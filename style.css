@@ -13,40 +13,40 @@
 
 /* 2. ГЛОБАЛЬНЫЕ НАСТРОЙКИ */
 * { 
-    margin: 0; padding: 0; box-sizing: border-box; 
-    cursor: none !important; 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    /* Возвращаем видимый курсор. Если хочешь кастомный салатовый — укажи ссылку на .cur или .png файл */
+    cursor: none; 
 }
 
 html { scroll-behavior: smooth; }
 
 /* 3. ФОН: КЛУБНИЧНОЕ ПОЛЕ И ГОРОШЕК */
 body {
-    background-color: #fff0f3;
-    /* Клубнички + Горошек */
+    background-color: #fff0f3; /* Тот самый нежно-розовый */
     background-image: 
         url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org" width="100" height="100"><text y="50" font-size="25" opacity="0.3">🍓</text></svg>'), 
         radial-gradient(#ffffff 1.5px, transparent 1.5px);
     background-size: 150px 150px, 20px 20px;
-    background-repeat: repeat; /* Чтобы ягоды были по всему экрану */
-    background-attachment: fixed; /* Чтобы фон не уезжал при скролле */
-    font-family: 'Comfortaa', cursive;
+    background-attachment: fixed;
+    font-family: 'VT323', monospace; 
     margin: 0;
-    padding: 0;
 }
 
 
 /* 4. ЦЕНТРАЛЬНАЯ КОЛОННА (ПАРЯЩИЙ СВИТОК) */
 .page-wrapper { 
+    background-color: #ffffff !important; 
     max-width: 1040px; 
-    margin: 0 auto; /* Убрали 60px сверху/снизу, теперь прижато к краям */
+    margin: 0 auto; 
     padding: 40px 60px;
-    background: #fff; 
-    min-height: 100vh; /* Растягивает блок на всю высоту экрана */
+    min-height: 100vh;
     position: relative;
-    border-left: 5px solid var(--border-pink);
-    border-right: 5px solid var(--border-pink);
-    box-shadow: 0 0 80px rgba(255, 182, 193, 0.4);
+    border-left: 5px solid #ffb6c1;
+    border-right: 5px solid #ffb6c1;
     z-index: 10;
+    opacity: 1 !important; /* Исключаем любую прозрачность */
 }
 
 
@@ -67,18 +67,18 @@ body {
 
 /* 5. ШАПКА (БАННЕР) */
 .header-container {
-    width: 100%; height: 200px;
-    background-color: #fff;
-    background-image: 
-        radial-gradient(var(--melon-green) 2.5px, transparent 2.5px),
-        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org" width="150" height="150" viewBox="0 0 100 100"><text y="50" font-size="12" opacity="0.07">🍀</text><text x="60" y="20" font-size="10" opacity="0.07">🍮</text><text x="80" y="80" font-size="12" opacity="0.07">🎀</text></svg>');
-    background-size: 18px 18px, 150px 150px;
-    border: 4px solid var(--border-pink);
-    border-radius: 35px;
+    width: 100%;
+    min-height: 220px;
+    background: #fff;
+    border: 3px solid #ffb6c1;
+    border-radius: 45px;
+    display: flex;
+    align-items: center;
+    padding: 20px 40px;
     position: relative;
-    display: flex; align-items: center; justify-content: flex-start;
-    padding-left: 30px; margin-bottom: 50px;
-    box-shadow: 0 10px 0px rgba(167, 244, 50, 0.15);
+    margin-bottom: 50px;
+    /* Розовая волна снизу (как на скрине) */
+    box-shadow: 0 12px 0px #ffb6c1; 
 }
 
 /* КРУЖЕВО СНИЗУ ШАПКИ */
@@ -93,16 +93,11 @@ body {
 
 /* ЛОГОТИП С ОБВОДКОЙ (Как на рефе) */
 .logo-wrap h1 {
-    font-size: 4.8rem;
-    color: var(--pink-bright);
-    letter-spacing: -4px;
-    line-height: 1;
-    /* Эффект наклейки-обводки */
-    -webkit-text-stroke: 8px #fff; 
-    paint-order: stroke fill;
-    filter: drop-shadow(8px 8px 0px rgba(167, 244, 50, 0.2));
+    font-family: 'Comfortaa', cursive; /* Или пиксельный, если хочешь */
+    font-size: 4rem;
+    color: #7b4a56;
+    letter-spacing: -2px;
 }
-
 .spin-logo {
     display: inline-block;
     animation: spin 5s linear infinite;
@@ -112,23 +107,35 @@ body {
 .header-subtitle { font-size: 0.8rem; color: var(--pink-bright); text-transform: uppercase; letter-spacing: 6px; margin-top: 12px; opacity: 0.9; font-weight: 700; }
 
 /* КНОПКИ НАВИГАЦИИ */
-.header-nav-side { display: flex; flex-direction: column; gap: 10px; }
-.nav-side-item {
-    text-decoration: none; font-size: 0.9rem; font-weight: bold;
-    padding: 8px 20px; border-radius: 12px; border: 3px solid #fff;
-    box-shadow: 4px 4px 0px rgba(255, 182, 193, 0.2); transition: 0.3s;
-    width: 140px; text-align: center; color: #fff;
+.header-nav-side {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border-right: 1px solid #eee;
+    padding-right: 20px;
+    margin-right: 40px;
 }
+.nav-side-item {
+    text-decoration: none;
+    font-family: 'VT323', monospace;
+    font-size: 1.1rem;
+    color: #555;
+    padding: 5px 10px;
+    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
 .item-pink { background: var(--border-pink); transform: rotate(-2deg); }
 .item-blue { background: var(--avito-blue); transform: rotate(1deg); }
 .item-yellow { background: var(--review-yellow); color: #fbc02d !important; transform: rotate(-1.5deg); }
 .item-green { background: var(--melon-green); color: #333 !important; transform: rotate(2deg); }
 
-.nav-side-item:hover, .nav-side-item.active-tab {
-    transform: scale(1.1) rotate(0deg) !important;
-    background-color: var(--melon-green);
-    color: #333 !important;
-    box-shadow: 5px 5px 0px var(--pink-bright);
+.nav-side-item:hover {
+    background: #fff5f8;
+    border-radius: 10px;
+    color: #ff85a1;
 }
 
 /* 6. ЛЕЙАУТ КОЛОНОК */
