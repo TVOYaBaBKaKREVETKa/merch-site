@@ -1,0 +1,251 @@
+@import url('https://fonts.googleapis.com');
+
+/* 1. ПАЛИТРА МЕЛОН-СОДА & КЛУБНИКА */
+:root {
+    --bg-pink: #fdf6f9;
+    --border-pink: #ffb6c1;
+    --pink-bright: #ff85a1;
+    --melon-green: #A7F432; 
+    --avito-blue: #4fc3f7;
+    --strawberry: #ff4d6d;
+    --review-yellow: #fff9c4;
+}
+
+* { 
+    margin: 0; padding: 0; box-sizing: border-box; 
+    cursor: none !important; 
+}
+
+html { scroll-behavior: smooth; }
+
+/* 2. ФОН - ГОРОШЕК (ЦЕНТРИРОВАНИЕ ТУТ) */
+body {
+    background-color: #fff0f3;
+    background-image: radial-gradient(#ffffff 1.5px, transparent 1.5px);
+    background-size: 15px 15px;
+    display: flex;
+    justify-content: center; /* Выравнивает сайт по центру экрана */
+    min-height: 100vh;
+}
+
+/* 3. ОСНОВНАЯ КОЛОННА (ЗАМЕНЕНО) */
+.page-wrapper { 
+    width: 1040px; /* Фиксированная ширина колонны */
+    background: #fff; /* Белый фон только внутри сайта */
+    margin: 0 auto;
+    padding: 20px 40px; 
+    min-height: 100vh;
+    position: relative;
+    box-shadow: 0 0 50px rgba(255, 182, 193, 0.3);
+    
+    /* Вертикальные границы (те самые "красные линии") */
+    border-left: 4px solid var(--border-pink);
+    border-right: 4px solid var(--border-pink);
+}
+
+/* КРУЖЕВА ВДОЛЬ ГРАНИЦ */
+.page-wrapper::before, .page-wrapper::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 30px;
+    height: 100%;
+    background-image: radial-gradient(circle at center, var(--border-pink) 8px, transparent 9px);
+    background-size: 22px 22px;
+    z-index: 5;
+}
+.page-wrapper::before { left: -32px; } /* Смещение влево */
+.page-wrapper::after { right: -32px; }  /* Смещение вправо */
+
+/* 4. БАННЕР */
+.header-container {
+    width: 100%; height: 200px;
+    background-color: #fff;
+    background-image: 
+        radial-gradient(var(--melon-green) 2.5px, transparent 2.5px),
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org" width="150" height="150" viewBox="0 0 100 100"><text y="50" font-size="12" opacity="0.07">🍀</text><text x="60" y="20" font-size="10" opacity="0.07">🍮</text><text x="80" y="80" font-size="12" opacity="0.07">🎀</text></svg>');
+    background-size: 18px 18px, 150px 150px;
+    border: 4px solid var(--border-pink);
+    border-radius: 35px;
+    position: relative;
+    display: flex; align-items: center; justify-content: flex-start;
+    padding-left: 30px; margin-bottom: 50px;
+    box-shadow: 0 10px 0px rgba(167, 244, 50, 0.15);
+}
+
+.header-container::after {
+    content: "";
+    position: absolute;
+    bottom: -15px;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    background-image: radial-gradient(circle at 10px 0, var(--border-pink) 10px, transparent 11px);
+    background-size: 20px 20px;
+}
+
+.header-title { display: flex; align-items: center; gap: 45px; z-index: 10; width: 100%; }
+
+.header-nav-side { display: flex; flex-direction: column; gap: 10px; }
+
+.nav-side-item {
+    text-decoration: none; font-size: 0.9rem; font-weight: bold;
+    padding: 8px 20px; border-radius: 12px; border: 3px solid #fff;
+    box-shadow: 4px 4px 0px rgba(255, 182, 193, 0.2); transition: 0.3s;
+    width: 140px; text-align: center;
+}
+
+.item-pink { background: var(--border-pink); color: #fff; transform: rotate(-2deg); }
+.item-blue { background: var(--avito-blue); color: #fff; transform: rotate(1deg); }
+.item-yellow { background: var(--review-yellow); color: #fbc02d; transform: rotate(-1.5deg); }
+.item-green { background: var(--melon-green); color: #333; transform: rotate(2deg); }
+
+.nav-side-item:hover, .nav-side-item.active-tab {
+    transform: scale(1.1) rotate(0deg) !important;
+    background-color: var(--melon-green);
+    color: #333;
+    box-shadow: 5px 5px 0px var(--pink-bright);
+}
+
+.logo-wrap h1 {
+    font-size: 4.8rem; color: var(--pink-bright); letter-spacing: -3px; line-height: 1;
+    text-shadow: -4px -4px 0 #fff, 4px -4px 0 #fff, -4px 4px 0 #fff, 4px 4px 0 #fff, 8px 8px 0px rgba(167, 244, 50, 0.2);
+}
+
+.header-subtitle { font-size: 0.8rem; color: var(--pink-bright); text-transform: uppercase; letter-spacing: 6px; margin-top: 12px; opacity: 0.9; font-weight: 700; }
+
+.header-oc-wrap { position: absolute; right: 25px; bottom: -25px; width: 210px; height: 240px; }
+.oc-placeholder { width: 100%; height: 100%; background: rgba(255, 255, 255, 0.8); border: 3px dashed var(--border-pink); border-radius: 30px; display: flex; align-items: center; justify-content: center; color: var(--border-pink); font-size: 0.8rem; }
+
+/* 4. ЛОГИКА КОЛОНОК */
+.main-layout { display: grid; grid-template-columns: 260px 1fr; gap: 40px; align-items: flex-start; width: 100%; }
+
+.sidebar-left { position: sticky; top: 20px; display: flex; flex-direction: column; gap: 25px; }
+
+/* ОБЩИЙ СТИЛЬ БОКСОВ */
+.box-deco {
+    background: #fff;
+    border: 3px solid var(--border-pink);
+    border-radius: 15px;
+    padding: 15px;
+    position: relative;
+    outline: 2px dashed var(--border-pink);
+    outline-offset: -8px;
+    box-shadow: 4px 4px 0px rgba(255, 182, 193, 0.2);
+}
+
+.box-deco::before {
+    content: '⭐';
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    font-size: 1.5rem;
+    filter: drop-shadow(2px 2px 0px #fff);
+}
+
+/* Эффект САЛАТОВОГО СКОТЧА */
+.box-deco::after {
+    content: '🍓'; /* Потом заменим на PNG клубнички */
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+    font-size: 1.5rem;
+    z-index: 20;
+    filter: drop-shadow(2px 2px 0px #fff);
+}
+
+
+.avatar-container { width: 120px; height: 120px; margin: 0 auto 15px; border: 3px solid var(--melon-green); border-radius: 15px; overflow: hidden; }
+.avatar-container img { width: 100%; height: 100%; object-fit: cover; }
+
+.side-title {
+    background: var(--border-pink);
+    color: #fff;
+    padding: 2px 12px;
+    border-radius: 20px;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: absolute;
+    top: -10px;
+    left: 15px;
+    border: 1px solid #fff;
+}
+
+.side-menu a {
+    display: block; text-decoration: none; color: #ff85a1; padding: 10px; margin-bottom: 8px;
+    background: #fff0f3; border-radius: 10px; transition: 0.3s; font-size: 0.9rem; font-weight: bold;
+    border: 1px dashed var(--border-pink);
+}
+.side-menu a:hover { background: var(--melon-green); color: #333; transform: scale(1.05); }
+
+/* 5. ЦЕНТРАЛЬНАЯ КОЛОНКА */
+.shop-content {
+    background: #fff;
+    border: 4px solid var(--border-pink);
+    border-radius: 40px;
+    padding: 40px;
+    min-height: 800px;
+    position: relative;
+    box-shadow: 10px 10px 0px rgba(255, 182, 193, 0.1);
+    background-image: 
+        linear-gradient(rgba(255, 182, 193, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 182, 193, 0.05) 1px, transparent 1px);
+    background-size: 25px 25px;
+    outline: 2px dashed var(--border-pink);
+    outline-offset: -15px;
+}
+
+.section-title h2 {
+    display: inline-block;
+    background: var(--melon-green);
+    color: #333;
+    padding: 8px 25px;
+    font-size: 1.3rem;
+    border-radius: 12px;
+    transform: rotate(-1.5deg);
+    margin-bottom: 40px;
+    border: 3px solid #fff;
+    box-shadow: 4px 4px 0px var(--border-pink);
+}
+
+/* 6. ПОЛАРОИДЫ */
+.pegboard { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 35px; }
+
+.merch-item {
+    transform-origin: top center; /* Качаемся от "гвоздика" сверху */
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.merch-item:hover {
+    transform: rotate(5deg) scale(1.05); /* Легкий наклон при наведении */
+}
+
+
+.item-img { width: 100%; aspect-ratio: 1; background: #f9f9f9; margin-bottom: 15px; border: 1px solid #f0f0f0; display: flex; align-items: center; justify-content: center; font-size: 3rem; }
+
+/* 7. ДЕКОР И КУРСОР */
+#custom-cursor {
+    width: 25px; height: 25px;
+    background: var(--melon-green);
+    border: 3px solid #fff;
+    border-radius: 50%;
+    position: fixed; pointer-events: none; z-index: 999999;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 10px rgba(167, 244, 50, 0.5);
+}
+
+.ticker-wrap {
+    width: 100%; overflow: hidden;
+    background: var(--melon-green);
+    border-top: 2px solid #fff; border-bottom: 2px solid #fff;
+    margin-bottom: 30px; transform: rotate(-1deg);
+}
+
+.ticker { white-space: nowrap; padding: 10px 0; animation: tickerMove 20s linear infinite; }
+
+@keyframes tickerMove { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+
+.tab-pane { display: none; animation: slideUp 0.4s ease-out; }
+.tab-pane.active { display: block; }
+@keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
