@@ -38,16 +38,17 @@ body {
 /* 4. ЦЕНТРАЛЬНАЯ КОЛОННА (ПАРЯЩИЙ СВИТОК) */
 .page-wrapper { 
     max-width: 1040px; 
-    margin: 60px auto; /* 60px сверху/снизу, auto — центровка по бокам */
+    margin: 0 auto; /* Убрали 60px сверху/снизу, теперь прижато к краям */
     padding: 40px 60px;
     background: #fff; 
-    min-height: 100vh;
+    min-height: 100vh; /* Растягивает блок на всю высоту экрана */
     position: relative;
     border-left: 5px solid var(--border-pink);
     border-right: 5px solid var(--border-pink);
-    box-shadow: 0 20px 80px rgba(255, 182, 193, 0.4);
+    box-shadow: 0 0 80px rgba(255, 182, 193, 0.4);
     z-index: 10;
 }
+
 
 
 /* ВЕРТИКАЛЬНЫЕ КРУЖЕВА ПО КРАЯМ КОЛОННЫ */
