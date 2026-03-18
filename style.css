@@ -22,32 +22,33 @@ html { scroll-behavior: smooth; }
 /* 3. ФОН: КЛУБНИЧНОЕ ПОЛЕ И ГОРОШЕК */
 body {
     background-color: #fff0f3;
-    /* Слой 1: Смайлики-клубнички | Слой 2: Белый горошек */
+    /* Клубнички + Горошек */
     background-image: 
-        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org" width="100" height="100" viewBox="0 0 100 100"><text y="50" font-size="25" opacity="0.3">🍓</text></svg>'), 
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org" width="100" height="100"><text y="50" font-size="25" opacity="0.3">🍓</text></svg>'), 
         radial-gradient(#ffffff 1.5px, transparent 1.5px);
     background-size: 150px 150px, 20px 20px;
-    background-repeat: repeat, repeat;
+    background-repeat: repeat; /* Чтобы ягоды были по всему экрану */
+    background-attachment: fixed; /* Чтобы фон не уезжал при скролле */
     font-family: 'Comfortaa', cursive;
-    display: flex;
-    justify-content: center;
-    min-height: 100vh;
+    margin: 0;
+    padding: 0;
 }
+
 
 /* 4. ЦЕНТРАЛЬНАЯ КОЛОННА (ПАРЯЩИЙ СВИТОК) */
 .page-wrapper { 
     max-width: 1040px; 
-    width: 100%;
-    margin: 60px auto; /* Отступ сверху/снизу для эффекта парения */
-    padding: 40px 60px; 
+    margin: 60px auto; /* 60px сверху/снизу, auto — центровка по бокам */
+    padding: 40px 60px;
     background: #fff; 
     min-height: 100vh;
     position: relative;
-    box-shadow: 0 20px 80px rgba(255, 182, 193, 0.4);
     border-left: 5px solid var(--border-pink);
     border-right: 5px solid var(--border-pink);
+    box-shadow: 0 20px 80px rgba(255, 182, 193, 0.4);
     z-index: 10;
 }
+
 
 /* ВЕРТИКАЛЬНЫЕ КРУЖЕВА ПО КРАЯМ КОЛОННЫ */
 .page-wrapper::before, .page-wrapper::after {
