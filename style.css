@@ -259,12 +259,12 @@ body {
 .sakuraleft {
   left: 0;
   /* Убедись, что файл лежит в той же папке, что и CSS, или укажи верный путь */
-  background-image: url('sakuraleft.gif'); 
+  background-image: url('assets/sakuraleft.gif'); 
 }
 
 .sakuraright {
   right: 0;
-  background-image: url('sakuraright.gif');
+  background-image: url('assets/sakuraright.gif');
   /* Если гифка уже «смотрит» в нужную сторону, scaleX можно убрать */
 }
 
