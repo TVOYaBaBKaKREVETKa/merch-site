@@ -242,3 +242,35 @@ body {
 .tab-pane { display: none; animation: slideUp 0.4s ease-out; }
 .tab-pane.active { display: block; }
 @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+.sakura-container {
+  position: fixed;
+  top: 0;
+  width: 300px; 
+  height: 300px; 
+  z-index: 9999; 
+  pointer-events: none; 
+  background-size: contain;
+  background-repeat: no-repeat;
+  image-rendering: pixelated; 
+}
+
+/* Названия после точки должны быть такими же, как в class="..." */
+.sakuraleft {
+  left: 0;
+  /* Убедись, что файл лежит в той же папке, что и CSS, или укажи верный путь */
+  background-image: url('sakuraleft.gif'); 
+}
+
+.sakuraright {
+  right: 0;
+  background-image: url('sakuraright.gif');
+  /* Если гифка уже «смотрит» в нужную сторону, scaleX можно убрать */
+}
+
+@media (max-width: 1024px) {
+  .sakura-container {
+    display: none;
+  }
+}
+
