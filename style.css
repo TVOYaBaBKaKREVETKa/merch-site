@@ -40,54 +40,34 @@ body {
     background-color: #ffffff !important; 
     max-width: 1040px; 
     margin: 0 auto; 
-    padding: 40px 60px;
+    padding: 5px 12px;
     min-height: 100vh;
     position: relative;
-    border-left: 5px solid #ffb6c1;
-    border-right: 5px solid #ffb6c1;
+    border-left: 2px solid #ffb6c1;
+    border-right: 2px solid #ffb6c1;
     z-index: 10;
     opacity: 1 !important; /* Исключаем любую прозрачность */
 }
 
 
 
-/* ВЕРТИКАЛЬНЫЕ КРУЖЕВА ПО КРАЯМ КОЛОННЫ */
-.page-wrapper::before, .page-wrapper::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    width: 30px;
-    height: 100%;
-    background-image: radial-gradient(circle at center, var(--border-pink) 8px, transparent 9px);
-    background-size: 22px 22px;
-    z-index: 5;
-}
-.page-wrapper::before { left: -32px; }
-.page-wrapper::after { right: -32px; }
-
 /* 5. ШАПКА (БАННЕР) */
 .header-container {
-    width: 100%;
-    min-height: 220px;
+    width: 95%; 
+    max-width: 1100px; /* Ограничиваем ширину, чтобы он не был на весь экран */
+    height: 250px;      /* Фиксированная высота как на рефе */
     background: #fff;
-    border: 3px solid #ffb6c1;
-    border-radius: 45px;
+    border: 5px solid #ffb6c1; /* Делаем рамку потолще */
+    border-radius: 40px; /* Сильнее скругляем углы */
     display: flex;
     align-items: center;
-    padding: 20px 40px;
+    justify-content: flex-start; /* Навигация слева */
+    padding: 0 50px;
     position: relative;
-    margin-bottom: 50px;
-    /* Розовая волна снизу (как на скрине) */
-    box-shadow: 0 12px 0px #ffb6c1; 
+    margin: 40px auto; /* Центрируем сам баннер на странице */
 }
 
-/* КРУЖЕВО СНИЗУ ШАПКИ */
-.header-container::after {
-    content: "";
-    position: absolute; bottom: -15px; left: 0; width: 100%; height: 20px;
-    background-image: radial-gradient(circle at 10px 0, var(--border-pink) 10px, transparent 11px);
-    background-size: 20px 20px;
-}
+
 
 .header-title { display: flex; align-items: center; gap: 45px; z-index: 10; width: 100%; }
 
@@ -110,9 +90,9 @@ body {
 .header-nav-side {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
     border-right: 1px solid #eee;
-    padding-right: 20px;
+    padding-right: 15px;
     margin-right: 40px;
 }
 .nav-side-item {
@@ -121,7 +101,7 @@ body {
     font-size: 1.1rem;
     color: #555;
     padding: 5px 10px;
-    transition: 0.2s;
+    transition: 0.3s;
     display: flex;
     align-items: center;
     gap: 8px;
