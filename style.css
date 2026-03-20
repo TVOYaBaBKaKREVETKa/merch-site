@@ -72,60 +72,98 @@ body {
 .header-title { display: flex; align-items: center; gap:0px; z-index: 10; width: 100%; }
 
 /* ЦЕНТРАЛЬНЫЙ БЛОК ДЛЯ ЛОГО */
+/* ЦЕНТРАЛЬНЫЙ БЛОК ДЛЯ ЛОГО */
 .logo-wrap {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    flex-grow: 1; /* Это заставит логотип встать ровно по центру между меню и правым краем */
+    flex-grow: 1; 
     margin: 0 20px;
+    margin-top: -15px;
+}
+
+/* КОНТЕЙНЕР (ЯКОРЬ ДЛЯ СОВМЕСТНОГО РОСТА) */
+.logo-container {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    /* Плавность для всего логотипа сразу */
+    transition: transform 0.3s ease-in-out;
 }
 
 /* САМ ЛОГОТИП (КАРТИНКА) */
 .main-logo-img {
-    height: 150px; /* ВОТ ЭТИМ ЧИСЛОМ регулируй размер. 110px - идеально для баннера в 200px */
-    width: auto;   /* Ширина подстроится сама, чтобы не было искажений */
+    height: 150px;
+    width: auto;
     object-fit: contain;
-    transition: transform 0.3s ease;
+    filter: drop-shadow(0 0 8px #ff3399);
+    /* Здесь только плавность свечения */
+    transition: filter 0.6s ease;
 }
 
-/* Легкий эффект при наведении, чтобы было "живо" */
-.main-logo-img:hover {
-    transform: scale(1.05);
-}
-
-
-
-/* ЛОГОТИП С ОБВОДКОЙ (Как на рефе) */
-
-
-
+/* Настройка завитушки */
 .spin-logo {
-    display: inline-block;
-    animation: spin 5s linear infinite;
+    position: absolute;
+    z-index: 15;
+    left: 100px;  
+    top: 20%;
+    height: 80px;
+    width: auto;
+    filter: drop-shadow(0 0 8px #ff3399);
+    /* Вращение + плавность свечения */
+    animation: rotate-logo 10s linear infinite;
+    transition: filter 0.3s ease;
 }
-@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-.header-subtitle { font-size: 0.8rem; color: var(--pink-bright); text-transform: uppercase; letter-spacing: 6px; margin-top: 12px; opacity: 0.9; font-weight: 700; }
+/* ГЛАВНЫЙ ЭФФЕКТ: Растет весь контейнер целиком */
+.logo-container:hover {
+    transform: scale(1.08); /* Теперь и лого, и завитушка приближаются вместе */
+}
+
+/* Разгорание свечения при наведении */
+.logo-container:hover .main-logo-img,
+.logo-container:hover .spin-logo {
+    filter: 
+        drop-shadow(0 0 2px #ffffff) 
+        drop-shadow(0 0 15px #ff3399) 
+        drop-shadow(0 0 25px rgba(255, 51, 153, 0.5));
+}
+
+@keyframes rotate-logo {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+
+
+.header-subtitle { font-size: 0.8rem; color: var(--pink-bright); text-transform: uppercase; letter-spacing: 6px; margin-top: -13px; opacity: 0.9; font-weight: 700; }
 
 /* КНОПКИ НАВИГАЦИИ */
 .header-nav-side {
     display: flex;
     flex-direction: column;
-    gap: 6px;
-    width: 150px;
+    gap: 8px; /* Чуть больше места между ними */
+    width: 200px; /* Расширим блок, чтобы кнопки не были узкими */
 }
+
 .nav-side-item {
+    font-size: 1.15rem; /* Увеличиваем шрифт, чтобы читалось легко */
+    padding: 8px 15px; /* Даем кнопкам "мяса" (внутренний объем) */
     text-decoration: none;
-    font-family: 'VT323', monospace;
-    font-size: 1rem;
-    color: #4a4a4a;
-    padding: 4px 12px;
-    border-radius: 4px;
-    background: #fff; /* Можно добавить цвета как обсуждали раньше */
-    border: 1px solid #eee;
-    transition: 0.2s;
-    width: fit-content;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    font-weight: bold; /* Делаем текст жирненьким */
+    
+    /* Эффект наклейки: белая обводка + тень */
+    border: 2px solid #fff; 
+     box-shadow: 4px 4px 0px rgba(255, 182, 193, 0.6);
+    
+    transition: all 0.2s ease;
 }
 
 .item-pink { background: var(--border-pink); transform: rotate(-2deg); }
@@ -134,10 +172,22 @@ body {
 .item-green { background: var(--melon-green); color: #333 !important; transform: rotate(2deg); }
 
 .nav-side-item:hover {
-    background: #fff5f8;
-    border-radius: 10px;
-    color: #ff85a1;
+    transform: scale(1.1) rotate(0deg); /* При наведении кнопка выпрямляется и растет */
+    box-shadow: 5px 5px 0px rgba(255, 182, 193, 0.4);
 }
+
+/* Эффект при клике (нажатии мышкой) */
+.nav-side-item:active {
+    /* Сдвигаем кнопку по направлению тени (вправо и вниз) */
+    transform: translate(3px, 3px) rotate(0deg); 
+    /* Уменьшаем тень, чтобы создать иллюзию прижатия к фону */
+    box-shadow: 1px 1px 0px rgba(0,0,0,0.1); 
+    /* Немного затемняем, чтобы имитировать тень от пальца/нажатия */
+    filter: brightness(0.95);
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+
 
 /* 6. ЛЕЙАУТ КОЛОНОК */
 .main-layout { display: grid; grid-template-columns: 260px 1fr; gap: 40px; align-items: flex-start; }
