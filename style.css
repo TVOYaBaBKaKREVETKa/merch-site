@@ -72,23 +72,7 @@ body {
 .header-title { display: flex; align-items: center; gap: 45px; z-index: 10; width: 100%; }
 
 /* ЛОГОТИП С ОБВОДКОЙ (Как на рефе) */
-.logo-wrap h1 {
-    font-family: 'DynaPuff', cursive;
-    color: #A2F4A2;
-    font-size: 5rem;
-    
-    /* Оставляем только один слой жесткого розового контура и белую подложку только вниз-вправо */
-    text-shadow: 
-        /* Тонкая розовая обводка */
-        2px 2px 0px #FFB3D9, 
-        -2px -2px 0px #FFB3D9,
-        2px -2px 0px #FFB3D9,
-        -2px 2px 0px #FFB3D9,
-        /* Жесткая белая подложка (сдвинута только вниз-вправо для 3D эффекта) */
-        5px 5px 0px #FFFFFF,
-        /* Очень слабая и мягкая розовая тень для объема */
-        8px 8px 15px rgba(255, 179, 217, 0.3);
-}
+
 
 
 .spin-logo {
@@ -103,21 +87,20 @@ body {
 .header-nav-side {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    border-right: 1px solid #eee;
-    padding-right: 15px;
-    margin-right: 40px;
+    gap: 6px;
+    width: 150px;
 }
 .nav-side-item {
     text-decoration: none;
     font-family: 'VT323', monospace;
-    font-size: 1.1rem;
-    color: #555;
-    padding: 5px 10px;
-    transition: 0.3s;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    font-size: 1rem;
+    color: #4a4a4a;
+    padding: 4px 12px;
+    border-radius: 4px;
+    background: #fff; /* Можно добавить цвета как обсуждали раньше */
+    border: 1px solid #eee;
+    transition: 0.2s;
+    width: fit-content;
 }
 
 .item-pink { background: var(--border-pink); transform: rotate(-2deg); }
@@ -267,9 +250,4 @@ body {
   }
 }
 
-.main-logo-img {
-    image-rendering: -webkit-optimize-contrast; /* Для Safari */
-    image-rendering: crisp-edges;               /* Для современных браузеров */
-    /* Если лого в стиле пиксель-арта, используй: */
-    /* image-rendering: pixelated; */
-}
+
