@@ -151,20 +151,28 @@ body {
 
 
 .header-subtitle { 
-    font-size: 0.75rem; /* Чуть уменьшил для баланса */
+    font-size: 0.75rem; 
     color: var(--pink-bright); 
     text-transform: uppercase; 
     letter-spacing: 6px; 
-    margin-top: 10px; /* Сделал нормальный отступ вниз от логотипа */
-    opacity: 0.9; 
+    
+    /* АДАПТИВНЫЙ ОТСТУП: */
+    /* Минимум 15px, идеально 3% от высоты экрана, максимум 40px */
+    margin-top: clamp(15px, 3vh, 40px); 
+    
+    opacity: 0.6; 
     font-weight: 700;
     
-    /* ЖЕЛЕЗНАЯ ЦЕНТРОВКА: */
+    /* ЦЕНТРОВКА: */
     text-align: center;
     display: block;
     width: 100%;
-    white-space: nowrap; /* Чтобы текст всегда был в одну строку */
+    white-space: nowrap;
+    
+    /* Y2K ЭФФЕКТ (опционально, добавь для стиля): */
+    text-shadow: 0 0 10px rgba(255, 20, 147, 0.3);
 }
+
 
 
 /* КНОПКИ НАВИГАЦИИ */
