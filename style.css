@@ -73,11 +73,25 @@ body {
 
 /* ЛОГОТИП С ОБВОДКОЙ (Как на рефе) */
 .logo-wrap h1 {
-    font-family: 'Comfortaa', cursive; /* Или пиксельный, если хочешь */
-    font-size: 4rem;
-    color: #7b4a56;
-    letter-spacing: -2px;
+    font-family: 'DynaPuff', cursive;
+    color: #A2F4A2; /* Мятный основной цвет */
+    font-size: 5rem;
+    margin: 0;
+        line-height: 1.4; /* Увеличивает межстрочный интервал, давая место теням сверху и снизу */
+    padding: 10px 0;  /* Добавляет внутренний отступ самому блоку с текстом */
+    
+    /* Слои: Тонкий белый контур -> Розовая обводка -> Белая подложка -> Тень */
+    text-shadow: 
+        /* 1. Имитация блика (белый тонкий контур) */
+        1px 1px 0px #fff, -1px -1px 0px #fff,
+        /* 2. Розовая обводка (чуть толще) */
+        3px 3px 0px #FFB3D9, -3px -3px 0px #FFB3D9, 3px -3px 0px #FFB3D9, -3px 3px 0px #FFB3D9,
+        /* 3. Белая «наклейка» (самый толстый слой) */
+        6px 6px 0px #fff, -6px -6px 0px #fff, 6px -6px 0px #fff, -6px 6px 0px #fff,
+        /* 4. Мягкая внешняя тень */
+        8px 8px 15px rgba(255, 179, 217, 0.4);
 }
+
 .spin-logo {
     display: inline-block;
     animation: spin 5s linear infinite;
