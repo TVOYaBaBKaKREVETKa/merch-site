@@ -115,7 +115,7 @@ body {
 .main-logo-img {
     height: 150px;
     width: auto;
-    margin-left: 60px;
+    margin-left: 120px;
     object-fit: contain;
     filter: drop-shadow(0 0 8px #ff3399);
     /* Здесь только плавность свечения */
@@ -126,7 +126,7 @@ body {
 .spin-logo {
     position: absolute;
     z-index: 15;
-    left: 160px;  
+    left: 220px;  
     top: 20%;
     height: 80px;
     width: auto;
@@ -182,15 +182,18 @@ body {
 
 /* КНОПКИ НАВИГАЦИИ */
 .header-nav-side {
+    position: absolute; /* ВЫРЫВАЕМ ИЗ ПОТОКА */
+    left: -40px;        /* Точное расстояние от левого края */
+    top: 50%;
+    transform: translateY(-50%); /* Центруем по вертикали */
+    
     display: flex;
     flex-direction: column;
     gap: 12px;
-    /* ФИКСИРУЕМ ШИРИНУ ДЛЯ БАЛАНСА */
-    width: 220px; 
-    /* Твой марджин оставляем, он норм */
-    margin-left: -35px; 
+    width: 100px;      /* Дай нормальную ширину, чтобы кнопки не сжались */
     z-index: 20;
 }
+
 
 .nav-side-item {
     font-size: 1.10rem; /* Увеличиваем шрифт, чтобы читалось легко */
@@ -202,7 +205,6 @@ body {
     gap: 10px;
     width: 136%;
     font-weight: bold; /* Делаем текст жирненьким */
-    text-decoration: none;
     
     /* Эффект наклейки: белая обводка + тень */
     border: 2px solid #fff; 
@@ -381,12 +383,14 @@ body {
 /* ПРАВАЯ ЧАСТЬ БАННЕРА */
 .header-oc-wrap {
     /* СТАВИМ ТАКУЮ ЖЕ ШИРИНУ, КАК У КНОПОК */
+    position: absolute;
     width: 220px; 
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: flex-end; /* Прижимаем персонажа вправо внутри его блока */
     position: relative;
+     z-index: 25; 
 }
 
 /* САМ ПЕРСОНАЖ */
@@ -405,6 +409,7 @@ body {
     filter: drop-shadow(0 0 10px rgba(255, 51, 153, 0.4));
     animation: oc-float 4s ease-in-out infinite;
     transition: filter 0.3s ease-in-out, transform 0.3s ease;
+    display: block;
 }
 
 .oc-img:hover {
