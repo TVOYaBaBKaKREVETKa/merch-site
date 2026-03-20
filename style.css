@@ -68,8 +68,8 @@ body {
 }
 
 
-
-.header-title { display: flex; align-items: center; gap: 45px; z-index: 10; width: 100%; }
+/*чёто с кнопками*/
+.header-title { display: flex; align-items: center; gap:0px; z-index: 10; width: 100%; }
 
 /* ЦЕНТРАЛЬНЫЙ БЛОК ДЛЯ ЛОГО */
 .logo-wrap {
@@ -94,11 +94,6 @@ body {
     transform: scale(1.05);
 }
 
-/* ПОДЗАГОЛОВОК (подтягиваем чуть выше к логотипу) */
-.header-subtitle {
-    margin-top: -5px; /* Немного уменьшил отступ сверху */
-    /* остальные твои стили subtitle остаются без изменений */
-}
 
 
 /* ЛОГОТИП С ОБВОДКОЙ (Как на рефе) */
