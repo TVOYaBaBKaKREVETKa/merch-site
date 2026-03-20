@@ -150,12 +150,22 @@ body {
 
 
 
-.header-subtitle { font-size: 0.8rem; 
+.header-subtitle { 
+    font-size: 0.75rem; /* Чуть уменьшил для баланса */
     color: var(--pink-bright); 
     text-transform: uppercase; 
     letter-spacing: 6px; 
-    margin-top: -13px; 
-    opacity: 0.9; font-weight: 700; }
+    margin-top: 10px; /* Сделал нормальный отступ вниз от логотипа */
+    opacity: 0.9; 
+    font-weight: 700;
+    
+    /* ЖЕЛЕЗНАЯ ЦЕНТРОВКА: */
+    text-align: center;
+    display: block;
+    width: 100%;
+    white-space: nowrap; /* Чтобы текст всегда был в одну строку */
+}
+
 
 /* КНОПКИ НАВИГАЦИИ */
 .header-nav-side {
