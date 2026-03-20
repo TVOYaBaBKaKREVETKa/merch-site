@@ -226,7 +226,7 @@ body {
 .sakura-container {
   position: fixed;
   top: 0;
-  width: 300px; 
+  width: 345px; 
   height: 300px; 
   z-index: 9999; 
   pointer-events: none; 
