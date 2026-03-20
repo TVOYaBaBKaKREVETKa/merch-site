@@ -58,18 +58,20 @@ body {
     height: 200px;      /* Фиксированная высота как на рефе */
     background: #fff;
     border: 3px solid #ffb6c1; /* Делаем рамку потолще */
-    border-radius: 40px; /* Сильнее скругляем углы */
+    border-radius: 20px; /* Сильнее скругляем углы */
     display: flex;
     align-items: center;
     justify-content: flex-start; /* Навигация слева */
     padding: 0 50px;
     position: relative;
-    margin: 10px auto; /* Центрируем сам баннер на странице */
+    margin: 25px auto; /* Центрируем сам баннер на странице */
+    overflow: visible;
 }
 
 
 /*чёто с кнопками*/
-.header-title { display: flex; align-items: center; gap:0px; z-index: 10; width: 100%; }
+.header-title { display: flex; align-items: center; gap:0px; z-index: 10; width: 100%; height: 100%; /* Занимает всю высоту баннера */
+}
 
 /* ЦЕНТРАЛЬНЫЙ БЛОК ДЛЯ ЛОГО */
 /* ЦЕНТРАЛЬНЫЙ БЛОК ДЛЯ ЛОГО */
@@ -80,8 +82,9 @@ body {
     justify-content: center;
     flex-grow: 1; 
     margin: 0 20px;
-    margin-top: -15px;
+    margin-top: -25px;
 }
+
 
 /* КОНТЕЙНЕР (ЯКОРЬ ДЛЯ СОВМЕСТНОГО РОСТА) */
 .logo-container {
@@ -97,6 +100,7 @@ body {
 .main-logo-img {
     height: 150px;
     width: auto;
+    margin-left: 50px;
     object-fit: contain;
     filter: drop-shadow(0 0 8px #ff3399);
     /* Здесь только плавность свечения */
@@ -107,14 +111,14 @@ body {
 .spin-logo {
     position: absolute;
     z-index: 15;
-    left: 100px;  
+    left: 150px;  
     top: 20%;
     height: 80px;
     width: auto;
     filter: drop-shadow(0 0 8px #ff3399);
     /* Вращение + плавность свечения */
     animation: rotate-logo 10s linear infinite;
-    transition: filter 0.3s ease;
+    transition: filter 0.6s ease;
 }
 
 /* ГЛАВНЫЙ ЭФФЕКТ: Растет весь контейнер целиком */
@@ -138,7 +142,12 @@ body {
 
 
 
-.header-subtitle { font-size: 0.8rem; color: var(--pink-bright); text-transform: uppercase; letter-spacing: 6px; margin-top: -13px; opacity: 0.9; font-weight: 700; }
+.header-subtitle { font-size: 0.8rem; 
+    color: var(--pink-bright); 
+    text-transform: uppercase; 
+    letter-spacing: 6px; 
+    margin-top: -13px; 
+    opacity: 0.9; font-weight: 700; }
 
 /* КНОПКИ НАВИГАЦИИ */
 .header-nav-side {
@@ -146,17 +155,19 @@ body {
     flex-direction: column;
     gap: 8px; /* Чуть больше места между ними */
     width: 200px; /* Расширим блок, чтобы кнопки не были узкими */
+        margin-left: -35px; /* Регулируй это число, чтобы кнопки встали как надо */
+    z-index: 20;
 }
 
 .nav-side-item {
-    font-size: 1.15rem; /* Увеличиваем шрифт, чтобы читалось легко */
-    padding: 8px 15px; /* Даем кнопкам "мяса" (внутренний объем) */
+    font-size: 1.10rem; /* Увеличиваем шрифт, чтобы читалось легко */
+    padding: 8px 12px; /* Даем кнопкам "мяса" (внутренний объем) */
     text-decoration: none;
     border-radius: 8px;
     display: flex;
     align-items: center;
     gap: 10px;
-    width: 100%;
+    width: 136%;
     font-weight: bold; /* Делаем текст жирненьким */
     
     /* Эффект наклейки: белая обводка + тень */
@@ -168,8 +179,9 @@ body {
 
 .item-pink { background: var(--border-pink); transform: rotate(-2deg); }
 .item-blue { background: var(--avito-blue); transform: rotate(1deg); }
-.item-yellow { background: var(--review-yellow); color: #fbc02d !important; transform: rotate(-1.5deg); }
 .item-green { background: var(--melon-green); color: #333 !important; transform: rotate(2deg); }
+.item-yellow { background: var(--review-yellow); color: #fbc02d !important; transform: rotate(-1.5deg); }
+
 
 .nav-side-item:hover {
     transform: scale(1.1) rotate(0deg); /* При наведении кнопка выпрямляется и растет */
@@ -325,4 +337,41 @@ body {
   }
 }
 
+
+/* ПРАВАЯ ЧАСТЬ БАННЕРА */
+.header-oc-wrap {
+    width: 200px; /* Такая же ширина как у меню слева для баланса */
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Прижимаем вправо */
+    position: relative;
+}
+
+/* САМ ПЕРСОНАЖ */
+.oc-img {
+    height: 250px; /* Твоя текущая высота */
+    width: auto;
+    object-fit: contain;
+    
+    /* --- ЮВЕЛИРНАЯ НАСТРОЙКА ПОЗИЦИИ --- */
+    position: relative; 
+    top: -27px;   /* Отрицательное (н-р -15px) — выше, положительное (н-р 10px) — ниже */
+    left: 25px;  /* Отрицательное — левее, положительное — правее */
+    z-index: 20;  /* Чтобы персонаж был ПОВЕРХ рамок баннера */
+    /* ---------------------------------- */
+
+    filter: drop-shadow(0 0 10px rgba(255, 51, 153, 0.4));
+    animation: oc-float 4s ease-in-out infinite;
+    transition: filter 0.3s ease-in-out, transform 0.3s ease;
+}
+
+.oc-img:hover {
+    transform: scale(1.05) rotate(1deg); /* Легкий наклон при наведении */
+    filter: drop-shadow(0 0 20px rgba(255, 51, 153, 0.6));
+}
+
+.logo-container:hover + .header-subtitle {
+    opacity: 1; /* Подзаголовок становится ярче, когда наводишь на лого */
+}
 
