@@ -53,9 +53,9 @@ body {
 
 /* 5. ШАПКА (БАННЕР) */
 .header-container {
-    width: 95%; 
+    width: 100%; 
     max-width: 1100px; /* Ограничиваем ширину, чтобы он не был на весь экран */
-    height: 250px;      /* Фиксированная высота как на рефе */
+    height: 200px;      /* Фиксированная высота как на рефе */
     background: #fff;
     border: 3px solid #ffb6c1; /* Делаем рамку потолще */
     border-radius: 40px; /* Сильнее скругляем углы */
@@ -64,7 +64,7 @@ body {
     justify-content: flex-start; /* Навигация слева */
     padding: 0 50px;
     position: relative;
-    margin: 40px auto; /* Центрируем сам баннер на странице */
+    margin: 10px auto; /* Центрируем сам баннер на странице */
 }
 
 
