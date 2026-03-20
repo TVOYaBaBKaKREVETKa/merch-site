@@ -267,3 +267,9 @@ body {
   }
 }
 
+.main-logo-img {
+    image-rendering: -webkit-optimize-contrast; /* Для Safari */
+    image-rendering: crisp-edges;               /* Для современных браузеров */
+    /* Если лого в стиле пиксель-арта, используй: */
+    /* image-rendering: pixelated; */
+}
