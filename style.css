@@ -74,25 +74,22 @@ body {
 /* ЛОГОТИП С ОБВОДКОЙ (Как на рефе) */
 .logo-wrap h1 {
     font-family: 'DynaPuff', cursive;
+    color: #A2F4A2;
     font-size: 5rem;
-    color: #A2F4A2; /* Мятный */
-    margin: 0;
     
-    /* Добавляем пространство, чтобы тени не обрезались */
-    line-height: 1.6; 
-    padding: 20px 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    /* Твои слои теней (я их немного подправил для четкости) */
+    /* Оставляем только один слой жесткого розового контура и белую подложку только вниз-вправо */
     text-shadow: 
+        /* Тонкая розовая обводка */
         2px 2px 0px #FFB3D9, 
         -2px -2px 0px #FFB3D9,
-        4px 4px 0px #FFF, 
-        -4px -4px 0px #FFF,
-        6px 6px 15px rgba(255, 179, 217, 0.4);
+        2px -2px 0px #FFB3D9,
+        -2px 2px 0px #FFB3D9,
+        /* Жесткая белая подложка (сдвинута только вниз-вправо для 3D эффекта) */
+        5px 5px 0px #FFFFFF,
+        /* Очень слабая и мягкая розовая тень для объема */
+        8px 8px 15px rgba(255, 179, 217, 0.3);
 }
+
 
 .spin-logo {
     display: inline-block;
