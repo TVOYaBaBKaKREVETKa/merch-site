@@ -70,21 +70,29 @@ body {
 
 
 /*чёто с кнопками*/
-.header-title { display: flex; align-items: center; gap:0px; z-index: 10; width: 100%; height: 100%; /* Занимает всю высоту баннера */
+.header-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Расталкивает блоки по краям */
+    width: 100%;
+    height: 100%;
+    position: relative;
 }
 
 /* ЦЕНТРАЛЬНЫЙ БЛОК ДЛЯ ЛОГО */
 /* ЦЕНТРАЛЬНЫЙ БЛОК ДЛЯ ЛОГО */
 .logo-wrap {
+    /* Занимает всё оставшееся место ровно посередине */
+    flex: 1; 
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    flex-grow: 1; 
-    margin: 0 20px;
-    margin-top: -25px;
+    text-align: center;
+    z-index: 10;
+    /* Убери отсюда любые margin-left или margin-right, если они были! */
+    margin: 0; 
 }
-
 
 /* КОНТЕЙНЕР (ЯКОРЬ ДЛЯ СОВМЕСТНОГО РОСТА) */
 .logo-container {
@@ -153,9 +161,11 @@ body {
 .header-nav-side {
     display: flex;
     flex-direction: column;
-    gap: 8px; /* Чуть больше места между ними */
-    width: 200px; /* Расширим блок, чтобы кнопки не были узкими */
-        margin-left: -35px; /* Регулируй это число, чтобы кнопки встали как надо */
+    gap: 12px;
+    /* ФИКСИРУЕМ ШИРИНУ ДЛЯ БАЛАНСА */
+    width: 220px; 
+    /* Твой марджин оставляем, он норм */
+    margin-left: -35px; 
     z-index: 20;
 }
 
@@ -340,11 +350,12 @@ body {
 
 /* ПРАВАЯ ЧАСТЬ БАННЕРА */
 .header-oc-wrap {
-    width: 200px; /* Такая же ширина как у меню слева для баланса */
+    /* СТАВИМ ТАКУЮ ЖЕ ШИРИНУ, КАК У КНОПОК */
+    width: 220px; 
     height: 100%;
     display: flex;
     align-items: center;
-    justify-content: flex-end; /* Прижимаем вправо */
+    justify-content: flex-end; /* Прижимаем персонажа вправо внутри его блока */
     position: relative;
 }
 
