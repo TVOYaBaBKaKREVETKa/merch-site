@@ -202,12 +202,19 @@ body {
     gap: 10px;
     width: 136%;
     font-weight: bold; /* Делаем текст жирненьким */
+    text-decoration: none;
     
     /* Эффект наклейки: белая обводка + тень */
     border: 2px solid #fff; 
      box-shadow: 4px 4px 0px rgba(255, 182, 193, 0.6);
     
     transition: all 0.2s ease;
+}
+
+.nav-icon {
+    width: 22px;            /* Подбери размер под себя */
+    height: 22px;
+    object-fit: contain;    /* Чтобы картинка не искажалась */
 }
 
 .item-pink { background: var(--border-pink); transform: rotate(-2deg); }
