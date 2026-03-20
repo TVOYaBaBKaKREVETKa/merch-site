@@ -74,22 +74,24 @@ body {
 /* ЛОГОТИП С ОБВОДКОЙ (Как на рефе) */
 .logo-wrap h1 {
     font-family: 'DynaPuff', cursive;
-    color: #A2F4A2; /* Мятный основной цвет */
     font-size: 5rem;
+    color: #A2F4A2; /* Мятный */
     margin: 0;
-        line-height: 1.4; /* Увеличивает межстрочный интервал, давая место теням сверху и снизу */
-    padding: 10px 0;  /* Добавляет внутренний отступ самому блоку с текстом */
     
-    /* Слои: Тонкий белый контур -> Розовая обводка -> Белая подложка -> Тень */
+    /* Добавляем пространство, чтобы тени не обрезались */
+    line-height: 1.6; 
+    padding: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* Твои слои теней (я их немного подправил для четкости) */
     text-shadow: 
-        /* 1. Имитация блика (белый тонкий контур) */
-        1px 1px 0px #fff, -1px -1px 0px #fff,
-        /* 2. Розовая обводка (чуть толще) */
-        3px 3px 0px #FFB3D9, -3px -3px 0px #FFB3D9, 3px -3px 0px #FFB3D9, -3px 3px 0px #FFB3D9,
-        /* 3. Белая «наклейка» (самый толстый слой) */
-        6px 6px 0px #fff, -6px -6px 0px #fff, 6px -6px 0px #fff, -6px 6px 0px #fff,
-        /* 4. Мягкая внешняя тень */
-        8px 8px 15px rgba(255, 179, 217, 0.4);
+        2px 2px 0px #FFB3D9, 
+        -2px -2px 0px #FFB3D9,
+        4px 4px 0px #FFF, 
+        -4px -4px 0px #FFF,
+        6px 6px 15px rgba(255, 179, 217, 0.4);
 }
 
 .spin-logo {
