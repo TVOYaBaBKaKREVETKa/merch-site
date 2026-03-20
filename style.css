@@ -54,19 +54,26 @@ body {
 /* 5. ШАПКА (БАННЕР) */
 .header-container {
     width: 100%; 
-    max-width: 1100px; /* Ограничиваем ширину, чтобы он не был на весь экран */
-    height: 200px;      /* Фиксированная высота как на рефе */
+    max-width: 1100px;
+    height: 200px;      
     background: #fff;
-    border: 3px solid #ffb6c1; /* Делаем рамку потолще */
-    border-radius: 20px; /* Сильнее скругляем углы */
+    border: 3px solid #ffb6c1; 
+    border-radius: 20px; 
     display: flex;
     align-items: center;
-    justify-content: flex-start; /* Навигация слева */
-    padding: 0 50px;
+    justify-content: flex-start; 
+    
+    /* ИЗМЕНЕНИЕ ТУТ: */
+    /* Было: 0 50px (50 слева, 50 справа) */
+    /* Стало: 0 сверху, 30 справа, 0 снизу, 70 слева */
+    padding: 0 30px 0 64px; 
+    
     position: relative;
-    margin: 25px auto; /* Центрируем сам баннер на странице */
+    margin: 25px auto; 
     overflow: visible;
+    box-sizing: border-box; /* Важно, чтобы паддинги не раздували рамку */
 }
+
 
 
 /*чёто с кнопками*/
@@ -108,7 +115,7 @@ body {
 .main-logo-img {
     height: 150px;
     width: auto;
-    margin-left: 50px;
+    margin-left: 60px;
     object-fit: contain;
     filter: drop-shadow(0 0 8px #ff3399);
     /* Здесь только плавность свечения */
@@ -119,7 +126,7 @@ body {
 .spin-logo {
     position: absolute;
     z-index: 15;
-    left: 150px;  
+    left: 160px;  
     top: 20%;
     height: 80px;
     width: auto;
@@ -161,7 +168,7 @@ body {
 
     /* ЦЕНТРОВКА «ПО ПРИБОРАМ»: */
     position: absolute;
-    left: 45%;
+    left: 46.3%;
     transform: translateX(-50%);
     
     /* ОПУСКАЕМ ВНИЗ: */
