@@ -71,6 +71,36 @@ body {
 
 .header-title { display: flex; align-items: center; gap: 45px; z-index: 10; width: 100%; }
 
+/* ЦЕНТРАЛЬНЫЙ БЛОК ДЛЯ ЛОГО */
+.logo-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1; /* Это заставит логотип встать ровно по центру между меню и правым краем */
+    margin: 0 20px;
+}
+
+/* САМ ЛОГОТИП (КАРТИНКА) */
+.main-logo-img {
+    height: 150px; /* ВОТ ЭТИМ ЧИСЛОМ регулируй размер. 110px - идеально для баннера в 200px */
+    width: auto;   /* Ширина подстроится сама, чтобы не было искажений */
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+/* Легкий эффект при наведении, чтобы было "живо" */
+.main-logo-img:hover {
+    transform: scale(1.05);
+}
+
+/* ПОДЗАГОЛОВОК (подтягиваем чуть выше к логотипу) */
+.header-subtitle {
+    margin-top: -5px; /* Немного уменьшил отступ сверху */
+    /* остальные твои стили subtitle остаются без изменений */
+}
+
+
 /* ЛОГОТИП С ОБВОДКОЙ (Как на рефе) */
 
 
