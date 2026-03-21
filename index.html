@@ -56,52 +56,59 @@
         </div>
 
         <main class="main-layout">
-<aside class="sidebar-left">
-    <!-- КАРТОЧКА ПРОФИЛЯ -->
-    <div class="profile-card box-deco">
-        <div class="avatar-frame">
-            <!-- Твой персонаж -->
-            <img src="assets/avatar.png" alt="Borween Profile" class="profile-img">
-            
-            <!-- Вылетающая иконка Level Up -->
-            <img src="assets/levelup.png" alt="Level Up!" class="level-up-icon">
-            
-            <!-- Инфо-плашка поверх -->
-            <div class="profile-overlay">
-                <span class="profile-name">borween</span>
-                <span class="profile-tag">vs. the world ⚡</span>
-            </div>
-        </div>
-        
-        <div class="mini-player">
-            <div class="track-info">
-                <marquee scrollamount="2">now playing: borween — strawberry mix 🍓</marquee>
-            </div>
-            <div class="player-controls">
-                <button>⏮</button>
-                <button class="play-btn">❤</button>
-                <button>⏭</button>
-            </div>
-        </div>
-        <p class="status">✨ Творю милоту</p>
-    </div>
-
-                <div class="box-deco">
-                    <h3 class="side-title">Directory:</h3>
-                    <nav class="side-menu">
-                        <a href="#merch" class="tab-trigger">🛍️ Shop All</a>
-                        <a href="#gallery">🎨 Portfolio</a>
-                    </nav>
+            <aside class="sidebar-left">
+                <!-- КАРТОЧКА ПРОФИЛЯ -->
+                <div class="profile-card box-deco">
+                    <div class="avatar-frame">
+                        <img src="assets/avatar.png" alt="Borween Profile" class="profile-img">
+                        <!-- Контейнеры для фонтана Level Up -->
+                        <img src="assets/levelup.png" alt="" class="level-up-icon lv-1">
+                        <img src="assets/levelup.png" alt="" class="level-up-icon lv-2">
+                        <img src="assets/levelup.png" alt="" class="level-up-icon lv-3">
+                        <div class="profile-overlay">
+                            <span class="profile-name">borween</span>
+                            <span class="profile-tag">vs. the world ⚡</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mini-player">
+                        <div class="track-info">
+                            <marquee scrollamount="2">now playing: borween — strawberry mix 🍓</marquee>
+                        </div>
+                        <div class="player-controls">
+                            <button>⏮</button>
+                            <button class="play-btn">❤</button>
+                            <button>⏭</button>
+                        </div>
+                    </div>
+                    <p class="status">✨ Творю милоту</p>
                 </div>
 
-                <div class="box-deco">
-                    <h3 class="side-title">Support:</h3>
-                    <nav class="side-menu">
-                        <a href="https://t.me" target="_blank" class="tg-btn">✈️ Join Telegram</a>
-                        <a href="#">☕ Buy a coffee</a>
-                    </nav>
+                <!-- ВИДЖЕТ ТЕЛЕГРАМА -->
+                <div class="box-deco tg-widget">
+                    <div class="tg-top-icon">
+                        <img src="assets/tg.png" alt="Telegram">
+                    </div>
+
+                    <div class="tg-content">
+                        <div class="tg-avatar-wrap">
+                            <img src="assets/yotsuba.png" alt="Yotsuba" class="tg-avatar">
+                            <span class="tg-status-dot"></span>
+                        </div>
+                        
+                        <div class="tg-header-info">
+                            <div class="tg-name">b@rween🍮🍀</div>
+                            <div class="tg-subs">676 subscribers</div>
+                        </div>
+
+                        <p class="tg-text">амбассадор juminocore🍀🍎🧤<br>тут рисунки, мерч и всякое-всякое</p>
+                        
+                        <a href="https://t.me" target="_blank" class="tg-join-btn">
+                            JOIN CHANNEL ✈️
+                        </a>
+                    </div>
                 </div>
-                
+
                 <div id="shaker-container" class="box-deco" style="height: 200px;"></div>
             </aside>
 
@@ -109,12 +116,40 @@
                 <!-- ВКЛАДКА МЕРЧ -->
                 <div id="merch-tab" class="tab-pane active">
                     <div class="section-title"><h2>New Merch Drops ✨</h2></div>
+                    
                     <div class="pegboard">
+                        
+                        <!-- ПРИМЕР КАРТОЧКИ 1 -->
                         <div class="merch-item">
-                            <div class="item-img">🧸</div>
+                            <!-- Блок для скотча. Класс tape-1, tape-2 и т.д. до 16 -->
+                            <div class="item-tape tape-1"></div> 
+                            <div class="item-img">
+                                <img src="assets/tovar1.png" alt="Bunny Keychain">
+                            </div>
                             <p class="item-name">Bunny Keychain</p>
                             <button class="buy-btn">Add to Jar</button>
                         </div>
+
+                        <!-- ПРИМЕР КАРТОЧКИ 2 -->
+                        <div class="merch-item">
+                            <div class="item-tape tape-5"></div>
+                            <div class="item-img">
+                                <img src="assets/tovar2.png" alt="Bear Sticker">
+                            </div>
+                            <p class="item-name">Bear Sticker Pack</p>
+                            <button class="buy-btn">Add to Jar</button>
+                        </div>
+
+                        <!-- ПРИМЕР КАРТОЧКИ 3 -->
+                        <div class="merch-item">
+                            <div class="item-tape tape-12"></div>
+                            <div class="item-img">
+                                <img src="assets/tovar3.png" alt="Pink Pin">
+                            </div>
+                            <p class="item-name">Limited Pink Pin</p>
+                            <button class="buy-btn">Add to Jar</button>
+                        </div>
+
                     </div>
                 </div>
 
@@ -123,7 +158,8 @@
                     <div class="section-title"><h2>Garage Sale (Avito) 🧺</h2></div>
                     <div class="pegboard">
                         <div class="merch-item">
-                            <div class="item-img" style="background-color: #e0f7fa;">👗</div>
+                            <div class="item-tape tape-3"></div>
+                            <div class="item-img">🧸</div>
                             <p class="item-name">Vintage Item</p>
                             <button class="buy-btn avito-btn">Buy on Avito</button>
                         </div>
