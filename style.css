@@ -436,3 +436,107 @@ box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
     opacity: 1; /* Подзаголовок становится ярче, когда наводишь на лого */
 }
 
+/* КОНТЕЙНЕР АВАТАРА */
+.avatar-frame {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    background: #fff0f5;
+    overflow: hidden;
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ПЕРСОНАЖ: Изначально черный */
+.profile-img {
+    width: 90%;
+    height: 90%;
+    object-fit: contain;
+    filter: brightness(0) opacity(0.8);
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+/* ИКОНКА LEVEL UP: Спрятана */
+.level-up-icon {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    width: 60px;
+    height: auto;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 10;
+    image-rendering: pixelated;
+}
+
+/* ЭФФЕКТЫ ПРИ НАВЕДЕНИИ НА КАРТОЧКУ */
+.profile-card:hover .profile-img {
+    /* Неон + Вибрация */
+    animation: neon-glow-vivid 4s linear infinite, shake-glitch 0.15s ease infinite;
+}
+
+.profile-card:hover .level-up-icon {
+    /* Вылет иконки */
+    animation: mario-item-jump 0.5s ease-out infinite;
+}
+
+/* --- АНИМАЦИИ --- */
+
+/* 1. Плавный неоновый перелив */
+@keyframes neon-glow-vivid {
+    0%   { filter: hue-rotate(0deg)   brightness(1.2) drop-shadow(0 0 3px #ff1493) drop-shadow(0 0 12px rgba(255, 20, 147, 0.5)); }
+    20%  { filter: hue-rotate(72deg)  brightness(1.2) drop-shadow(0 0 3px #ff8c00) drop-shadow(0 0 12px rgba(255, 140, 0, 0.5)); }
+    40%  { filter: hue-rotate(144deg) brightness(1.2) drop-shadow(0 0 3px #00ff7f) drop-shadow(0 0 12px rgba(0, 255, 127, 0.5)); }
+    60%  { filter: hue-rotate(216deg) brightness(1.2) drop-shadow(0 0 3px #00bfff) drop-shadow(0 0 12px rgba(0, 191, 255, 0.5)); }
+    80%  { filter: hue-rotate(288deg) brightness(1.2) drop-shadow(0 0 3px #9932cc) drop-shadow(0 0 12px rgba(153, 50, 204, 0.5)); }
+    100% { filter: hue-rotate(360deg) brightness(1.2) drop-shadow(0 0 3px #ff1493) drop-shadow(0 0 12px rgba(255, 20, 147, 0.5)); }
+}
+
+/* 2. Вибрация (Shake) */
+@keyframes shake-glitch {
+    0% { transform: translate(0); }
+    25% { transform: translate(2px, -2px); }
+    50% { transform: translate(-2px, 2px); }
+    75% { transform: translate(2px, 2px); }
+    100% { transform: translate(0); }
+}
+
+/* 3. Прыжок иконки (Mario style) */
+@keyframes mario-item-jump {
+    0% { 
+        transform: translate(-50%, 0) scale(0.5) rotate(-20deg); 
+        opacity: 0;
+    }
+    30% { 
+        transform: translate(-50%, -60px) scale(1.2) rotate(10deg); 
+        opacity: 1;
+    }
+    100% { 
+        transform: translate(-50%, -120px) scale(1.5) rotate(-30deg); 
+        opacity: 0;
+    }
+}
+
+/* ПЛАШКА С ТЕКСТОМ */
+.profile-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(255, 182, 193, 0.9));
+    padding: 20px 10px 5px 10px;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    z-index: 5;
+}
+
+
+.profile-name {
+    display: block;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
