@@ -72,6 +72,10 @@ body {
     margin: 25px auto; 
     overflow: visible;
     box-sizing: border-box; /* Важно, чтобы паддинги не раздували рамку */
+        background-color: #ffffff;
+    background: 
+                url('assets/stars.gif');
+    background-position: center;
 }
 
 
@@ -159,23 +163,23 @@ body {
 
 .header-subtitle { 
     font-size: 0.75rem; 
-    color: var(--pink-bright); 
     text-transform: uppercase; 
     letter-spacing: 6px; 
-    font-weight: 700;
-    opacity: 0.9;
+    font-weight: 800;
     white-space: nowrap;
-
-    /* ЦЕНТРОВКА «ПО ПРИБОРАМ»: */
     position: absolute;
     left: 46.3%;
     transform: translateX(-50%);
-    
-    /* ОПУСКАЕМ ВНИЗ: */
-    /* bottom: 20px; — если хочешь прижать к низу розовой рамки */
-    /* ИЛИ используй top, чтобы отступить от верха: */
-    top: 155px; /* Подбери это число, чтобы текст встал ровно под BORWEEN */
+    top: 155px;
+    z-index: 5;
+
+    /* ЦВЕТ И ЭФФЕКТ: */
+    color: #ce2d82; /* Темно-розовый/пурпурный */
+    text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.8); /* Легкий блик сзади */
+    opacity: 1; /* Убрал прозрачность для четкости */
 }
+
+
 
 
 
@@ -218,7 +222,17 @@ box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
     height: 30px;
     object-fit: contain; 
         filter: drop-shadow(0 0 2px white) drop-shadow(0 0 1px white);
-    transform: scale(1.2);   /* Чтобы картинка не искажалась */
+    transform: scale(1.3);   /* Чтобы картинка не искажалась */
+}
+
+.item-pink .nav-icon {
+    transform: scale(1.7);
+    filter: brightness(1.1) contrast(1.1) drop-shadow(0 0 2px #fff) drop-shadow(0 0 1px #fff); /* Увеличит картинку на 40%, не меняя размеры кнопки */
+}
+
+.item-green .nav-icon {
+    transform: scale(1.5); /* Увеличит картинку на 40%, не меняя размеры кнопки */
+
 }
 
 .item-pink { background: var(--border-pink); transform: rotate(-2deg); }
