@@ -262,49 +262,58 @@ box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
 /* 6. ЛЕЙАУТ КОЛОНОК */
 .main-layout { display: grid; grid-template-columns: 260px 1fr; gap: 40px; align-items: flex-start; }
 
-.sidebar-left { position: sticky; top: 20px; display: flex; flex-direction: column; gap: 25px; }
+
 
 /* БЛОКИ (BOX DECO) С ПУНКТИРОМ */
+/* --- СЕКЦИЯ САЙДБАРА (ИЗМЕНЕНО: сужена до 240px) --- */
+.sidebar-left {
+    width: 220px; /* Было шире, теперь компактно */
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
 .box-deco {
     background: #fff;
     border: 3px solid var(--border-pink);
     border-radius: 20px;
-    padding: 20px;
+    padding: 15px; /* Уменьшил с 20px, чтобы сэкономить место внутри */
     position: relative;
     /* Внутренняя строчка */
     outline: 2px dashed var(--border-pink);
-    outline-offset: -8px;
+    outline-offset: -6px; /* Чуть прижал к краям */
     box-shadow: 5px 5px 0px rgba(167, 244, 50, 0.1);
 }
 
-/* ЛЕНТОЧКА-ЗАГОЛОВОК */
+/* ЛЕНТОЧКА-ЗАГОЛОВОК (Оставил без изменений) */
 .side-title {
     background: var(--border-pink); color: #fff;
     padding: 2px 15px; border-radius: 20px;
     font-size: 0.65rem; text-transform: uppercase; letter-spacing: 2px;
-    position: absolute; top: -12px; left: 20px;
+    position: absolute; top: -12px; left: 15px; /* Сместил чуть левее под новый размер */
     border: 2px solid #fff; box-shadow: 2px 2px 0px var(--border-pink);
 }
 
-/* МИНИ-ПЛЕЕР ВНУТРИ ПРОФИЛЯ */
+/* МИНИ-ПЛЕЕР ВНУТРИ ПРОФИЛЯ (Сделал компактнее) */
 .mini-player {
     background: #fff0f3; border: 1px solid var(--border-pink);
-    border-radius: 12px; padding: 10px; margin: 15px 0;
+    border-radius: 12px; padding: 8px; margin: 12px 0;
 }
 .track-info { background: #fff; border: 1px dashed var(--border-pink); padding: 4px; border-radius: 6px; }
 .track-info marquee { font-size: 0.65rem; color: var(--pink-bright); font-weight: bold; }
 .player-controls { display: flex; justify-content: space-around; padding-top: 5px; }
-.player-controls button { background: none; border: none; color: var(--pink-bright); font-size: 1.1rem; }
+.player-controls button { background: none; border: none; color: var(--pink-bright); font-size: 1.1rem; cursor: pointer; }
 
-/* СПИСКИ С СЕРДЕЧКАМИ */
+/* СПИСКИ С СЕРДЕЧКАМИ (Уменьшил отступы) */
 .side-menu a {
     display: flex; align-items: center; text-decoration: none;
-    color: var(--pink-bright); padding: 8px 0; font-size: 0.85rem;
+    color: var(--pink-bright); padding: 6px 0; font-size: 0.8rem; /* Уменьшил шрифт и паддинг */
     border-bottom: 1px dashed var(--border-pink);
 }
-.side-menu a::before { content: '❤'; margin-right: 10px; font-size: 0.7rem; }
+.side-menu a::before { content: '❤'; margin-right: 8px; font-size: 0.65rem; }
 
-/* 7. ТОВАРЫ (ПОЛАРОИДЫ) */
+/* 7. ТОВАРЫ (ПОЛАРОИДЫ) - Оставил как есть */
 .pegboard { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 30px; }
 
 .merch-item {
@@ -363,6 +372,7 @@ box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
 .tab-pane { display: none; animation: slideUp 0.4s ease-out; }
 .tab-pane.active { display: block; }
 @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
 
 .sakura-container {
   position: fixed;
@@ -441,28 +451,34 @@ box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
     position: relative;
     width: 100%;
     height: 220px;
-    background: #fff0f5;
+    
+    /* ФОНОВАЯ КАРТИНКА: */
+    background-image: url('assets/avatarbg.gif'); /* Замени на свой файл (png/jpg/gif) */
+    background-size: cover;
+    background-position: center;
+    
     overflow: hidden;
-    border-radius: 10px 10px 0 0;
+    border-radius: 17px 17px 0 0;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-/* ПЕРСОНАЖ: Изначально черный */
+/* ПЕРСОНАЖ */
 .profile-img {
     width: 90%;
-    height: 90%;
+    height: 95%;
     object-fit: contain;
+    object-position: bottom;
     filter: brightness(0) opacity(0.8);
     transition: all 0.3s ease;
-    z-index: 1;
+    z-index: 2; /* Поднимаем над фоном */
 }
 
-/* ИКОНКА LEVEL UP: Спрятана */
+/* ИКОНКА LEVEL UP */
 .level-up-icon {
     position: absolute;
-    top: 40%;
+    top: 30%;
     left: 50%;
     transform: translate(-50%, -50%) scale(0);
     width: 60px;
@@ -473,20 +489,53 @@ box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
     image-rendering: pixelated;
 }
 
-/* ЭФФЕКТЫ ПРИ НАВЕДЕНИИ НА КАРТОЧКУ */
+/* ЭФФЕКТЫ ПРИ НАВЕДЕНИИ */
 .profile-card:hover .profile-img {
-    /* Неон + Вибрация */
     animation: neon-glow-vivid 4s linear infinite, shake-glitch 0.15s ease infinite;
 }
 
 .profile-card:hover .level-up-icon {
-    /* Вылет иконки */
     animation: mario-item-jump 0.5s ease-out infinite;
 }
 
-/* --- АНИМАЦИИ --- */
+/* ПЛАШКА С ТЕКСТОМ (КАК НА РЕФЕ) */
+.profile-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 20%; /* Плашка занимает чуть меньше половины кадра */
+    /* Сплошной нежно-розовый цвет с прозрачностью (без градиента) */
+    background: rgba(255, 192, 203, 0.7); 
+    /* Тонкая белая линия сверху плашки для акцента */
+    border-top: 2px solid rgba(255, 255, 255, 0.5);
+    
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 5;
+    
+    /* Эффект матового стекла (опционально) */
+    backdrop-filter: blur(2px);
+}
 
-/* 1. Плавный неоновый перелив */
+.profile-name {
+    display: block;
+    font-weight: 900;
+    font-size: 1.1rem;
+    color: #fff;
+    text-shadow: 1px 1px 0px rgba(255, 105, 180, 0.5);
+    margin-bottom: 2px;
+}
+
+.profile-tag {
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.2;
+}
+
+/* --- ТВОИ АНИМАЦИИ (БЕЗ ИЗМЕНЕНИЙ) --- */
 @keyframes neon-glow-vivid {
     0%   { filter: hue-rotate(0deg)   brightness(1.2) drop-shadow(0 0 3px #ff1493) drop-shadow(0 0 12px rgba(255, 20, 147, 0.5)); }
     20%  { filter: hue-rotate(72deg)  brightness(1.2) drop-shadow(0 0 3px #ff8c00) drop-shadow(0 0 12px rgba(255, 140, 0, 0.5)); }
@@ -496,7 +545,6 @@ box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
     100% { filter: hue-rotate(360deg) brightness(1.2) drop-shadow(0 0 3px #ff1493) drop-shadow(0 0 12px rgba(255, 20, 147, 0.5)); }
 }
 
-/* 2. Вибрация (Shake) */
 @keyframes shake-glitch {
     0% { transform: translate(0); }
     25% { transform: translate(2px, -2px); }
@@ -505,38 +553,9 @@ box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
     100% { transform: translate(0); }
 }
 
-/* 3. Прыжок иконки (Mario style) */
 @keyframes mario-item-jump {
-    0% { 
-        transform: translate(-50%, 0) scale(0.5) rotate(-20deg); 
-        opacity: 0;
-    }
-    30% { 
-        transform: translate(-50%, -60px) scale(1.2) rotate(10deg); 
-        opacity: 1;
-    }
-    100% { 
-        transform: translate(-50%, -120px) scale(1.5) rotate(-30deg); 
-        opacity: 0;
-    }
+    0% { transform: translate(-50%, 0) scale(0.5) rotate(-20deg); opacity: 0; }
+    30% { transform: translate(-50%, -60px) scale(1.2) rotate(10deg); opacity: 1; }
+    100% { transform: translate(-50%, -120px) scale(1.5) rotate(-30deg); opacity: 0; }
 }
 
-/* ПЛАШКА С ТЕКСТОМ */
-.profile-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(transparent, rgba(255, 182, 193, 0.9));
-    padding: 20px 10px 5px 10px;
-    color: white;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-    z-index: 5;
-}
-
-
-.profile-name {
-    display: block;
-    font-weight: bold;
-    font-size: 1.1rem;
-}
