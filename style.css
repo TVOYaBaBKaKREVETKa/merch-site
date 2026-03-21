@@ -452,8 +452,8 @@ box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
     width: 100%;
     height: 220px;
     
-    /* ФОНОВАЯ КАРТИНКА: */
-    background-image: url('assets/avatarbg.gif'); /* Замени на свой файл (png/jpg/gif) */
+    /* ТВОЯ ФОНОВАЯ КАРТИНКА */
+    background-image: url('assets/avatarbg.gif'); 
     background-size: cover;
     background-position: center;
     
@@ -464,18 +464,44 @@ box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
     align-items: center;
 }
 
-/* ПЕРСОНАЖ */
+/* ПЕРСОНАЖ: ТЕПЕРЬ ЦВЕТНОЙ СРАЗУ */
 .profile-img {
     width: 90%;
     height: 95%;
     object-fit: contain;
     object-position: bottom;
-    filter: brightness(0) opacity(0.8);
+    /* УБРАЛИ brightness(0), теперь он в своих родных цветах */
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5)); 
     transition: all 0.3s ease;
-    z-index: 2; /* Поднимаем над фоном */
+    z-index: 2;
 }
 
-/* ИКОНКА LEVEL UP */
+/* ЭФФЕКТЫ ПРИ НАВЕДЕНИИ */
+.profile-card:hover .profile-img {
+    /* Добавляем сочности цветам при наведении и наше свечение */
+    filter: saturate(1.4) brightness(1.1); 
+    animation: neon-glow-vivid 4s linear infinite, shake-glitch 0.15s ease infinite;
+}
+
+/* ПЛАШКА С ТЕКСТОМ */
+.profile-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 21%; /* Чуть увеличил, чтобы текст "vs the world" не лез на край */
+    background: rgba(255, 192, 203, 0.75); 
+    border-top: 2px solid rgba(255, 255, 255, 0.5);
+    
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 5;
+    backdrop-filter: blur(3px);
+}
+
+/* ИКОНКА LEVEL UP (БЕЗ ИЗМЕНЕНИЙ) */
 .level-up-icon {
     position: absolute;
     top: 30%;
@@ -489,60 +515,20 @@ box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
     image-rendering: pixelated;
 }
 
-/* ЭФФЕКТЫ ПРИ НАВЕДЕНИИ */
-.profile-card:hover .profile-img {
-    animation: neon-glow-vivid 4s linear infinite, shake-glitch 0.15s ease infinite;
-}
-
 .profile-card:hover .level-up-icon {
     animation: mario-item-jump 0.5s ease-out infinite;
 }
 
-/* ПЛАШКА С ТЕКСТОМ (КАК НА РЕФЕ) */
-.profile-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 20%; /* Плашка занимает чуть меньше половины кадра */
-    /* Сплошной нежно-розовый цвет с прозрачностью (без градиента) */
-    background: rgba(255, 192, 203, 0.7); 
-    /* Тонкая белая линия сверху плашки для акцента */
-    border-top: 2px solid rgba(255, 255, 255, 0.5);
-    
-    padding: 12px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    z-index: 5;
-    
-    /* Эффект матового стекла (опционально) */
-    backdrop-filter: blur(2px);
-}
+/* --- ТВОИ АНИМАЦИИ --- */
 
-.profile-name {
-    display: block;
-    font-weight: 900;
-    font-size: 1.1rem;
-    color: #fff;
-    text-shadow: 1px 1px 0px rgba(255, 105, 180, 0.5);
-    margin-bottom: 2px;
-}
-
-.profile-tag {
-    font-size: 0.7rem;
-    color: rgba(255, 255, 255, 0.9);
-    line-height: 1.2;
-}
-
-/* --- ТВОИ АНИМАЦИИ (БЕЗ ИЗМЕНЕНИЙ) --- */
+/* Подправил фильтры здесь, чтобы они не закрашивали персонажа в один цвет */
 @keyframes neon-glow-vivid {
-    0%   { filter: hue-rotate(0deg)   brightness(1.2) drop-shadow(0 0 3px #ff1493) drop-shadow(0 0 12px rgba(255, 20, 147, 0.5)); }
-    20%  { filter: hue-rotate(72deg)  brightness(1.2) drop-shadow(0 0 3px #ff8c00) drop-shadow(0 0 12px rgba(255, 140, 0, 0.5)); }
-    40%  { filter: hue-rotate(144deg) brightness(1.2) drop-shadow(0 0 3px #00ff7f) drop-shadow(0 0 12px rgba(0, 255, 127, 0.5)); }
-    60%  { filter: hue-rotate(216deg) brightness(1.2) drop-shadow(0 0 3px #00bfff) drop-shadow(0 0 12px rgba(0, 191, 255, 0.5)); }
-    80%  { filter: hue-rotate(288deg) brightness(1.2) drop-shadow(0 0 3px #9932cc) drop-shadow(0 0 12px rgba(153, 50, 204, 0.5)); }
-    100% { filter: hue-rotate(360deg) brightness(1.2) drop-shadow(0 0 3px #ff1493) drop-shadow(0 0 12px rgba(255, 20, 147, 0.5)); }
+    0%   { filter: saturate(1.4) hue-rotate(0deg)   drop-shadow(0 0 3px #ff1493) drop-shadow(0 0 12px rgba(255, 20, 147, 0.5)); }
+    20%  { filter: saturate(1.4) hue-rotate(72deg)  drop-shadow(0 0 3px #ff8c00) drop-shadow(0 0 12px rgba(255, 140, 0, 0.5)); }
+    40%  { filter: saturate(1.4) hue-rotate(144deg) drop-shadow(0 0 3px #00ff7f) drop-shadow(0 0 12px rgba(0, 255, 127, 0.5)); }
+    60%  { filter: saturate(1.4) hue-rotate(216deg) drop-shadow(0 0 3px #00bfff) drop-shadow(0 0 12px rgba(0, 191, 255, 0.5)); }
+    80%  { filter: saturate(1.4) hue-rotate(288deg) drop-shadow(0 0 3px #9932cc) drop-shadow(0 0 12px rgba(153, 50, 204, 0.5)); }
+    100% { filter: saturate(1.4) hue-rotate(360deg) drop-shadow(0 0 3px #ff1493) drop-shadow(0 0 12px rgba(255, 20, 147, 0.5)); }
 }
 
 @keyframes shake-glitch {
@@ -558,4 +544,8 @@ box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
     30% { transform: translate(-50%, -60px) scale(1.2) rotate(10deg); opacity: 1; }
     100% { transform: translate(-50%, -120px) scale(1.5) rotate(-30deg); opacity: 0; }
 }
+
+/* ТЕКСТ (ДЛЯ ПОРЯДКА) */
+.profile-name { display: block; font-weight: 900; font-size: 1.1rem; color: #fff; text-shadow: 1px 1px 0px rgba(255, 105, 180, 0.5); margin-bottom: 2px; }
+.profile-tag { font-size: 0.7rem; color: rgba(255, 255, 255, 0.9); line-height: 1.2; }
 
