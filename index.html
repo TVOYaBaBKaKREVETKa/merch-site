@@ -16,7 +16,6 @@
     <div class="page-wrapper">
         <header class="header-container">
             <div class="header-title">
-                <!-- Навигация слева -->
                 <nav class="header-nav-side">
                     <a href="#merch" class="nav-side-item item-pink active-tab">
                         <img src="assets/cart2.png" alt="" class="nav-icon"> Мерч
@@ -32,7 +31,6 @@
                     </a>
                 </nav>
 
-                <!-- ЦЕНТРАЛЬНЫЙ БЛОК С ЛОГО И ЗАВИТУШКОЙ -->
                 <div class="logo-wrap">
                     <div class="logo-container">
                         <img src="assets/zavi.png" alt="o" class="spin-logo">
@@ -41,14 +39,12 @@
                     <p class="header-subtitle">✦ digital artist & cute things collector ✦</p>
                 </div>
 
-                <!-- ПРАВАЯ ЧАСТЬ С ПЕРСОНАЖЕМ -->
                 <div class="header-oc-wrap">
                     <img src="assets/OC.png" alt="Artist OC" class="oc-img">
                 </div>
             </div>
         </header>
 
-        <!-- Бегущая строка -->
         <div class="ticker-wrap">
             <div class="ticker">
                 <span>🍀 b🌀rween merch 🍮 coming soon 🎀 garage sale update 🍀 b🌀rween merch 🍮 coming soon 🎀 garage sale update 🍀</span>
@@ -57,11 +53,9 @@
 
         <main class="main-layout">
             <aside class="sidebar-left">
-                <!-- КАРТОЧКА ПРОФИЛЯ -->
                 <div class="profile-card box-deco">
                     <div class="avatar-frame">
                         <img src="assets/avatar.png" alt="Borween Profile" class="profile-img">
-                        <!-- Контейнеры для фонтана Level Up -->
                         <img src="assets/levelup.png" alt="" class="level-up-icon lv-1">
                         <img src="assets/levelup.png" alt="" class="level-up-icon lv-2">
                         <img src="assets/levelup.png" alt="" class="level-up-icon lv-3">
@@ -84,28 +78,21 @@
                     <p class="status">✨ Творю милоту</p>
                 </div>
 
-                <!-- ВИДЖЕТ ТЕЛЕГРАМА -->
                 <div class="box-deco tg-widget">
                     <div class="tg-top-icon">
                         <img src="assets/tg.png" alt="Telegram">
                     </div>
-
                     <div class="tg-content">
                         <div class="tg-avatar-wrap">
                             <img src="assets/yotsuba.png" alt="Yotsuba" class="tg-avatar">
                             <span class="tg-status-dot"></span>
                         </div>
-                        
                         <div class="tg-header-info">
                             <div class="tg-name">b@rween🍮🍀</div>
                             <div class="tg-subs">676 subscribers</div>
                         </div>
-
                         <p class="tg-text">амбассадор juminocore🍀🍎🧤<br>тут рисунки, мерч и всякое-всякое</p>
-                        
-                        <a href="https://t.me" target="_blank" class="tg-join-btn">
-                            JOIN CHANNEL ✈️
-                        </a>
+                        <a href="https://t.me" target="_blank" class="tg-join-btn">JOIN CHANNEL ✈️</a>
                     </div>
                 </div>
 
@@ -113,52 +100,36 @@
             </aside>
 
             <section class="shop-content">
-                <!-- ВКЛАДКА МЕРЧ -->
                 <div id="merch-tab" class="tab-pane active">
                     <div class="section-title"><h2>New Merch Drops ✨</h2></div>
-                    
                     <div class="pegboard">
-                        
-                        <!-- ПРИМЕР КАРТОЧКИ 1 -->
+                        <!-- Карточки теперь без цифр у скотча, их добавит JS -->
                         <div class="merch-item">
-                            <!-- Блок для скотча. Класс tape-1, tape-2 и т.д. до 16 -->
-                            <div class="item-tape tape-1"></div> 
-                            <div class="item-img">
-                                <img src="assets/tovar1.png" alt="Bunny Keychain">
-                            </div>
+                            <div class="item-tape"></div> 
+                            <div class="item-img"><img src="assets/tovar1.png" alt=""></div>
                             <p class="item-name">Bunny Keychain</p>
                             <button class="buy-btn">Add to Jar</button>
                         </div>
-
-                        <!-- ПРИМЕР КАРТОЧКИ 2 -->
                         <div class="merch-item">
-                            <div class="item-tape tape-5"></div>
-                            <div class="item-img">
-                                <img src="assets/tovar2.png" alt="Bear Sticker">
-                            </div>
+                            <div class="item-tape"></div>
+                            <div class="item-img"><img src="assets/tovar2.png" alt=""></div>
                             <p class="item-name">Bear Sticker Pack</p>
                             <button class="buy-btn">Add to Jar</button>
                         </div>
-
-                        <!-- ПРИМЕР КАРТОЧКИ 3 -->
                         <div class="merch-item">
-                            <div class="item-tape tape-12"></div>
-                            <div class="item-img">
-                                <img src="assets/tovar3.png" alt="Pink Pin">
-                            </div>
+                            <div class="item-tape"></div>
+                            <div class="item-img"><img src="assets/tovar3.png" alt=""></div>
                             <p class="item-name">Limited Pink Pin</p>
                             <button class="buy-btn">Add to Jar</button>
                         </div>
-
                     </div>
                 </div>
 
-                <!-- ВКЛАДКА АВИТО -->
                 <div id="avito-tab" class="tab-pane">
                     <div class="section-title"><h2>Garage Sale (Avito) 🧺</h2></div>
                     <div class="pegboard">
                         <div class="merch-item">
-                            <div class="item-tape tape-3"></div>
+                            <div class="item-tape"></div>
                             <div class="item-img">🧸</div>
                             <p class="item-name">Vintage Item</p>
                             <button class="buy-btn avito-btn">Buy on Avito</button>
@@ -166,7 +137,6 @@
                     </div>
                 </div>
 
-                <!-- ВКЛАДКА ОТЗЫВЫ -->
                 <div id="reviews-tab" class="tab-pane">
                     <div class="section-title"><h2>Customer Reviews 💬</h2></div>
                     <div class="box-deco" style="text-align: center; padding: 50px;">

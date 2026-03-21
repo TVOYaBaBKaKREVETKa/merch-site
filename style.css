@@ -353,26 +353,47 @@ box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
 }
 
 /* 2. КАРТОЧКА-ПОЛАРОИД */
+/* КАРТОЧКА-ПОЛАРОИД */
 .merch-item {
     background: #fff; 
-    padding: 12px 12px 45px 12px; /* Широкий низ как у полароида */
+    /* Широкий низ как у полароида */
+    padding: 12px 12px 45px 12px; 
     border: 3px solid #333;
-    box-shadow: 8px 8px 0px var(--border-pink), 15px 15px 30px rgba(0,0,0,0.05);
-    transform: rotate(-2deg); 
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    
+    /* Начальная тень */
+    box-shadow: 8px 8px 0px var(--border-pink), 10px 10px 20px rgba(0,0,0,0.05);
+    
+    /* МАГИЯ: Берем рандомный наклон из JS (по умолчанию -2deg, если JS не сработал) */
+    transform: rotate(var(--tilt, -2deg)); 
+    
+    /* Пружинистый переход (Bounce effect) */
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    
     position: relative;
     z-index: 1;
+    cursor: pointer;
 }
 
-/* Наклон в другую сторону для четных карточек */
-.merch-item:nth-child(even) { transform: rotate(2deg); }
+/* Убираем nth-child(even), так как теперь JS делает наклон рандомным для всех */
 
-/* ЭФФЕКТ ПРИ НАВЕДЕНИИ */
+/* ЭФФЕКТ ПРИ НАВЕДЕНИИ: КАРТОЧКА ОЖИВАЕТ */
 .merch-item:hover { 
-    transform: scale(1.05) rotate(0deg) translateY(-10px); 
+    /* Выпрямляем в 0, поднимаем вверх на 20px и чуть увеличиваем */
+    transform: rotate(0deg) translateY(-20px) scale(1.06) !important; 
+    
     z-index: 100; 
-    box-shadow: 12px 12px 0px var(--pink-bright);
+    
+    /* Делаем тень "длиннее", чтобы казалось, что карточка взлетела высоко */
+    box-shadow: 0px 20px 30px rgba(0,0,0,0.1), 15px 25px 0px var(--pink-bright);
 }
+
+/* Доп. фишка: при наведении на карточку, скотч тоже чуть приподнимается */
+.merch-item:hover .item-tape {
+    transform: translateX(-50%) translateY(-5px) scale(1.1);
+    filter: drop-shadow(0 5px 5px rgba(0,0,0,0.1));
+    transition: 0.3s ease;
+}
+
 
 /* 3. ОБЩИЙ СТИЛЬ СКОТЧА */
 .item-tape {
