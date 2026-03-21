@@ -61,7 +61,7 @@ body {
     border-radius: 20px; 
     display: flex;
     align-items: center;
-    justify-content: flex-start; 
+    justify-content: flex-start;    
     
     /* ИЗМЕНЕНИЕ ТУТ: */
     /* Было: 0 50px (50 слева, 50 справа) */
@@ -208,15 +208,17 @@ body {
     
     /* Эффект наклейки: белая обводка + тень */
     border: 2px solid #fff; 
-     box-shadow: 4px 4px 0px rgba(255, 182, 193, 0.6);
+box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
     
     transition: all 0.2s ease;
 }
 
 .nav-icon {
-    width: 22px;            /* Подбери размер под себя */
-    height: 22px;
-    object-fit: contain;    /* Чтобы картинка не искажалась */
+    width: 30px;            /* Подбери размер под себя */
+    height: 30px;
+    object-fit: contain; 
+        filter: drop-shadow(0 0 2px white) drop-shadow(0 0 1px white);
+    transform: scale(1.2);   /* Чтобы картинка не искажалась */
 }
 
 .item-pink { background: var(--border-pink); transform: rotate(-2deg); }
