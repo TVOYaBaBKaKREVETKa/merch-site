@@ -348,10 +348,10 @@ box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
 /* --- СТИЛЬ ЗАГОЛОВКА (Добавлен сверху) --- */
 /* --- 1. ОРИГИНАЛЬНЫЙ ЗАГОЛОВОК "HOLO-STICKER" --- */
 /* --- 1. ТОТ САМЫЙ ХОЛО-ЗАГОЛОВОК (STICKER STYLE) --- */
+/* --- 1. ТОТ САМЫЙ ХОЛО-ЗАГОЛОВОК (STICKER STYLE) --- */
 .section-title {
     text-align: center;
     margin: 60px 0 40px 0;
-    perspective: 1000px;
 }
 
 .section-title h2 {
@@ -390,15 +390,22 @@ box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
     50% { transform: translateY(-10px) rotate(1deg); }
 }
 
-/* --- 2. СЕТКА (ФИКС "ДЫРКИ" СЛЕВА) --- */
+/* --- 2. СЕТКА (УБИВАЕМ ДЫРУ СЛЕВА РАЗ И НАВСЕГДА) --- */
 
 /* 
-   ПРИНУДИТЕЛЬНО убираем паддинги у вкладок, 
-   которые могут толкать сетку вправо 
+   ГЛАВНЫЙ ФИКС: Убираем паддинги у всех внешних контейнеров, 
+   которые толкают сетку вправо.
 */
-.tab-pane {
-    padding-left: 0 !important;
+/* Ищи это в районе 164 строки */
+.main-content {
+    flex: 1;
+    /* БЫЛО: padding: 40px; */
+    padding: 40px 20px 40px 0px; /* Слева теперь 0! */
+    overflow-y: auto;
+    background: white;
+    position: relative;
 }
+
 
 .pegboard { 
     display: grid; 
@@ -407,14 +414,18 @@ box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
     /* Расстояние между карточками (идеальное) */
     gap: 50px 30px; 
     
-    /* Убираем ПАДДИНГ СЛЕВА в 0, чтобы левая карточка прилипла к сайдбару */
-    padding: 20px 10px 100px 0px; 
+    /* 
+       Выставляем симметричные отступы внутри самой сетки. 
+       Слева поставим 15px, чтобы левая карточка была максимально близко, но не влипала.
+    */
+    padding: 20px 20px 100px 15px; 
     
     width: 100%;
+    max-width: 100%;
     box-sizing: border-box;
     
-    /* Прижимаем карточки к левому краю их колонок */
-    justify-items: start; 
+    /* Центрируем содержимое в ячейках */
+    justify-items: center; 
 }
 
 /* --- 3. КАРТОЧКИ С САЛАТОВЫМ ХОВЕРОМ --- */
@@ -428,18 +439,16 @@ box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
     position: relative;
     
     width: 100%;
-    max-width: 230px; /* Чтобы не раздувались слишком сильно */
+    max-width: 220px; /* Чтобы не раздувались */
 }
 
-/* ХОВЕР С САЛАТОВОЙ ТЕНЬЮ ХУДОЖНИЦЫ */
 .merch-item:hover { 
     transform: rotate(0deg) translateY(-20px) scale(1.08) !important; 
     z-index: 100; 
-    /* Возвращаем сочную салатовую тень #a7f432 */
     box-shadow: 0px 20px 30px rgba(0,0,0,0.1), 15px 25px 0px #a7f432;
 }
 
-/* --- 4. СКОТЧИ --- */
+/* --- 4. СКОТЧИ (ФИКС ОТОБРАЖЕНИЯ) --- */
 .item-tape {
     position: absolute;
     top: -25px; 
@@ -452,9 +461,11 @@ box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    filter: drop-shadow(0 2px 2px rgba(0,0,0,0.15));
+    /* Добавляем display block чтобы точно было видно */
+    display: block !important; 
 }
 
+/* Ссылки на скотчи (проверь пути assets на гитхабе) */
 .tape-1 { background-image: url('assets/tape1.png'); }
 .tape-2 { background-image: url('assets/tape2.png'); }
 .tape-3 { background-image: url('assets/tape3.png'); }
@@ -472,7 +483,7 @@ box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
 .tape-15 { background-image: url('assets/tape15.png'); }
 .tape-16 { background-image: url('assets/tape16.png'); }
 
-/* --- 5. ВНУТРЕННОСТИ КАРТОЧЕК --- */
+/* --- 5. ВНУТРЯНКА --- */
 .item-img { 
     width: 100%; 
     aspect-ratio: 1; 
@@ -484,11 +495,7 @@ box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
     overflow: hidden;
 }
 
-.item-img img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
+.item-img img { width: 100%; height: 100%; object-fit: cover; }
 
 .item-name {
     margin-top: 15px;
@@ -505,20 +512,17 @@ box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
     background: var(--pink-bright);
     color: #fff;
     border: 2px solid #333;
-    padding: 8px;
+    padding: 10px;
     font-weight: 900;
     cursor: pointer;
     box-shadow: 4px 4px 0px #333;
     transition: 0.2s;
     text-transform: uppercase;
-    border-radius: 5px;
+    border-radius: 8px;
 }
 
-.buy-btn:hover {
-    background: #a7f432; /* Салатовый при наведении на кнопку */
-    color: #333;
-    transform: translate(-2px, -2px);
-}
+.buy-btn:hover { background: #a7f432; color: #333; }
+
 
 
 
