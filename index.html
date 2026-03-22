@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com">
+<script src="https://cdnjs.cloudflare.com"></script>
+<script src="https://cdnjs.cloudflare.com"></script>
+
     <meta charset="UTF-8">
     <title>borween | Artist Shop</title>
     <link href="https://fonts.googleapis.com" rel="stylesheet">
@@ -91,74 +95,133 @@
                 </div>
             </aside>
 
-            <section class="shop-content">
-                <!-- ВКЛАДКА МЕРЧ -->
-                <div id="merch-tab" class="tab-pane active">
-                    <div class="section-title"><h2>New Merch Drops ✨</h2></div>
-                    <div class="pegboard">
-                        <div class="merch-item">
-                            <div class="item-tape"></div> 
-                            <div class="item-img"><img src="" alt=""></div>
-                            <p class="item-name">Bunny Keychain</p>
-                            <button class="buy-btn">Add to Jar</button>
-                        </div>
-                        <div class="merch-item">
-                            <div class="item-tape"></div> 
-                            <div class="item-img"><img src="" alt=""></div>
-                            <p class="item-name">Bear Sticker Pack</p>
-                            <button class="buy-btn">Add to Jar</button>
-                        </div>
-                        <div class="merch-item">
-                            <div class="item-tape"></div> 
-                            <div class="item-img"><img src="" alt=""></div>
-                            <p class="item-name">Limited Pink Pin</p>
-                            <button class="buy-btn">Add to Jar</button>
-                        </div>
-                        <div class="merch-item">
-                            <div class="item-tape"></div> 
-                            <div class="item-img"><img src="" alt=""></div>
-                            <p class="item-name">Strawberry Charm</p>
-                            <button class="buy-btn">Add to Jar</button>
-                        </div>
-                        <div class="merch-item">
-                            <div class="item-tape"></div> 
-                            <div class="item-img"><img src="" alt=""></div>
-                            <p class="item-name">Art Print #01</p>
-                            <button class="buy-btn">Add to Jar</button>
-                        </div>
-                        <div class="merch-item">
-                            <div class="item-tape"></div> 
-                            <div class="item-img"><img src="" alt=""></div>
-                            <p class="item-name">Cute Washi Tape</p>
-                            <button class="buy-btn">Add to Jar</button>
-                        </div>
-                    </div>
-                </div>
+<section class="shop-content">
+    
 
-                <!-- ВКЛАДКА АВИТО -->
-                <div id="avito-tab" class="tab-pane">
-                    <div class="section-title"><h2>Garage Sale (Avito) 🧺</h2></div>
-                    <div class="pegboard">
-                        <div class="merch-item">
-                            <div class="item-tape"></div>
-                            <div class="item-img">🧸</div>
-                            <p class="item-name">Vintage Item</p>
-                            <button class="buy-btn avito-btn">Buy on Avito</button>
-                        </div>
-                        <div class="merch-item">
-                            <div class="item-tape"></div>
-                            <div class="item-img">👗</div>
-                            <p class="item-name">Pastel Sweater</p>
-                            <button class="buy-btn avito-btn">Buy on Avito</button>
-                        </div>
-                        <div class="merch-item">
-                            <div class="item-tape"></div>
-                            <div class="item-img">📸</div>
-                            <p class="item-name">Retro Camera</p>
-                            <button class="buy-btn avito-btn">Buy on Avito</button>
-                        </div>
-                    </div>
+
+
+
+    <!-- ВКЛАДКА МЕРЧ -->
+    <div id="merch-tab" class="tab-pane active">
+        <div class="section-title"><h2>New Merch Drops ✨</h2></div>
+        <div class="shop-nav-compact">
+    <!-- Кнопка-ярлычок -->
+    <button id="nav-toggle" class="nav-toggle-btn">
+        <span class="pulse-dot"></span> FILTERS & SORT
+    </button>
+
+    <div id="nav-drawer" class="nav-drawer">
+        <div class="nav-inner">
+            
+            <!-- СЕКЦИЯ ФАНДОМОВ -->
+            <div class="fandom-row">
+                <div class="fan-icon active" data-fandom="all">
+                    <img src="assets/testfandom.png" alt="All">
                 </div>
+                <div class="fan-icon" data-fandom="scott">
+                    <img src="assets/testfandom.png" style="filter: hue-rotate(90deg);" alt="Scott">
+                </div>
+                <div class="fan-icon" data-fandom="original">
+                    <img src="assets/testfandom.png" style="filter: hue-rotate(180deg);" alt="OCs">
+                </div>
+                <div class="fan-icon" data-fandom="anime">
+                    <img src="assets/testfandom.png" style="filter: hue-rotate(270deg);" alt="Anime">
+                </div>
+            </div>
+
+            <div class="divider-v"></div>
+
+            <!-- СЕКЦИЯ СОРТИРОВКИ -->
+            <div class="sort-row">
+                <button class="smart-sort" data-type="price" data-dir="0">
+                    <img src="assets/testfandom.png" class="sort-icon-img">
+                    <span class="sort-arrow">↕</span>
+                </button>
+                <button class="smart-sort" data-type="date" data-dir="2">
+                    <img src="assets/testfandom.png" class="sort-icon-img" style="filter: saturate(2);">
+                    <span class="sort-arrow">↓</span>
+                </button>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+        <div class="pegboard">
+            <!-- Добавил data-атрибуты для работы фильтров -->
+            <div class="merch-item" data-fandom="original" data-price="450" data-date="2026-03-22">
+                <div class="item-tape"></div> 
+                <div class="item-img"><img src="" alt=""></div>
+                <p class="item-name">Bunny Keychain</p>
+                <button class="buy-btn">Add to Jar</button>
+            </div>
+            <div class="merch-item" data-fandom="anime" data-price="150" data-date="2026-03-10">
+                <div class="item-tape"></div> 
+                <div class="item-img"><img src="" alt=""></div>
+                <p class="item-name">Bear Sticker Pack</p>
+                <button class="buy-btn">Add to Jar</button>
+            </div>
+            <div class="merch-item" data-fandom="scott" data-price="300" data-date="2026-03-21">
+                <div class="item-tape"></div> 
+                <div class="item-img"><img src="" alt=""></div>
+                <p class="item-name">Limited Pink Pin</p>
+                <button class="buy-btn">Add to Jar</button>
+            </div>
+            <div class="merch-item" data-fandom="original" data-price="600" data-date="2026-03-05">
+                <div class="item-tape"></div> 
+                <div class="item-img"><img src="" alt=""></div>
+                <p class="item-name">Strawberry Charm</p>
+                <button class="buy-btn">Add to Jar</button>
+            </div>
+            <div class="merch-item" data-fandom="anime" data-price="1200" data-date="2026-02-28">
+                <div class="item-tape"></div> 
+                <div class="item-img"><img src="" alt=""></div>
+                <p class="item-name">Art Print #01</p>
+                <button class="buy-btn">Add to Jar</button>
+            </div>
+            <div class="merch-item" data-fandom="scott" data-price="250" data-date="2026-03-15">
+                <div class="item-tape"></div> 
+                <div class="item-img"><img src="" alt=""></div>
+                <p class="item-name">Cute Washi Tape</p>
+                <button class="buy-btn">Add to Jar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ВКЛАДКА АВИТО -->
+    <div id="avito-tab" class="tab-pane">
+        <div class="section-title"><h2>Garage Sale (Avito) 🧺</h2></div>
+        <div class="pegboard">
+            <div class="merch-item" data-fandom="original" data-price="1000" data-date="2026-01-10">
+                <div class="item-tape"></div>
+                <div class="item-img">🧸</div>
+                <p class="item-name">Vintage Item</p>
+                <button class="buy-btn avito-btn">Buy on Avito</button>
+            </div>
+            <div class="merch-item" data-fandom="anime" data-price="2500" data-date="2026-03-01">
+                <div class="item-tape"></div>
+                <div class="item-img">👗</div>
+                <p class="item-name">Pastel Sweater</p>
+                <button class="buy-btn avito-btn">Buy on Avito</button>
+            </div>
+            <div class="merch-item" data-fandom="scott" data-price="1800" data-date="2026-03-20">
+                <div class="item-tape"></div>
+                <div class="item-img">📸</div>
+                <p class="item-name">Retro Camera</p>
+                <button class="buy-btn avito-btn">Buy on Avito</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ВКЛАДКА ОТЗЫВЫ -->
+    <div id="reviews-tab" class="tab-pane">
+        <div class="section-title"><h2>Customer Reviews 💬</h2></div>
+        <div class="box-deco" style="text-align: center; padding: 50px;">
+            <p>Здесь скоро появятся отзывы довольных котиков! 🐾</p>
+        </div>
+    </div>
+</section>
+
 
                 <!-- ВКЛАДКА ОТЗЫВЫ -->
                 <div id="reviews-tab" class="tab-pane">

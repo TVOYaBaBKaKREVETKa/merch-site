@@ -99,3 +99,101 @@ document.addEventListener('DOMContentLoaded', () => {
     if (closeBtn) closeBtn.onclick = () => modal.style.display = 'none';
     window.onclick = (e) => { if (modal && e.target === modal) modal.style.display = 'none'; };
 });
+
+const fandomItems = document.querySelectorAll('.fandom-item');
+const footerText = document.getElementById('fandom-name');
+
+fandomItems.forEach(item => {
+    // При клике
+    item.addEventListener('click', () => {
+        fandomItems.forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
+        // Тут вызывай свою функцию фильтрации товаров
+    });
+
+    // При наведении (меняем текст внизу окна)
+    item.addEventListener('mouseenter', () => {
+        footerText.innerText = `Category: ${item.getAttribute('title')}`;
+    });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const toggle = document.getElementById('nav-toggle');
+    const drawer = document.getElementById('nav-drawer');
+    const fanIcons = document.querySelectorAll('.fan-icon');
+    const sortBtns = document.querySelectorAll('.smart-sort');
+
+    toggle.onclick = () => drawer.classList.toggle('open');
+
+    function updateStore() {
+        // 1. Находим АКТИВНУЮ в данный момент вкладку (Мерч или Авито)
+        const activePane = document.querySelector('.tab-pane.active');
+        if (!activePane) return;
+
+        const container = activePane.querySelector('.pegboard');
+        const items = Array.from(activePane.querySelectorAll('.merch-item'));
+        
+        // 2. Берем настройки из панели фильтров
+        const activeFandom = document.querySelector('.fan-icon.active').dataset.fandom;
+        const priceSort = document.querySelector('.smart-sort[data-type="price"]');
+        const dateSort = document.querySelector('.smart-sort[data-type="date"]');
+
+        // 3. Фильтруем ТОЛЬКО вещи внутри этой вкладки
+        items.forEach(item => {
+            const fandom = item.dataset.fandom;
+            item.style.display = (activeFandom === 'all' || fandom === activeFandom) ? 'block' : 'none';
+        });
+
+        let visible = items.filter(i => i.style.display !== 'none');
+
+        // 4. Сортировка
+        if (priceSort.dataset.dir !== "0") {
+            visible.sort((a, b) => {
+                const p1 = parseFloat(a.dataset.price) || 0;
+                const p2 = parseFloat(b.dataset.price) || 0;
+                return priceSort.dataset.dir === "1" ? p1 - p2 : p2 - p1;
+            });
+        } else if (dateSort.dataset.dir !== "0") {
+            visible.sort((a, b) => {
+                let d1 = new Date(a.dataset.date || 0);
+                let d2 = new Date(b.dataset.date || 0);
+                return dateSort.dataset.dir === "1" ? d1 - d2 : d2 - d1;
+            });
+        }
+
+        // Перерисовываем
+        visible.forEach(item => container.appendChild(item));
+    }
+
+    // Клик по фандомам
+    fanIcons.forEach(icon => {
+        icon.onclick = () => {
+            fanIcons.forEach(i => i.classList.remove('active'));
+            icon.classList.add('active');
+            updateStore();
+        };
+    });
+
+    // Умный клик по кнопкам сортировки
+    sortBtns.forEach(btn => {
+        btn.onclick = () => {
+            let current = parseInt(btn.dataset.dir);
+            let next = (current + 1) % 3;
+            sortBtns.forEach(b => { 
+                if(b !== btn) {
+                    b.dataset.dir = "0"; 
+                    b.querySelector('.sort-arrow').innerText = "↕"; 
+                }
+            });
+            btn.dataset.dir = next;
+            const arrows = ["↕", "↑", "↓"];
+            btn.querySelector('.sort-arrow').innerText = arrows[next];
+            updateStore();
+        };
+    });
+
+    // Вызываем при переключении вкладок (добавь это в свой код переключения вкладок!)
+    // Если у тебя есть функция переключения вкладок, просто добавь в её конец updateStore();
+    
+    updateStore(); // Запуск при загрузке
+});
