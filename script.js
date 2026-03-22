@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 2. РАНДОМ ДЛЯ МЕРЧА (СКОТЧ И УМНЫЙ НАКЛОН)
     function setupMerchEffects() {
-        // Рандом скотча (из 16 вариантов)
         const tapes = document.querySelectorAll('.item-tape');
         tapes.forEach(tape => {
             if (![...tape.classList].some(cls => cls.startsWith('tape-'))) {
@@ -20,16 +19,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // НАКЛОН С ПОДДЕРЖКОЙ CSS ПЕРЕМЕННЫХ
         const items = document.querySelectorAll('.merch-item');
         items.forEach(item => {
-            // Генерируем угол от -7 до 7
             const randomRotate = (Math.random() * 14 - 7).toFixed(1); 
-            
-            // Сохраняем угол в переменную --tilt, чтобы CSS её видел
             item.style.setProperty('--tilt', `${randomRotate}deg`);
-            
-            // Применяем вращение через переменную
             item.style.transform = `rotate(var(--tilt))`;
         });
     }
@@ -56,7 +49,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 activePane.style.opacity = '0';
                 activePane.classList.add('active');
 
-                // Пересчитываем для новой вкладки
                 setupMerchEffects();
 
                 setTimeout(() => {
@@ -67,4 +59,43 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // 4. ЛОГИКА МОДАЛЬНОГО ОКНА (ИСПРАВЛЕНО ДЛЯ АВИТО)
+    const modal = document.getElementById('product-modal');
+    const modalImg = document.getElementById('modal-img');
+    const modalTitle = document.getElementById('modal-title');
+    const closeBtn = document.querySelector('.modal-close-trigger');
+
+    document.addEventListener('click', (e) => {
+        const card = e.target.closest('.merch-item');
+        
+        // Проверяем, что кликнули по карточке и НЕ по кнопке покупки
+        if (card && !e.target.classList.contains('buy-btn')) {
+            const title = card.querySelector('.item-name').innerText;
+            const imgTag = card.querySelector('.item-img img');
+            const imgContainer = card.querySelector('.item-img');
+
+            // Безопасно подставляем заголовок
+            modalTitle.innerText = title;
+
+            // Проверяем: есть ли внутри тег img и есть ли у него путь
+            if (imgTag && imgTag.getAttribute('src') !== "") {
+                modalImg.src = imgTag.src;
+                modalImg.style.display = 'block'; // Показываем картинку
+                // Если в модалке был текст-заглушка для эмодзи, тут его можно скрыть
+            } else {
+                // Если картинки нет (как в Авито-заглушках), 
+                // можем либо скрыть картинку в модалке, либо оставить пустое место
+                modalImg.src = ""; 
+                modalImg.style.display = 'none'; 
+                // Можно добавить логику, чтобы в модалке рисовался эмодзи из контейнера,
+                // но когда ты вставишь реальные фото в Авито, всё заработает само через блок выше.
+            }
+            
+            if (modal) modal.style.display = 'flex';
+        }
+    });
+
+    if (closeBtn) closeBtn.onclick = () => modal.style.display = 'none';
+    window.onclick = (e) => { if (modal && e.target === modal) modal.style.display = 'none'; };
 });
