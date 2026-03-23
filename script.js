@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. КУРСОР
+    // --- 1. КУРСОР ---
     const cursor = document.getElementById('custom-cursor');
     if (cursor) {
         document.addEventListener('mousemove', (e) => {
@@ -9,134 +9,31 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 2. РАНДОМ ДЛЯ МЕРЧА (СКОТЧ И УМНЫЙ НАКЛОН)
+    // --- 2. ЭФФЕКТЫ (СКОТЧ + НАКЛОН) ---
     function setupMerchEffects() {
-        const tapes = document.querySelectorAll('.item-tape');
-        tapes.forEach(tape => {
+        // Лепим скотч на ВСЕ карточки (и мерч, и авито)
+        document.querySelectorAll('.item-tape').forEach(tape => {
             if (![...tape.classList].some(cls => cls.startsWith('tape-'))) {
                 const randomNum = Math.floor(Math.random() * 16) + 1;
                 tape.classList.add(`tape-${randomNum}`);
             }
         });
-
-        const items = document.querySelectorAll('.merch-item');
-        items.forEach(item => {
-            const randomRotate = (Math.random() * 14 - 7).toFixed(1); 
-            item.style.setProperty('--tilt', `${randomRotate}deg`);
-            item.style.transform = `rotate(var(--tilt))`;
+        // Наклоняем полароиды
+        document.querySelectorAll('.merch-item').forEach(item => {
+            if (!item.style.getPropertyValue('--tilt')) {
+                const randomRotate = (Math.random() * 14 - 7).toFixed(1);
+                item.style.setProperty('--tilt', `${randomRotate}deg`);
+                item.style.transform = `rotate(var(--tilt))`;
+            }
         });
     }
 
-    setupMerchEffects();
-
-    // 3. ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК
-    const tabs = document.querySelectorAll('.nav-side-item');
-    const panes = document.querySelectorAll('.tab-pane');
-
-    tabs.forEach(tab => {
-        tab.addEventListener('click', function(e) {
-            const target = this.getAttribute('href');
-            if (target.startsWith('http')) return;
-            e.preventDefault();
-
-            tabs.forEach(t => t.classList.remove('active-tab'));
-            panes.forEach(p => p.classList.remove('active'));
-
-            this.classList.add('active-tab');
-
-            const activePane = document.querySelector(target + '-tab');
-            if (activePane) {
-                activePane.style.opacity = '0';
-                activePane.classList.add('active');
-
-                setupMerchEffects();
-
-                setTimeout(() => {
-                    activePane.style.transition = 'opacity 0.4s ease-out, transform 0.4s ease-out';
-                    activePane.style.opacity = '1';
-                    activePane.style.transform = 'translateY(0)';
-                }, 10);
-            }
-        });
-    });
-
-    // 4. ЛОГИКА МОДАЛЬНОГО ОКНА (ИСПРАВЛЕНО ДЛЯ АВИТО)
-    const modal = document.getElementById('product-modal');
-    const modalImg = document.getElementById('modal-img');
-    const modalTitle = document.getElementById('modal-title');
-    const closeBtn = document.querySelector('.modal-close-trigger');
-
-    document.addEventListener('click', (e) => {
-        const card = e.target.closest('.merch-item');
-        
-        // Проверяем, что кликнули по карточке и НЕ по кнопке покупки
-        if (card && !e.target.classList.contains('buy-btn')) {
-            const title = card.querySelector('.item-name').innerText;
-            const imgTag = card.querySelector('.item-img img');
-            const imgContainer = card.querySelector('.item-img');
-
-            // Безопасно подставляем заголовок
-            modalTitle.innerText = title;
-
-            // Проверяем: есть ли внутри тег img и есть ли у него путь
-            if (imgTag && imgTag.getAttribute('src') !== "") {
-                modalImg.src = imgTag.src;
-                modalImg.style.display = 'block'; // Показываем картинку
-                // Если в модалке был текст-заглушка для эмодзи, тут его можно скрыть
-            } else {
-                // Если картинки нет (как в Авито-заглушках), 
-                // можем либо скрыть картинку в модалке, либо оставить пустое место
-                modalImg.src = ""; 
-                modalImg.style.display = 'none'; 
-                // Можно добавить логику, чтобы в модалке рисовался эмодзи из контейнера,
-                // но когда ты вставишь реальные фото в Авито, всё заработает само через блок выше.
-            }
-            
-            if (modal) modal.style.display = 'flex';
-        }
-    });
-
-    if (closeBtn) closeBtn.onclick = () => modal.style.display = 'none';
-    window.onclick = (e) => { if (modal && e.target === modal) modal.style.display = 'none'; };
-});
-
-const fandomItems = document.querySelectorAll('.fandom-item');
-const footerText = document.getElementById('fandom-name');
-
-fandomItems.forEach(item => {
-    // При клике
-    item.addEventListener('click', () => {
-        fandomItems.forEach(i => i.classList.remove('active'));
-        item.classList.add('active');
-        // Тут вызывай свою функцию фильтрации товаров
-    });
-
-    // При наведении (меняем текст внизу окна)
-    item.addEventListener('mouseenter', () => {
-        footerText.innerText = `Category: ${item.getAttribute('title')}`;
-    });
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-    const shortcut = document.getElementById('os-shortcut');
-    const win = document.getElementById('os-window');
-    const closeBtn = document.querySelector('.win-btn-close');
-    const fandomIcons = document.querySelectorAll('.win-item:not(.sort-file)');
-    const sortFiles = document.querySelectorAll('.sort-file');
-
-    // 1. ОТКРЫТИЕ/ЗАКРЫТИЕ
-    if (shortcut) shortcut.onclick = () => win.classList.toggle('show');
-    if (closeBtn) closeBtn.onclick = () => win.classList.remove('show');
-
-    // 2. ОБНОВЛЕНИЕ МАГАЗИНА
+    // --- 3. МАГАЗИН (ФИЛЬТР + СОРТИРОВКА) ---
     function updateStore() {
-        const activePane = document.querySelector('.tab-pane.active');
-        if (!activePane) return;
+        const activeContainer = document.querySelector('.pegboard:not([style*="display: none"])');
+        if (!activeContainer) return;
 
-        const container = activePane.querySelector('.pegboard');
-        const items = Array.from(activePane.querySelectorAll('.merch-item'));
-        
-        // Берем активный фандом
+        const items = Array.from(activeContainer.querySelectorAll('.merch-item'));
         const activeIcon = document.querySelector('.win-item.active:not(.sort-file)');
         const activeFandom = activeIcon ? activeIcon.dataset.fandom : 'all';
         
@@ -150,82 +47,110 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let visible = items.filter(i => i.style.display !== 'none');
 
-        // Сортировка
         if (priceFile && priceFile.dataset.dir !== "0") {
-            visible.sort((a, b) => priceFile.dataset.dir === "1" ? a.dataset.price - b.dataset.price : b.dataset.price - a.dataset.price);
+            visible.sort((a, b) => {
+                const p1 = parseFloat(a.dataset.price) || 0;
+                const p2 = parseFloat(b.dataset.price) || 0;
+                return priceFile.dataset.dir === "1" ? p1 - p2 : p2 - p1;
+            });
         } else if (dateFile && dateFile.dataset.dir !== "0") {
-            visible.sort((a, b) => dateFile.dataset.dir === "1" ? new Date(a.dataset.date) - new Date(b.dataset.date) : new Date(b.dataset.date) - new Date(a.dataset.date));
+            visible.sort((a, b) => {
+                const d1 = new Date(a.dataset.date) || 0;
+                const d2 = new Date(b.dataset.date) || 0;
+                return dateFile.dataset.dir === "1" ? d1 - d2 : d2 - d1;
+            });
         }
-
-        visible.forEach(item => container.appendChild(item));
+        visible.forEach(item => activeContainer.appendChild(item));
     }
 
-    // 3. ОБРАБОТКА КЛИКОВ
-    fandomIcons.forEach(icon => {
-        icon.onclick = () => {
-            fandomIcons.forEach(i => i.classList.remove('active'));
-            icon.classList.add('active');
-            updateStore();
-        };
-    });
+    // --- 4. ВКЛАДКИ ---
+    const tabs = document.querySelectorAll('.nav-side-item');
+    const merchContainer = document.getElementById('shop-merch');
+    const avitoContainer = document.getElementById('shop-avito');
+    const sectionTitle = document.getElementById('current-section-title');
 
-    sortFiles.forEach(file => {
-        file.onclick = () => {
-            let next = (parseInt(file.dataset.dir) + 1) % 3;
-            sortFiles.forEach(f => { f.dataset.dir = "0"; f.querySelector('.arr').innerText = "↕"; f.classList.remove('active'); });
-            
-            file.dataset.dir = next;
-            file.querySelector('.arr').innerText = ["↕", "↑", "↓"][next];
-            if (next !== 0) file.classList.add('active');
-            
-            updateStore();
-        };
-    });
-
-    updateStore();
-});
-
-// Закрытие окна при клике в любое место экрана
-window.addEventListener('click', (e) => {
-    const win = document.getElementById('os-window');
-    const shortcut = document.getElementById('os-shortcut');
-
-    // Проверяем: если окно открыто И клик был НЕ по окну И НЕ по кнопке открытия
-    if (win.classList.contains('show') && !win.contains(e.target) && !shortcut.contains(e.target)) {
-        win.classList.remove('show');
-    }
-});
-
-document.querySelectorAll('.nav-side-item').forEach(link => {
-    link.addEventListener('click', function(e) {
-        const href = this.getAttribute('href');
-        
-        // Работаем только если нажали Мерч или Авито
-        if (href === '#merch' || href === '#avito') {
+    tabs.forEach(tab => {
+        tab.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (!href.startsWith('#')) return;
             e.preventDefault();
 
-            // 1. Меняем активную вкладку в меню
-            document.querySelectorAll('.nav-side-item').forEach(el => el.classList.remove('active-tab'));
+            tabs.forEach(t => t.classList.remove('active-tab'));
             this.classList.add('active-tab');
 
-            // 2. Переключаем контейнеры и заголовки
-            const merchBlock = document.getElementById('shop-merch');
-            const avitoBlock = document.getElementById('shop-avito');
-            const titleBlock = document.getElementById('current-section-title');
-            const winHeader = document.querySelector('.win-glass-header');
-
             if (href === '#merch') {
-                merchBlock.style.display = 'grid';
-                avitoBlock.style.display = 'none';
-                titleBlock.innerHTML = 'New Merch Drops ✨';
-                if(winHeader) winHeader.style.background = ''; // Возвращаем обычный цвет окна
-            } else {
-                merchBlock.style.display = 'none';
-                avitoBlock.style.display = 'grid';
-                titleBlock.innerHTML = 'Garage Sale / Avito 📦';
-                if(winHeader) winHeader.style.background = 'linear-gradient(to right, #00aff0, #005a87)'; // Окно синеет под Авито
+                merchContainer.style.display = 'grid';
+                avitoContainer.style.display = 'none';
+                sectionTitle.innerText = "New Merch Drops ✨";
+            } else if (href === '#avito') {
+                merchContainer.style.display = 'none';
+                avitoContainer.style.display = 'grid';
+                sectionTitle.innerText = "Garage Sale (Avito) 🧺";
             }
+
+            setupMerchEffects(); // СРАЗУ ЛЕПИМ СКОТЧ ПРИ СМЕНЕ
+            updateStore();
+        });
+    });
+
+    // --- 5. МОДАЛКА И ГАЛЕРЕЯ (Универсальная) ---
+    const modal = document.getElementById('product-modal');
+    const modalImg = document.getElementById('modal-img');
+    let currentImages = [];
+    let currentIdx = 0;
+
+    document.addEventListener('click', (e) => {
+        const card = e.target.closest('.merch-item');
+        // Открываем модалку, если кликнули по карточке, но НЕ по кнопке "купить"
+        if (card && !e.target.closest('.buy-btn')) {
+            const imgAttr = card.getAttribute('data-images');
+            currentImages = imgAttr ? imgAttr.split(',') : [card.querySelector('.item-img img').src];
+            currentIdx = 0;
+
+            document.getElementById('modal-title').innerText = card.querySelector('.item-name').innerText;
+            document.getElementById('modal-desc').innerText = card.dataset.desc || "Описание скоро будет ✨";
+            document.querySelector('.modal-price').innerText = (card.dataset.price || 0) + "₽";
+            
+            modalImg.src = currentImages[currentIdx];
+            document.getElementById('current-idx').innerText = "1";
+            document.getElementById('total-idx').innerText = currentImages.length;
+            modal.style.display = 'flex';
         }
     });
+
+    // Навигация галереи
+    document.getElementById('prev-img').onclick = (e) => {
+        e.stopPropagation();
+        currentIdx = (currentIdx - 1 + currentImages.length) % currentImages.length;
+        modalImg.src = currentImages[currentIdx];
+        document.getElementById('current-idx').innerText = currentIdx + 1;
+    };
+
+    document.getElementById('next-img').onclick = (e) => {
+        e.stopPropagation();
+        currentIdx = (currentIdx + 1) % currentImages.length;
+        modalImg.src = currentImages[currentIdx];
+        document.getElementById('current-idx').innerText = currentIdx + 1;
+    };
+
+    const modalClose = document.querySelector('.modal-close-trigger');
+    if (modalClose) modalClose.onclick = () => modal.style.display = 'none';
+
+    // --- 6. ОКНО ФИЛЬТРОВ ---
+    const shortcut = document.getElementById('os-shortcut');
+    const win = document.getElementById('os-window');
+    if (shortcut && win) {
+        shortcut.onclick = (e) => { e.stopPropagation(); win.classList.toggle('show'); };
+    }
+
+    // Закрытие всего по клику мимо
+    window.onclick = (e) => {
+        if (e.target === modal) modal.style.display = 'none';
+        if (win && !win.contains(e.target) && !shortcut.contains(e.target)) win.classList.remove('show');
+    };
+
+    // Инициализация
+    setupMerchEffects();
+    updateStore();
 });
 
