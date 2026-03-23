@@ -252,25 +252,35 @@
     </div>
 
     <!-- МОДАЛЬНОЕ ОКНО ТОВАРА -->
-    <div id="product-modal" class="modal-overlay">
-        <div class="modal-window-container">
-            <img src="assets/modal.png" class="modal-frame-img">
-            <button class="modal-close-trigger"></button>
-            <div class="modal-content-grid">
-                <div class="modal-image-slot">
-                    <img id="modal-img" src="" alt="">
-                </div>
-                <div class="modal-text-slot">
-                    <h2 id="modal-title">Name</h2>
-                    <p id="modal-desc">Милое описание товара. Всё поместится здесь!</p>
-                    <div class="modal-footer">
-                        <span class="modal-price">500₽</span>
-                        <button class="buy-btn">ORDER 🎀</button>
-                    </div>
+<div id="product-modal" class="modal-overlay">
+    <div class="modal-window-container">
+        <img src="assets/modal.png" class="modal-frame-img">
+        
+        <!-- Кнопка закрытия с эффектом -->
+        <button class="modal-close-trigger" title="Закрыть"></button>
+
+        <div class="modal-content-grid">
+            <!-- ГАЛЕРЕЯ -->
+            <div class="modal-image-slot">
+                <button class="gallery-nav prev" id="prev-img">❮</button>
+                <img id="modal-img" src="" alt="">
+                <button class="gallery-nav next" id="next-img">❯</button>
+                
+                <!-- Индикатор страниц (например, 1/3) -->
+                <div class="gallery-counter"><span id="current-idx">1</span> / <span id="total-idx">1</span></div>
+            </div>
+
+            <div class="modal-text-slot">
+                <h2 id="modal-title">Название товара</h2>
+                <p id="modal-desc">Описание будет здесь. Мы сделали его читабельным и красивым.</p>
+                <div class="modal-footer">
+                    <span class="modal-price">500₽</span>
+                    <button class="buy-btn">ORDER 🎀</button>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
     <script src="script.js"></script>
 </body>
