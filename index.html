@@ -100,77 +100,68 @@
 
 
 
-
-<!-- ВКЛАДКА МЕРЧ -->
-<div id="merch-tab" class="tab-pane active">
-    
-    <!-- Объединенный заголовок и мини-ярлык -->
-    <div class="section-header-row">
-        <div class="section-title">
-            <h2>New Merch Drops ✨</h2>
-        </div>
-
-        <div class="fandom-explorer-system">
-            <!-- Тот самый маленький ярлык-кнопка -->
-            <div id="os-shortcut" class="os-shortcut-mini" title="Open Filters">
-                <img src="assets/testfandom.png" class="shortcut-img">
-                <span class="shortcut-tag">Filters.exe</span>
-            </div>
-
-            <!-- Компактное окно проводника -->
-            <div id="os-window" class="win-window compact-mode">
-                <div class="win-title-bar">
-                    <div class="win-title">Explorer</div>
-                    <div class="win-controls">
-                        <button class="win-btn win-btn-close">×</button>
-                    </div>
-                </div>
-                
-                <div class="win-content scrollable">
-                    <p class="win-label">✦ SELECT FANDOM</p>
-                    <div class="win-icons-grid">
-                        <div class="win-icon active" data-fandom="all">
-                            <img src="assets/testfandom.png"><span>All_Files</span>
-                        </div>
-                        <div class="win-icon" data-fandom="scott">
-                            <img src="assets/testfandom.png" style="filter: hue-rotate(90deg);"><span>Scott.ink</span>
-                        </div>
-                        <div class="win-icon" data-fandom="original">
-                            <img src="assets/testfandom.png" style="filter: hue-rotate(180deg);"><span>OCs.png</span>
-                        </div>
-                        <div class="win-icon" data-fandom="anime">
-                            <img src="assets/testfandom.png" style="filter: hue-rotate(270deg);"><span>Anime.txt</span>
-                        </div>
-                        <!-- Сюда просто копируй новые иконки, когда фандомов станет больше -->
-                    </div>
-
-                    <div class="win-divider"></div>
-
-                    <p class="win-label">✦ SORTING</p>
-                    <div class="win-sort-grid">
-                        <div class="win-icon sort-file" data-sort-type="price" data-dir="0">
-                            <img src="assets/testfandom.png" style="filter: saturate(0);">
-                            <span>$ Price <em class="arr">↕</em></span>
-                        </div>
-                        <div class="win-icon sort-file" data-sort-type="date" data-dir="2">
-                            <img src="assets/testfandom.png" style="filter: invert(0.5);">
-                            <span>Date <em class="arr">↓</em></span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="win-status-bar">
-                    <div class="status-field">System Ready</div>
-                </div>
-            </div>
-        </div>
+<div class="merch-header-zone">
+    <div class="section-title">
+        <h2>New Merch Drops ✨</h2>
     </div>
 
-    <!-- Твоя сетка товаров (pegboard) идет ниже -->
-    <div class="pegboard">
-        <!-- Карточки товаров... -->
+    <!-- ЯРЛЫК ПРОВОДНИКА -->
+    <div id="os-shortcut" class="premium-shortcut">
+        <img src="assets/testfandom.png" alt="">
+        <span>Explorer.exe</span>
+    </div>
+
+    <!-- ОКНО ПРОВОДНИКА -->
+    <div id="os-window" class="premium-window">
+        <div class="win-glass-header">
+            <div class="win-dots">
+                <span class="dot-red"></span>
+                <span class="dot-yellow"></span>
+                <span class="dot-green"></span>
+            </div>
+            <span class="win-title">Explorer.exe</span>
+            <button class="win-close-x win-btn-close">×</button>
+        </div>
+        
+        <div class="win-glass-body">
+            <div class="win-section-title">✦ ВЫБЕРИ ВСЕЛЕННУЮ</div>
+            <div class="win-grid-icons">
+                <div class="win-item active" data-fandom="all">
+                    <img src="assets/testfandom.png">
+                    <span>Все_файлы</span>
+                </div>
+                <div class="win-item" data-fandom="scott">
+                    <img src="assets/testfandom.png" style="filter: hue-rotate(90deg);">
+                    <span>Scott_P</span>
+                </div>
+                <div class="win-item" data-fandom="original">
+                    <img src="assets/testfandom.png" style="filter: hue-rotate(180deg);">
+                    <span>Мои_ОС</span>
+                </div>
+                <div class="win-item" data-fandom="anime">
+                    <img src="assets/testfandom.png" style="filter: hue-rotate(270deg);">
+                    <span>Аниме</span>
+                </div>
+            </div>
+
+            <div class="win-hr"></div>
+
+            <div class="win-section-title">✦ СИСТЕМНАЯ СОРТИРОВКА</div>
+            <div class="win-sort-row">
+                <div class="win-item sort-file" data-sort-type="price" data-dir="0">
+                    <img src="assets/testfandom.png" style="filter: grayscale(1);">
+                    <span>Цена <em class="arr">↕</em></span>
+                </div>
+                <div class="win-item sort-file" data-sort-type="date" data-dir="2">
+                    <img src="assets/testfandom.png" style="filter: sepia(1) saturate(2);">
+                    <span>Дата <em class="arr">↓</em></span>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
+
 
 
         <div class="pegboard">

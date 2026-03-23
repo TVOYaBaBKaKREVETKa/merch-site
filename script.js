@@ -118,106 +118,70 @@ fandomItems.forEach(item => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. ЭЛЕМЕНТЫ ОКНА
     const shortcut = document.getElementById('os-shortcut');
     const win = document.getElementById('os-window');
     const closeBtn = document.querySelector('.win-btn-close');
-    const minBtn = document.getElementById('win-minimize');
-    
-    // 2. ЭЛЕМЕНТЫ ФИЛЬТРАЦИИ
-    const icons = document.querySelectorAll('.win-icon:not(.sort-file)');
+    const fandomIcons = document.querySelectorAll('.win-item:not(.sort-file)');
     const sortFiles = document.querySelectorAll('.sort-file');
 
-    // --- ЛОГИКА ОКНА (ОТКРЫТЬ/ЗАКРЫТЬ) ---
-    if (shortcut) {
-        shortcut.onclick = () => win.classList.toggle('show');
-    }
-    if (closeBtn) {
-        closeBtn.onclick = () => win.classList.remove('show');
-    }
-    if (minBtn) {
-        minBtn.onclick = () => win.classList.remove('show');
-    }
+    // 1. ОТКРЫТИЕ/ЗАКРЫТИЕ
+    if (shortcut) shortcut.onclick = () => win.classList.toggle('show');
+    if (closeBtn) closeBtn.onclick = () => win.classList.remove('show');
 
-    // --- ГЛАВНАЯ ФУНКЦИЯ ОБНОВЛЕНИЯ МАГАЗИНА ---
-    function updateOS() {
+    // 2. ОБНОВЛЕНИЕ МАГАЗИНА
+    function updateStore() {
         const activePane = document.querySelector('.tab-pane.active');
         if (!activePane) return;
 
         const container = activePane.querySelector('.pegboard');
         const items = Array.from(activePane.querySelectorAll('.merch-item'));
         
-        // Получаем текущие настройки из окна
-        const activeIcon = document.querySelector('.win-icon.active');
+        // Берем активный фандом
+        const activeIcon = document.querySelector('.win-item.active:not(.sort-file)');
         const activeFandom = activeIcon ? activeIcon.dataset.fandom : 'all';
         
         const priceFile = document.querySelector('.sort-file[data-sort-type="price"]');
         const dateFile = document.querySelector('.sort-file[data-sort-type="date"]');
 
-        // 1. Фильтруем (показываем только нужный фандом)
         items.forEach(item => {
             const f = item.dataset.fandom;
             item.style.display = (activeFandom === 'all' || f === activeFandom) ? 'block' : 'none';
         });
 
-        // 2. Сортируем только те, что остались видимыми
         let visible = items.filter(i => i.style.display !== 'none');
 
-        // Сортировка по Цене
+        // Сортировка
         if (priceFile && priceFile.dataset.dir !== "0") {
-            visible.sort((a, b) => {
-                const p1 = parseFloat(a.dataset.price) || 0;
-                const p2 = parseFloat(b.dataset.price) || 0;
-                return priceFile.dataset.dir === "1" ? p1 - p2 : p2 - p1;
-            });
-        } 
-        // Сортировка по Дате (если цена не активна)
-        else if (dateFile && dateFile.dataset.dir !== "0") {
-            visible.sort((a, b) => {
-                const d1 = new Date(a.dataset.date || 0);
-                const d2 = new Date(b.dataset.date || 0);
-                return dateFile.dataset.dir === "1" ? d1 - d2 : d2 - d1;
-            });
+            visible.sort((a, b) => priceFile.dataset.dir === "1" ? a.dataset.price - b.dataset.price : b.dataset.price - a.dataset.price);
+        } else if (dateFile && dateFile.dataset.dir !== "0") {
+            visible.sort((a, b) => dateFile.dataset.dir === "1" ? new Date(a.dataset.date) - new Date(b.dataset.date) : new Date(b.dataset.date) - new Date(a.dataset.date));
         }
 
-        // 3. Перерисовываем отсортированные карточки в контейнере
         visible.forEach(item => container.appendChild(item));
     }
 
-    // --- КЛИКИ ПО ИКОНКАМ ФАНДОМОВ ---
-    icons.forEach(icon => {
+    // 3. ОБРАБОТКА КЛИКОВ
+    fandomIcons.forEach(icon => {
         icon.onclick = () => {
-            icons.forEach(i => i.classList.remove('active'));
+            fandomIcons.forEach(i => i.classList.remove('active'));
             icon.classList.add('active');
-            updateOS();
+            updateStore();
         };
     });
 
-    // --- КЛИКИ ПО СИСТЕМНЫМ ФАЙЛАМ (СОРТИРОВКА) ---
     sortFiles.forEach(file => {
         file.onclick = () => {
-            // Переключаем направление: 0 (выкл) -> 1 (возр) -> 2 (убыв)
-            let currentDir = parseInt(file.dataset.dir || "0");
-            let nextDir = (currentDir + 1) % 3;
+            let next = (parseInt(file.dataset.dir) + 1) % 3;
+            sortFiles.forEach(f => { f.dataset.dir = "0"; f.querySelector('.arr').innerText = "↕"; f.classList.remove('active'); });
             
-            // Сбрасываем другой файл сортировки, чтобы не конфликтовали
-            sortFiles.forEach(f => {
-                f.dataset.dir = "0";
-                const arrow = f.querySelector('.arr');
-                if (arrow) arrow.innerText = "↕";
-            });
-
-            // Устанавливаем новое состояние
-            file.dataset.dir = nextDir.toString();
-            const arrow = file.querySelector('.arr');
-            const iconsList = ["↕", "↑", "↓"];
-            if (arrow) arrow.innerText = iconsList[nextDir];
-
-            updateOS();
+            file.dataset.dir = next;
+            file.querySelector('.arr').innerText = ["↕", "↑", "↓"][next];
+            if (next !== 0) file.classList.add('active');
+            
+            updateStore();
         };
     });
 
-    // Запускаем сортировку один раз при загрузке, чтобы всё сразу встало красиво
-    updateOS();
+    updateStore();
 });
 
