@@ -70,7 +70,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 return dir === "1" ? p1 - p2 : p2 - p1;
             });
         } 
-        // Логика Даты: По умолчанию Новые (1), dir="2" - Старые
         else {
             const dir = (dateFile && dateFile.dataset.dir !== "0") ? dateFile.dataset.dir : "1";
             visibleItems.sort((a, b) => {
@@ -131,70 +130,86 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- 6. МОДАЛКА ---
+    // --- 6. МОДАЛКА И ГАЛЕРЕЯ (УМНАЯ ПРИВЯЗКА) ---
     const modal = document.getElementById('product-modal');
+    const modalImg = document.getElementById('modal-img');
+    let currentImages = [];
+    let currentIdx = 0;
+
     document.addEventListener('click', (e) => {
         const card = e.target.closest('.merch-item');
         if (card && !e.target.closest('.buy-btn')) {
+            const name = card.querySelector('.item-name').innerText;
+            const price = card.querySelector('.price-tag').innerText;
+            const desc = card.getAttribute('data-desc') || "Описание скоро будет ✨";
+            const imgAttr = card.getAttribute('data-images');
+            const mainImgSrc = card.querySelector('.item-img img').src;
+            
+            currentImages = imgAttr ? imgAttr.split(',') : [mainImgSrc];
+            currentIdx = 0;
+
+            document.getElementById('modal-title').innerText = name;
+            document.getElementById('modal-desc').innerText = desc;
+            
+            const modalPriceTag = document.querySelector('.modal-price');
+            if (modalPriceTag) modalPriceTag.innerText = price;
+            
+            modalImg.src = currentImages[currentIdx];
+            document.getElementById('current-idx').innerText = "1";
+            document.getElementById('total-idx').innerText = currentImages.length;
+            
             if(modal) modal.style.display = 'flex';
         }
     });
 
     const modalClose = document.querySelector('.modal-close-trigger');
-    if (modalClose) modalClose.onclick = () => modal.style.display = 'none';
+    if (modalClose) modalClose.onclick = () => { if(modal) modal.style.display = 'none'; };
 
-    // --- 7. ОКНО OS (ФИЛЬТРЫ) ---
+    // --- 7. ОКНО OS (EXPLORER.EXE) ---
     const shortcut = document.getElementById('os-shortcut');
     const win = document.getElementById('os-window');
-    const winCloseBtn = document.querySelector('.win-btn-close'); // Находим твой крестик
+    const winCloseBtn = document.querySelector('.win-btn-close');
 
     if (shortcut && win) {
-        shortcut.onclick = (e) => { 
-            e.stopPropagation(); 
-            win.classList.toggle('show'); 
-        };
+        shortcut.onclick = (e) => { e.stopPropagation(); win.classList.toggle('show'); };
     }
 
-    // ФИКС: Обработчик для кнопки закрытия (крестика)
     if (winCloseBtn && win) {
-        winCloseBtn.onclick = (e) => {
-            e.stopPropagation();
-            win.classList.remove('show');
-        };
+        winCloseBtn.onclick = (e) => { e.stopPropagation(); win.classList.remove('show'); };
     }
 
+    // --- 8. ЛОГИКА ПЛЕЕРА ---
+    const audio = document.getElementById('main-audio');
+    const playPauseBtn = document.getElementById('play-pause');
+    const playerMarquee = document.getElementById('player-marquee');
+
+    if (audio && playPauseBtn) {
+        if (playerMarquee) playerMarquee.stop();
+
+        playPauseBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (audio.paused) {
+                audio.play().catch(() => console.log("User interaction needed"));
+                playPauseBtn.innerText = '💔';
+                if (playerMarquee) playerMarquee.start();
+            } else {
+                audio.pause();
+                playPauseBtn.innerText = '❤';
+                if (playerMarquee) playerMarquee.stop();
+            }
+        });
+
+        document.getElementById('prev-track').onclick = () => audio.currentTime -= 10;
+        document.getElementById('next-track').onclick = () => audio.currentTime += 10;
+    }
+
+    // Закрытие всего по клику мимо
     window.onclick = (e) => {
         if (e.target === modal) modal.style.display = 'none';
         if (win && !win.contains(e.target) && !shortcut.contains(e.target)) win.classList.remove('show');
     };
 
+    // Инициализация
     setupMerchEffects();
     updateStore();
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-    const audio = document.getElementById('main-audio');
-    const playBtn = document.querySelector('.play-btn');
-    const marquee = document.getElementById('player-marquee');
-
-    if (audio && playBtn) {
-        // По умолчанию строка стоит, пока не нажмем Play
-        if (marquee) marquee.stop();
-
-        playBtn.addEventListener('click', () => {
-            if (audio.paused) {
-                audio.play().catch(() => console.log("Нужен клик для старта звука"));
-                playBtn.innerText = '💔'; // Меняем сердечко на разбитое, когда играет
-                if (marquee) marquee.start();
-            } else {
-                audio.pause();
-                playBtn.innerText = '❤'; // Возвращаем целое сердечко на паузе
-                if (marquee) marquee.stop();
-            }
-        });
-    }
-
-    // Заглушки для ⏮ ⏭ (просто чтобы не выдавали ошибки)
-    document.getElementById('prev-btn').onclick = () => { audio.currentTime -= 10; };
-    document.getElementById('next-btn').onclick = () => { audio.currentTime += 10; };
-});
+}); // ВОТ ЭТА СКОБКА БЫЛА ПОТЕРЯНА!
