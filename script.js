@@ -118,82 +118,106 @@ fandomItems.forEach(item => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    const toggle = document.getElementById('nav-toggle');
-    const drawer = document.getElementById('nav-drawer');
-    const fanIcons = document.querySelectorAll('.fan-icon');
-    const sortBtns = document.querySelectorAll('.smart-sort');
+    // 1. ЭЛЕМЕНТЫ ОКНА
+    const shortcut = document.getElementById('os-shortcut');
+    const win = document.getElementById('os-window');
+    const closeBtn = document.querySelector('.win-btn-close');
+    const minBtn = document.getElementById('win-minimize');
+    
+    // 2. ЭЛЕМЕНТЫ ФИЛЬТРАЦИИ
+    const icons = document.querySelectorAll('.win-icon:not(.sort-file)');
+    const sortFiles = document.querySelectorAll('.sort-file');
 
-    toggle.onclick = () => drawer.classList.toggle('open');
+    // --- ЛОГИКА ОКНА (ОТКРЫТЬ/ЗАКРЫТЬ) ---
+    if (shortcut) {
+        shortcut.onclick = () => win.classList.toggle('show');
+    }
+    if (closeBtn) {
+        closeBtn.onclick = () => win.classList.remove('show');
+    }
+    if (minBtn) {
+        minBtn.onclick = () => win.classList.remove('show');
+    }
 
-    function updateStore() {
-        // 1. Находим АКТИВНУЮ в данный момент вкладку (Мерч или Авито)
+    // --- ГЛАВНАЯ ФУНКЦИЯ ОБНОВЛЕНИЯ МАГАЗИНА ---
+    function updateOS() {
         const activePane = document.querySelector('.tab-pane.active');
         if (!activePane) return;
 
         const container = activePane.querySelector('.pegboard');
         const items = Array.from(activePane.querySelectorAll('.merch-item'));
         
-        // 2. Берем настройки из панели фильтров
-        const activeFandom = document.querySelector('.fan-icon.active').dataset.fandom;
-        const priceSort = document.querySelector('.smart-sort[data-type="price"]');
-        const dateSort = document.querySelector('.smart-sort[data-type="date"]');
+        // Получаем текущие настройки из окна
+        const activeIcon = document.querySelector('.win-icon.active');
+        const activeFandom = activeIcon ? activeIcon.dataset.fandom : 'all';
+        
+        const priceFile = document.querySelector('.sort-file[data-sort-type="price"]');
+        const dateFile = document.querySelector('.sort-file[data-sort-type="date"]');
 
-        // 3. Фильтруем ТОЛЬКО вещи внутри этой вкладки
+        // 1. Фильтруем (показываем только нужный фандом)
         items.forEach(item => {
-            const fandom = item.dataset.fandom;
-            item.style.display = (activeFandom === 'all' || fandom === activeFandom) ? 'block' : 'none';
+            const f = item.dataset.fandom;
+            item.style.display = (activeFandom === 'all' || f === activeFandom) ? 'block' : 'none';
         });
 
+        // 2. Сортируем только те, что остались видимыми
         let visible = items.filter(i => i.style.display !== 'none');
 
-        // 4. Сортировка
-        if (priceSort.dataset.dir !== "0") {
+        // Сортировка по Цене
+        if (priceFile && priceFile.dataset.dir !== "0") {
             visible.sort((a, b) => {
                 const p1 = parseFloat(a.dataset.price) || 0;
                 const p2 = parseFloat(b.dataset.price) || 0;
-                return priceSort.dataset.dir === "1" ? p1 - p2 : p2 - p1;
+                return priceFile.dataset.dir === "1" ? p1 - p2 : p2 - p1;
             });
-        } else if (dateSort.dataset.dir !== "0") {
+        } 
+        // Сортировка по Дате (если цена не активна)
+        else if (dateFile && dateFile.dataset.dir !== "0") {
             visible.sort((a, b) => {
-                let d1 = new Date(a.dataset.date || 0);
-                let d2 = new Date(b.dataset.date || 0);
-                return dateSort.dataset.dir === "1" ? d1 - d2 : d2 - d1;
+                const d1 = new Date(a.dataset.date || 0);
+                const d2 = new Date(b.dataset.date || 0);
+                return dateFile.dataset.dir === "1" ? d1 - d2 : d2 - d1;
             });
         }
 
-        // Перерисовываем
+        // 3. Перерисовываем отсортированные карточки в контейнере
         visible.forEach(item => container.appendChild(item));
     }
 
-    // Клик по фандомам
-    fanIcons.forEach(icon => {
+    // --- КЛИКИ ПО ИКОНКАМ ФАНДОМОВ ---
+    icons.forEach(icon => {
         icon.onclick = () => {
-            fanIcons.forEach(i => i.classList.remove('active'));
+            icons.forEach(i => i.classList.remove('active'));
             icon.classList.add('active');
-            updateStore();
+            updateOS();
         };
     });
 
-    // Умный клик по кнопкам сортировки
-    sortBtns.forEach(btn => {
-        btn.onclick = () => {
-            let current = parseInt(btn.dataset.dir);
-            let next = (current + 1) % 3;
-            sortBtns.forEach(b => { 
-                if(b !== btn) {
-                    b.dataset.dir = "0"; 
-                    b.querySelector('.sort-arrow').innerText = "↕"; 
-                }
+    // --- КЛИКИ ПО СИСТЕМНЫМ ФАЙЛАМ (СОРТИРОВКА) ---
+    sortFiles.forEach(file => {
+        file.onclick = () => {
+            // Переключаем направление: 0 (выкл) -> 1 (возр) -> 2 (убыв)
+            let currentDir = parseInt(file.dataset.dir || "0");
+            let nextDir = (currentDir + 1) % 3;
+            
+            // Сбрасываем другой файл сортировки, чтобы не конфликтовали
+            sortFiles.forEach(f => {
+                f.dataset.dir = "0";
+                const arrow = f.querySelector('.arr');
+                if (arrow) arrow.innerText = "↕";
             });
-            btn.dataset.dir = next;
-            const arrows = ["↕", "↑", "↓"];
-            btn.querySelector('.sort-arrow').innerText = arrows[next];
-            updateStore();
+
+            // Устанавливаем новое состояние
+            file.dataset.dir = nextDir.toString();
+            const arrow = file.querySelector('.arr');
+            const iconsList = ["↕", "↑", "↓"];
+            if (arrow) arrow.innerText = iconsList[nextDir];
+
+            updateOS();
         };
     });
 
-    // Вызываем при переключении вкладок (добавь это в свой код переключения вкладок!)
-    // Если у тебя есть функция переключения вкладок, просто добавь в её конец updateStore();
-    
-    updateStore(); // Запуск при загрузке
+    // Запускаем сортировку один раз при загрузке, чтобы всё сразу встало красиво
+    updateOS();
 });
+
