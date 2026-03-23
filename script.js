@@ -185,3 +185,14 @@ document.addEventListener('DOMContentLoaded', () => {
     updateStore();
 });
 
+// Закрытие окна при клике в любое место экрана
+window.addEventListener('click', (e) => {
+    const win = document.getElementById('os-window');
+    const shortcut = document.getElementById('os-shortcut');
+
+    // Проверяем: если окно открыто И клик был НЕ по окну И НЕ по кнопке открытия
+    if (win.classList.contains('show') && !win.contains(e.target) && !shortcut.contains(e.target)) {
+        win.classList.remove('show');
+    }
+});
+

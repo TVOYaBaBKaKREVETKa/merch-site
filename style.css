@@ -337,7 +337,7 @@ box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
 .track-info { background: #fff; border: 1px dashed var(--border-pink); padding: 4px; border-radius: 6px; }
 .track-info marquee { font-size: 0.65rem; color: var(--pink-bright); font-weight: bold; }
 .player-controls { display: flex; justify-content: space-around; padding-top: 5px; }
-.player-controls button { background: none; border: none; color: var(--pink-bright); font-size: 1.1rem; cursor: pointer; }
+.player-controls button { background: none; border: none; color: var(--pink-bright); font-size: 1.1rem; cursor: none; }
 
 
 
@@ -379,7 +379,7 @@ box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
     border-radius: 20px;
     box-shadow: 12px 12px 0px #333;
     text-shadow: 3px 3px 0px #333;
-    cursor: pointer;
+    cursor: none;
     position: relative;
 }
 
@@ -502,7 +502,7 @@ box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
     border: 2px solid #333;
     padding: 10px;
     font-weight: 900;
-    cursor: pointer;
+    cursor: none;
     box-shadow: 4px 4px 0px #333;
     transition: 0.2s;
     text-transform: uppercase;
@@ -944,7 +944,7 @@ box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
     height: 8%;
     background: transparent;
     border: none;
-    cursor: pointer;
+    cursor: none;
 }
 
 /* Сетка для контента, подстроенная под твой PNG */
@@ -988,11 +988,12 @@ box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
 /* ПАНЕЛЬ УПРАВЛЕНИЯ */
 .merch-header-zone {
     display: flex !important;
-    align-items: center;
+    flex-direction: row !important;
+    /* Это свойство поставит кнопку ровно по центру высоты баннера */
+    align-items: center !important; 
     justify-content: center;
-    gap: 15px;
-    /* Ультра-компактно: 5px сверху, 10px снизу */
-    margin: 5px 0 10px 0 !important; 
+    gap: 20px;
+    margin: 10px 0 20px 0 !important;
     position: relative;
     width: 100%;
 }
@@ -1003,14 +1004,21 @@ box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
     display: flex;
     flex-direction: column;
     align-items: center;
-    cursor: pointer;
-    background: rgba(255, 255, 255, 0.6);
+    cursor: none;
+    background: rgba(255, 255, 255, 0.7);
     border: 2px solid #333;
     padding: 6px;
+    border-radius: 8px;
     box-shadow: 4px 4px 0px #ffb6c1;
     transition: 0.2s;
-    width: 70px;
+    width: 65px;
+    flex-shrink: 0;
+
+    /* НАСТРОЙКА ПОЗИЦИИ */
+    margin-top: -45px !important; /* Чем БОЛЬШЕ число, тем ВЫШЕ кнопка */
+    margin-left: 15px !important; /* Чем БОЛЬШЕ число, тем ПРАВЕЕ кнопка */
 }
+
 .premium-shortcut:hover { transform: scale(1.05); }
 .premium-shortcut img { width: 24px !important; height: 24px !important; object-fit: contain; }
 .premium-shortcut span { font-family: monospace; font-size: 8px; font-weight: 900; margin-top: 3px; color: #333; }
@@ -1053,10 +1061,10 @@ box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
 .win-dots span { width: 8px; height: 8px; border-radius: 50%; border: 1px solid #333; }
 .dot-red { background: #ff5f56; } .dot-yellow { background: #ffbd2e; } .dot-green { background: #27c93f; }
 .win-title { font-family: monospace; font-weight: 900; font-size: 11px; color: #333; }
-.win-close-x { background: #fff; border: 2px solid #333; cursor: pointer; font-weight: bold; width: 20px; height: 20px; }
+.win-close-x { background: #fff; border: 2px solid #333; cursor: none; font-weight: bold; width: 20px; height: 20px; }
 
 /* ТЕЛО ОКНА */
-.win-glass-body { padding: 20px 15px; }
+.win-glass-body { padding: 10px 15px; }
 .win-section-title { font-family: monospace; font-size: 9px; font-weight: 900; color: #ff1493; margin-bottom: 15px; letter-spacing: 1px; }
 
 .win-grid-icons { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
@@ -1067,7 +1075,7 @@ box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
     display: flex;
     flex-direction: column;
     align-items: center;
-    cursor: pointer;
+    cursor: none;
     transition: 0.1s;
     text-align: center;
 }
@@ -1103,3 +1111,30 @@ box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
 
 .win-hr { border-top: 2px dashed #eee; margin: 20px 0; }
 .arr { font-style: normal; color: #ff1493; }
+
+
+.win-close-x {
+    background: #fff;
+    border: 2px solid #333;
+    cursor: pointer;
+    font-weight: bold;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Пружинистая анимация */
+}
+
+/* При наведении: становится красным и чуть увеличивается */
+.win-close-x:hover {
+    background-color: #ff5f56 !important;
+    color: white !important;
+    transform: scale(1.1) rotate(90deg); /* Крутится на 90 градусов для стиля */
+}
+
+/* Эффект нажатия */
+.win-close-x:active {
+    transform: scale(0.9);
+    box-shadow: inset 2px 2px 0px rgba(0,0,0,0.2);
+}
