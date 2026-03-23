@@ -11,17 +11,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- 2. ЭФФЕКТЫ (СКОТЧ + НАКЛОН) ---
     function setupMerchEffects() {
-        // Лепим скотч на ВСЕ карточки (и мерч, и авито)
         document.querySelectorAll('.item-tape').forEach(tape => {
             if (![...tape.classList].some(cls => cls.startsWith('tape-'))) {
                 const randomNum = Math.floor(Math.random() * 16) + 1;
                 tape.classList.add(`tape-${randomNum}`);
             }
         });
-        // Наклоняем полароиды
+
         document.querySelectorAll('.merch-item').forEach(item => {
             if (!item.style.getPropertyValue('--tilt')) {
-                const randomRotate = (Math.random() * 14 - 7).toFixed(1);
+                const randomRotate = (Math.random() * 6 - 3).toFixed(1); // Уменьшил разброс для аккуратности
                 item.style.setProperty('--tilt', `${randomRotate}deg`);
                 item.style.transform = `rotate(var(--tilt))`;
             }
@@ -30,40 +29,69 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- 3. МАГАЗИН (ФИЛЬТР + СОРТИРОВКА) ---
     function updateStore() {
-        const activeContainer = document.querySelector('.pegboard:not([style*="display: none"])');
+        // Находим текущую видимую сетку
+        const activeContainer = Array.from(document.querySelectorAll('.pegboard')).find(el => 
+            window.getComputedStyle(el).display !== 'none'
+        );
         if (!activeContainer) return;
 
         const items = Array.from(activeContainer.querySelectorAll('.merch-item'));
+        
+        // Находим активный фильтр в окне OS
         const activeIcon = document.querySelector('.win-item.active:not(.sort-file)');
         const activeFandom = activeIcon ? activeIcon.dataset.fandom : 'all';
         
         const priceFile = document.querySelector('.sort-file[data-sort-type="price"]');
-        const dateFile = document.querySelector('.sort-file[data-sort-type="date"]');
 
+        // 3.1 Фильтрация
         items.forEach(item => {
             const f = item.dataset.fandom;
-            item.style.display = (activeFandom === 'all' || f === activeFandom) ? 'block' : 'none';
+            if (activeFandom === 'all' || f === activeFandom) {
+                item.style.display = ''; // Возвращаем в сетку
+            } else {
+                item.style.display = 'none'; // Скрываем
+            }
         });
 
-        let visible = items.filter(i => i.style.display !== 'none');
+        // 3.2 Сортировка по цене
+        let visibleItems = items.filter(i => i.style.display !== 'none');
 
         if (priceFile && priceFile.dataset.dir !== "0") {
-            visible.sort((a, b) => {
+            const dir = priceFile.dataset.dir;
+            visibleItems.sort((a, b) => {
                 const p1 = parseFloat(a.dataset.price) || 0;
                 const p2 = parseFloat(b.dataset.price) || 0;
-                return priceFile.dataset.dir === "1" ? p1 - p2 : p2 - p1;
+                return dir === "1" ? p1 - p2 : p2 - p1;
             });
-        } else if (dateFile && dateFile.dataset.dir !== "0") {
-            visible.sort((a, b) => {
-                const d1 = new Date(a.dataset.date) || 0;
-                const d2 = new Date(b.dataset.date) || 0;
-                return dateFile.dataset.dir === "1" ? d1 - d2 : d2 - d1;
-            });
+            // Перевставляем в DOM в новом порядке
+            visibleItems.forEach(item => activeContainer.appendChild(item));
         }
-        visible.forEach(item => activeContainer.appendChild(item));
     }
 
-    // --- 4. ВКЛАДКИ ---
+    // --- 4. КЛИКИ ПО ФИЛЬТРАМ (ИНТЕРФЕЙС OS) ---
+    document.querySelectorAll('.win-item:not(.sort-file)').forEach(icon => {
+        icon.addEventListener('click', function() {
+            document.querySelectorAll('.win-item:not(.sort-file)').forEach(i => i.classList.remove('active'));
+            this.classList.add('active');
+            updateStore();
+        });
+    });
+
+    // Клик по файлу "Price" (Сортировка)
+    const priceSort = document.querySelector('.sort-file[data-sort-type="price"]');
+    if (priceSort) {
+        priceSort.addEventListener('click', function() {
+            let currentDir = parseInt(this.dataset.dir || "0");
+            // Цикл: 0 -> 1 (min) -> 2 (max) -> back to 0
+            this.dataset.dir = (currentDir + 1) % 3;
+            
+            // Визуальный фидбек
+            this.style.filter = this.dataset.dir === "0" ? "grayscale(1)" : "none";
+            updateStore();
+        });
+    }
+
+    // --- 5. ВКЛАДКИ (МЕРЧ / АВИТО) ---
     const tabs = document.querySelectorAll('.nav-side-item');
     const merchContainer = document.getElementById('shop-merch');
     const avitoContainer = document.getElementById('shop-avito');
@@ -72,28 +100,28 @@ document.addEventListener('DOMContentLoaded', () => {
     tabs.forEach(tab => {
         tab.addEventListener('click', function(e) {
             const href = this.getAttribute('href');
-            if (!href.startsWith('#')) return;
+            if (!href || !href.startsWith('#')) return;
             e.preventDefault();
 
             tabs.forEach(t => t.classList.remove('active-tab'));
             this.classList.add('active-tab');
 
             if (href === '#merch') {
-                merchContainer.style.display = 'grid';
-                avitoContainer.style.display = 'none';
-                sectionTitle.innerText = "New Merch Drops ✨";
+                if(merchContainer) merchContainer.style.display = 'grid';
+                if(avitoContainer) avitoContainer.style.display = 'none';
+                if(sectionTitle) sectionTitle.innerText = "New Merch Drops ✨";
             } else if (href === '#avito') {
-                merchContainer.style.display = 'none';
-                avitoContainer.style.display = 'grid';
-                sectionTitle.innerText = "Garage Sale (Avito) 🧺";
+                if(merchContainer) merchContainer.style.display = 'none';
+                if(avitoContainer) avitoContainer.style.display = 'grid';
+                if(sectionTitle) sectionTitle.innerText = "Garage Sale (Avito) 🧺";
             }
 
-            setupMerchEffects(); // СРАЗУ ЛЕПИМ СКОТЧ ПРИ СМЕНЕ
+            setupMerchEffects();
             updateStore();
         });
     });
 
-    // --- 5. МОДАЛКА И ГАЛЕРЕЯ (Универсальная) ---
+    // --- 6. МОДАЛКА И ГАЛЕРЕЯ ---
     const modal = document.getElementById('product-modal');
     const modalImg = document.getElementById('modal-img');
     let currentImages = [];
@@ -101,10 +129,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.addEventListener('click', (e) => {
         const card = e.target.closest('.merch-item');
-        // Открываем модалку, если кликнули по карточке, но НЕ по кнопке "купить"
         if (card && !e.target.closest('.buy-btn')) {
             const imgAttr = card.getAttribute('data-images');
-            currentImages = imgAttr ? imgAttr.split(',') : [card.querySelector('.item-img img').src];
+            const mainImg = card.querySelector('.item-img img');
+            
+            currentImages = imgAttr ? imgAttr.split(',') : (mainImg ? [mainImg.src] : []);
+            if (currentImages.length === 0) return;
+            
             currentIdx = 0;
 
             document.getElementById('modal-title').innerText = card.querySelector('.item-name').innerText;
@@ -118,15 +149,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Навигация галереи
-    document.getElementById('prev-img').onclick = (e) => {
+    // Кнопки галереи
+    const prevBtn = document.getElementById('prev-img');
+    const nextBtn = document.getElementById('next-img');
+
+    if (prevBtn) prevBtn.onclick = (e) => {
         e.stopPropagation();
         currentIdx = (currentIdx - 1 + currentImages.length) % currentImages.length;
         modalImg.src = currentImages[currentIdx];
         document.getElementById('current-idx').innerText = currentIdx + 1;
     };
 
-    document.getElementById('next-img').onclick = (e) => {
+    if (nextBtn) nextBtn.onclick = (e) => {
         e.stopPropagation();
         currentIdx = (currentIdx + 1) % currentImages.length;
         modalImg.src = currentImages[currentIdx];
@@ -136,21 +170,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalClose = document.querySelector('.modal-close-trigger');
     if (modalClose) modalClose.onclick = () => modal.style.display = 'none';
 
-    // --- 6. ОКНО ФИЛЬТРОВ ---
+    // --- 7. ОКНО OS (ФИЛЬТРЫ) ---
     const shortcut = document.getElementById('os-shortcut');
     const win = document.getElementById('os-window');
     if (shortcut && win) {
-        shortcut.onclick = (e) => { e.stopPropagation(); win.classList.toggle('show'); };
+        shortcut.onclick = (e) => { 
+            e.stopPropagation(); 
+            win.classList.toggle('show'); 
+        };
     }
 
-    // Закрытие всего по клику мимо
+    // Закрытие по клику мимо
     window.onclick = (e) => {
         if (e.target === modal) modal.style.display = 'none';
-        if (win && !win.contains(e.target) && !shortcut.contains(e.target)) win.classList.remove('show');
+        if (win && !win.contains(e.target) && !shortcut.contains(e.target)) {
+            win.classList.remove('show');
+        }
     };
 
-    // Инициализация
+    // Инициализация при загрузке
     setupMerchEffects();
     updateStore();
 });
-
