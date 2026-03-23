@@ -172,31 +172,29 @@ document.addEventListener('DOMContentLoaded', () => {
     updateStore();
 });
 
-// Ждем загрузки страницы
 document.addEventListener('DOMContentLoaded', () => {
     const audio = document.getElementById('main-audio');
-    const playPauseBtn = document.getElementById('play-pause');
+    const playBtn = document.querySelector('.play-btn');
     const marquee = document.getElementById('player-marquee');
 
-    if (audio && playPauseBtn) {
-        // По умолчанию строка стоит
-        marquee.stop(); 
+    if (audio && playBtn) {
+        // По умолчанию строка стоит, пока не нажмем Play
+        if (marquee) marquee.stop();
 
-        playPauseBtn.addEventListener('click', (e) => {
-            e.stopPropagation(); // Чтобы не срабатывали другие клики
+        playBtn.addEventListener('click', () => {
             if (audio.paused) {
-                audio.play();
-                playPauseBtn.innerText = '💔'; // Меняем сердце на разбитое при игре
-                marquee.start();
+                audio.play().catch(() => console.log("Нужен клик для старта звука"));
+                playBtn.innerText = '💔'; // Меняем сердечко на разбитое, когда играет
+                if (marquee) marquee.start();
             } else {
                 audio.pause();
-                playPauseBtn.innerText = '❤'; // Возвращаем целое сердце
-                marquee.stop();
+                playBtn.innerText = '❤'; // Возвращаем целое сердечко на паузе
+                if (marquee) marquee.stop();
             }
         });
-
-        // Перемотка
-        document.getElementById('prev-track').onclick = () => audio.currentTime -= 10;
-        document.getElementById('next-track').onclick = () => audio.currentTime += 10;
     }
+
+    // Заглушки для ⏮ ⏭ (просто чтобы не выдавали ошибки)
+    document.getElementById('prev-btn').onclick = () => { audio.currentTime -= 10; };
+    document.getElementById('next-btn').onclick = () => { audio.currentTime += 10; };
 });

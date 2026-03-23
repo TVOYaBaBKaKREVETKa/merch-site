@@ -67,16 +67,22 @@
                             <span class="profile-tag">vs. the world ⚡</span>
                         </div>
                     </div>
-                    <div class="mini-player">
-                        <div class="track-info">
-                            <marquee scrollamount="2">now playing: borween — strawberry mix 🍓</marquee>
-                        </div>
-                        <div class="player-controls">
-                            <button>⏮</button><button class="play-btn">❤</button><button>⏭</button>
-                        </div>
-                    </div>
-                    <p class="status">✨ Творю милоту</p>
-                </div>
+<div class="mini-player">
+    <!-- Музыкальный файл. Убедись, что в assets лежит strawberry.mp3 -->
+    <audio id="main-audio" src="assets/blacksheep.mp3" loop></audio>
+    
+    <div class="track-info">
+        <!-- Добавили id="player-marquee", чтобы останавливать текст вместе с музыкой -->
+        <marquee id="player-marquee" scrollamount="2">now playing: borween — strawberry mix 🍓</marquee>
+    </div>
+    <div class="player-controls">
+        <button id="prev-btn">⏮</button>
+        <button class="play-btn">❤</button>
+        <button id="next-btn">⏭</button>
+    </div>
+</div>
+<p class="status">✨ Творю милоту</p>
+</div>
 
                 <div class="box-deco tg-widget">
                     <div class="tg-top-icon"><img src="assets/tg.png" alt="Telegram"></div>

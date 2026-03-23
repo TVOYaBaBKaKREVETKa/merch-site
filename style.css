@@ -330,78 +330,29 @@ box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
 }
 
 /* МИНИ-ПЛЕЕР ВНУТРИ ПРОФИЛЯ (Сделал компактнее) */
-/* --- ПЛЕЕР: РЕТРО-ГАДЖЕТ --- */
 .mini-player {
-    background: #fff; 
-    border: 3px solid #333; /* Жирный черный контур */
-    box-shadow: 4px 4px 0px var(--border-pink); /* Розовая тень-сдвиг */
+    background: #fff0f3; 
+    border: 1px solid var(--border-pink);
     border-radius: 12px; 
-    padding: 12px; 
-    margin: 15px 0;
-    width: 100%; 
-    box-sizing: border-box;
-    display: block; /* ГАРАНТИЯ: не растягивается во всю высоту */
-    position: relative;
+    padding: 8px; 
+    margin: 12px 0;
+    box-sizing: border-box; /* ГАРАНТИЯ: плеер не раздует сайдбар */
 }
-
-/* Экран плеера */
 .track-info { 
-    background: #fdf2f7; /* Очень светлый розовый */
-    border: 3px inset #fff; /* Эффект "вдавленного" экрана */
-    padding: 6px; 
+    background: #fff; 
+    border: 1px dashed var(--border-pink); 
+    padding: 4px; 
     border-radius: 6px; 
-    overflow: hidden;
-    height: 24px; /* Четкая высота экрана */
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
+    overflow: hidden; 
 }
-
-.track-info marquee { 
-    font-size: 0.7rem; 
-    color: #333; 
-    font-family: 'Courier New', Courier, monospace; /* Системный шрифт */
-    font-weight: bold; 
-    text-transform: uppercase;
-}
-
-/* Кнопки управления */
-.player-controls { 
-    display: flex; 
-    justify-content: center; 
-    gap: 12px;
-}
-
+.track-info marquee { font-size: 0.65rem; color: var(--pink-bright); font-weight: bold; }
+.player-controls { display: flex; justify-content: space-around; padding-top: 5px; }
 .player-controls button { 
-    background: #fff;
-    border: 2px solid #333;
-    border-radius: 6px;
-    color: #333;
-    font-size: 1rem;
-    width: 40px;
-    height: 35px;
-    cursor: pointer;
-    box-shadow: 2px 2px 0px #333;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: 0.1s;
-}
-
-/* Эффект нажатия (вжимаются) */
-.player-controls button:active {
-    transform: translate(2px, 2px);
-    box-shadow: 0px 0px 0px #333;
-}
-
-/* Красная кнопка Play/Pause */
-.play-btn {
-    background: var(--pink-bright) !important;
-    color: #fff !important;
-}
-
-.player-controls button:hover {
-    background: #a7f432; /* Твой салатовый при наведении */
+    background: none; 
+    border: none; 
+    color: var(--pink-bright); 
+    font-size: 1.1rem; 
+    cursor: pointer; /* Сделал pointer, чтобы было понятно, что кликабельно */
 }
 
 
@@ -1400,7 +1351,7 @@ box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
 /* Эффект выделения (синий), если сортировка активна */
 .win-item.sort-file[data-dir="1"], 
 .win-item.sort-file[data-dir="2"] {
-    background: #0202ef84 !important; /* Тот самый синий из Windows */
+    background: #0303c984 !important; /* Тот самый синий из Windows */
 }
 
 .win-item.sort-file[data-dir="1"] .sort-label, 
