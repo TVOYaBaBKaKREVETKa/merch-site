@@ -96,148 +96,87 @@
             </aside>
 
 <section class="shop-content">
-    
-
-
-
-<div class="merch-header-zone">
-    <div class="section-title">
-        <h2>New Merch Drops ✨</h2>
-    </div>
-
-    <!-- ЯРЛЫК ПРОВОДНИКА -->
-    <div id="os-shortcut" class="premium-shortcut">
-        <img src="assets/testfandom.png" alt="">
-        <span>Фильтры.exe</span>
-    </div>
-
-    <!-- ОКНО ПРОВОДНИКА -->
-    <div id="os-window" class="premium-window">
-        <div class="win-glass-header">
-            <div class="win-dots">
-                <span class="dot-red"></span>
-                <span class="dot-yellow"></span>
-                <span class="dot-green"></span>
-            </div>
-            <span class="win-title">Explorer.exe</span>
-            <button class="win-close-x win-btn-close">×</button>
+    <div class="merch-header-zone">
+        <div class="section-title">
+            <!-- ID для смены заголовка -->
+            <h2 id="current-section-title">New Merch Drops ✨</h2>
         </div>
-        
-        <div class="win-glass-body">
-            <div class="win-section-title">✦ ВЫБЕРИ ВСЕЛЕННУЮ</div>
-            <div class="win-grid-icons">
-                <div class="win-item active" data-fandom="all">
-                    <img src="assets/testfandom.png">
-                    <span>Все_файлы</span>
+
+        <!-- ЯРЛЫК ПРОВОДНИКА -->
+        <div id="os-shortcut" class="premium-shortcut">
+            <img src="assets/testfandom.png" alt="">
+            <span>Фильтры.exe</span>
+        </div>
+
+        <!-- ОКНО ПРОВОДНИКА -->
+        <div id="os-window" class="premium-window">
+            <div class="win-glass-header">
+                <div class="win-dots">
+                    <span class="dot-red"></span>
+                    <span class="dot-yellow"></span>
+                    <span class="dot-green"></span>
                 </div>
-                <div class="win-item" data-fandom="scott">
-                    <img src="assets/testfandom.png" style="filter: hue-rotate(90deg);">
-                    <span>Scott_P</span>
-                </div>
-                <div class="win-item" data-fandom="original">
-                    <img src="assets/testfandom.png" style="filter: hue-rotate(180deg);">
-                    <span>Мои_ОС</span>
-                </div>
-                <div class="win-item" data-fandom="anime">
-                    <img src="assets/testfandom.png" style="filter: hue-rotate(270deg);">
-                    <span>Аниме</span>
-                </div>
+                <span class="win-title">Explorer.exe</span>
+                <button class="win-close-x win-btn-close">×</button>
             </div>
-
-            <div class="win-hr"></div>
-
-            <div class="win-section-title">✦ СИСТЕМНАЯ СОРТИРОВКА</div>
-            <div class="win-sort-row">
-                <div class="win-item sort-file" data-sort-type="price" data-dir="0">
-                    <img src="assets/testfandom.png" style="filter: grayscale(1);">
-                    <span>Цена <em class="arr">↕</em></span>
+            
+            <div class="win-glass-body">
+                <div class="win-section-title">✦ ВЫБЕРИ ВСЕЛЕННУЮ</div>
+                <div class="win-grid-icons">
+                    <div class="win-item active" data-fandom="all"><img src="assets/testfandom.png"><span>Все_файлы</span></div>
+                    <div class="win-item" data-fandom="scott"><img src="assets/testfandom.png" style="filter: hue-rotate(90deg);"><span>Scott_P</span></div>
+                    <div class="win-item" data-fandom="original"><img src="assets/testfandom.png" style="filter: hue-rotate(180deg);"><span>Мои_ОС</span></div>
+                    <div class="win-item" data-fandom="anime"><img src="assets/testfandom.png" style="filter: hue-rotate(270deg);"><span>Аниме</span></div>
                 </div>
-                <div class="win-item sort-file" data-sort-type="date" data-dir="2">
-                    <img src="assets/testfandom.png" style="filter: sepia(1) saturate(2);">
-                    <span>Дата <em class="arr">↓</em></span>
+                <div class="win-hr"></div>
+                <div class="win-section-title">✦ СИСТЕМНАЯ СОРТИРОВКА</div>
+                <div class="win-sort-row">
+                    <div class="win-item sort-file" data-sort-type="price" data-dir="0"><span>Цена ↕</span></div>
+                    <div class="win-item sort-file" data-sort-type="date" data-dir="2"><span>Дата ↓</span></div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-
-
-
-        <div class="pegboard">
-            <!-- Добавил data-атрибуты для работы фильтров -->
-            <div class="merch-item" data-fandom="original" data-price="450" data-date="2026-03-22">
-                <div class="item-tape"></div> 
-                <div class="item-img"><img src="" alt=""></div>
-                <p class="item-name">Bunny Keychain</p>
-                <button class="buy-btn">Add to Jar</button>
-            </div>
-            <div class="merch-item" data-fandom="anime" data-price="150" data-date="2026-03-10">
-                <div class="item-tape"></div> 
-                <div class="item-img"><img src="" alt=""></div>
-                <p class="item-name">Bear Sticker Pack</p>
-                <button class="buy-btn">Add to Jar</button>
-            </div>
-            <div class="merch-item" data-fandom="scott" data-price="300" data-date="2026-03-21">
-                <div class="item-tape"></div> 
-                <div class="item-img"><img src="" alt=""></div>
-                <p class="item-name">Limited Pink Pin</p>
-                <button class="buy-btn">Add to Jar</button>
-            </div>
-            <div class="merch-item" data-fandom="original" data-price="600" data-date="2026-03-05">
-                <div class="item-tape"></div> 
-                <div class="item-img"><img src="" alt=""></div>
-                <p class="item-name">Strawberry Charm</p>
-                <button class="buy-btn">Add to Jar</button>
-            </div>
-            <div class="merch-item" data-fandom="anime" data-price="1200" data-date="2026-02-28">
-                <div class="item-tape"></div> 
-                <div class="item-img"><img src="" alt=""></div>
-                <p class="item-name">Art Print #01</p>
-                <button class="buy-btn">Add to Jar</button>
-            </div>
-            <div class="merch-item" data-fandom="scott" data-price="250" data-date="2026-03-15">
-                <div class="item-tape"></div> 
-                <div class="item-img"><img src="" alt=""></div>
-                <p class="item-name">Cute Washi Tape</p>
-                <button class="buy-btn">Add to Jar</button>
-            </div>
+    <!-- ТОВАРЫ МЕРЧА (Видны сразу) -->
+    <div id="shop-merch" class="pegboard">
+        <div class="merch-item" data-fandom="original" data-price="450">
+            <div class="item-tape"></div> 
+            <div class="item-img"><img src="assets/merch1.png" alt=""></div>
+            <p class="item-name">Bunny Keychain</p>
+            <div class="price-tag">450₽</div>
+            <button class="buy-btn">Add to Jar</button>
+        </div>
+        <div class="merch-item" data-fandom="anime" data-price="150">
+            <div class="item-tape"></div> 
+            <div class="item-img"><img src="assets/merch2.png" alt=""></div>
+            <p class="item-name">Bear Sticker Pack</p>
+            <div class="price-tag">150₽</div>
+            <button class="buy-btn">Add to Jar</button>
         </div>
     </div>
 
-    <!-- ВКЛАДКА АВИТО -->
-    <div id="avito-tab" class="tab-pane">
-        <div class="section-title"><h2>Garage Sale (Avito) 🧺</h2></div>
-        <div class="pegboard">
-            <div class="merch-item" data-fandom="original" data-price="1000" data-date="2026-01-10">
-                <div class="item-tape"></div>
-                <div class="item-img">🧸</div>
-                <p class="item-name">Vintage Item</p>
-                <button class="buy-btn avito-btn">Buy on Avito</button>
-            </div>
-            <div class="merch-item" data-fandom="anime" data-price="2500" data-date="2026-03-01">
-                <div class="item-tape"></div>
-                <div class="item-img">👗</div>
-                <p class="item-name">Pastel Sweater</p>
-                <button class="buy-btn avito-btn">Buy on Avito</button>
-            </div>
-            <div class="merch-item" data-fandom="scott" data-price="1800" data-date="2026-03-20">
-                <div class="item-tape"></div>
-                <div class="item-img">📸</div>
-                <p class="item-name">Retro Camera</p>
-                <button class="buy-btn avito-btn">Buy on Avito</button>
-            </div>
+    <!-- ТОВАРЫ АВИТО (Скрыты, стиль РАСПРОДАЖА) -->
+    <div id="shop-avito" class="pegboard" style="display: none;">
+        <div class="merch-item sale-item" data-fandom="original" data-price="800">
+            <div class="sale-badge">SALE %</div>
+            <div class="item-tape avito-tape"></div> 
+            <div class="item-img"><img src="assets/avito1.png" alt=""></div>
+            <p class="item-name">Vintage Plush</p>
+            <div class="price-tag">800₽ <span class="old-price">1600₽</span></div>
+            <button class="buy-btn avito-btn">Связаться</button>
         </div>
-    </div>
-
-    <!-- ВКЛАДКА ОТЗЫВЫ -->
-    <div id="reviews-tab" class="tab-pane">
-        <div class="section-title"><h2>Customer Reviews 💬</h2></div>
-        <div class="box-deco" style="text-align: center; padding: 50px;">
-            <p>Здесь скоро появятся отзывы довольных котиков! 🐾</p>
+        <div class="merch-item sale-item" data-fandom="anime" data-price="1200">
+            <div class="sale-badge">SALE %</div>
+            <div class="item-tape avito-tape"></div> 
+            <div class="item-img"><img src="assets/avito2.png" alt=""></div>
+            <p class="item-name">Manga Collection</p>
+            <div class="price-tag">1200₽ <span class="old-price">2500₽</span></div>
+            <button class="buy-btn avito-btn">Связаться</button>
         </div>
     </div>
 </section>
+
 
 
                 <!-- ВКЛАДКА ОТЗЫВЫ -->

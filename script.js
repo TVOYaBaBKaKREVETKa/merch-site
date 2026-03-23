@@ -196,3 +196,36 @@ window.addEventListener('click', (e) => {
     }
 });
 
+document.querySelectorAll('.nav-side-item').forEach(link => {
+    link.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        
+        // Работаем только если нажали Мерч или Авито
+        if (href === '#merch' || href === '#avito') {
+            e.preventDefault();
+
+            // 1. Меняем активную вкладку в меню
+            document.querySelectorAll('.nav-side-item').forEach(el => el.classList.remove('active-tab'));
+            this.classList.add('active-tab');
+
+            // 2. Переключаем контейнеры и заголовки
+            const merchBlock = document.getElementById('shop-merch');
+            const avitoBlock = document.getElementById('shop-avito');
+            const titleBlock = document.getElementById('current-section-title');
+            const winHeader = document.querySelector('.win-glass-header');
+
+            if (href === '#merch') {
+                merchBlock.style.display = 'grid';
+                avitoBlock.style.display = 'none';
+                titleBlock.innerHTML = 'New Merch Drops ✨';
+                if(winHeader) winHeader.style.background = ''; // Возвращаем обычный цвет окна
+            } else {
+                merchBlock.style.display = 'none';
+                avitoBlock.style.display = 'grid';
+                titleBlock.innerHTML = 'Garage Sale / Avito 📦';
+                if(winHeader) winHeader.style.background = 'linear-gradient(to right, #00aff0, #005a87)'; // Окно синеет под Авито
+            }
+        }
+    });
+});
+
