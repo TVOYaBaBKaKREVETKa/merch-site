@@ -1411,3 +1411,10 @@ button,
     font-weight: bold;
     font-size: 1.2em;
 }
+
+/* Когда экран меньше 768px (планшеты и телефоны) */
+@media (max-width: 768px) {
+  .product-grid {
+    grid-template-columns: 1fr; /* Один товар в ряд вместо трех */
+  }
+}
