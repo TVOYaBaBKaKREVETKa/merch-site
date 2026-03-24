@@ -1467,3 +1467,47 @@ button,
         height: auto !important;
     }
 }
+
+@media (max-width: 768px) {
+    /* 1. Само окно: делаем его широким */
+    .modal-content {
+        width: 95% !important; /* Занимает 95% ширины экрана */
+        max-width: none !important;
+        margin: 10% auto !important; /* Небольшой отступ сверху */
+        padding: 15px !important;
+        border-radius: 15px !important;
+        box-shadow: 8px 8px 0px #333 !important; /* Уменьшаем огромную тень */
+    }
+
+    /* 2. Картинка внутри модалки (если есть) */
+    .modal-content img {
+        width: 100% !important;
+        height: auto !important;
+        border-radius: 10px !important;
+        margin-bottom: 15px !important;
+    }
+
+    /* 3. Текст и кнопки в модалке */
+    .modal-content h2 {
+        font-size: 1.4rem !important;
+        line-height: 1.2 !important;
+    }
+
+    .modal-content p {
+        font-size: 1rem !important;
+    }
+
+    /* Кнопка закрытия (крестик) — делаем её больше, чтобы попасть пальцем */
+    .close-modal {
+        font-size: 2rem !important;
+        right: 15px !important;
+        top: 10px !important;
+    }
+    
+    /* Кнопка "Купить" или "Добавить" внутри модалки */
+    .modal-button {
+        width: 100% !important; /* Кнопка на всю ширину модалки */
+        padding: 15px !important;
+        font-size: 1.1rem !important;
+    }
+}
