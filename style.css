@@ -1413,3 +1413,57 @@ button,
     font-size: 1.2em;
 }
 
+/* --- БЛОК АДАПТАЦИИ (ВСТАВИТЬ В САМЫЙ КОНЕЦ) --- */
+
+@media (max-width: 768px) {
+    /* 1. Исправляем шрифт и базу */
+    html { font-size: 14px; } 
+    body { overflow-x: hidden; width: 100vw; }
+
+    /* 2. Главный контейнер: перестраиваем всё в одну колонку */
+    /* Замени .main-wrapper на имя своего главного дива, если оно другое */
+    .main-wrapper, .container, .main-layout { 
+        display: flex !important;
+        flex-direction: column !important;
+        padding: 10px !important;
+        width: 100% !important;
+    }
+
+    /* 3. Боковая панель (профиль) теперь сверху */
+    .sidebar, .left-panel {
+        width: 100% !important;
+        margin-bottom: 20px !important;
+        position: static !important; /* Отключаем фиксированное положение */
+    }
+
+    /* 4. Заголовок "NEW MERCH DROPS" — усмиряем размеры */
+    .section-title h2 {
+        font-size: 1.3rem !important; /* Уменьшаем, чтобы не вылезал */
+        padding: 10px 20px !important;
+        display: block !important;
+        margin: 0 auto 20px auto !important;
+        width: fit-content !important;
+        box-shadow: 6px 6px 0px #333 !important; /* Уменьшаем тень */
+        outline-offset: -6px !important; /* Чтобы рамка не мешала буквам */
+    }
+
+    /* 5. Сетка товаров: делаем карточки по одной */
+    .product-grid {
+        display: grid !important;
+        grid-template-columns: 1fr !important; /* Строго одна карточка в ряд */
+        gap: 25px !important;
+        justify-items: center !important;
+    }
+
+    /* 6. Сама карточка товара */
+    .product-card {
+        width: 280px !important; /* Фиксируем ширину, чтобы не была на весь экран */
+        margin: 0 auto !important;
+    }
+
+    /* 7. Картинки внутри карточек */
+    .product-card img {
+        width: 100% !important;
+        height: auto !important;
+    }
+}
