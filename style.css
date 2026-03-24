@@ -1413,98 +1413,147 @@ button,
     font-size: 1.2em;
 }
 
-/* --- ТОТАЛЬНАЯ ПЕРЕСБОРКА ДЛЯ МОБИЛОК (max-width: 768px) --- */
-@media screen and (max-width: 768px) {
-    /* 1. Глобальный сброс: превращаем сайт в вертикальную ленту */
-    body {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        width: 100vw !important;
-        overflow-x: hidden !important;
-        height: auto !important;
-        padding: 20px 0 !important;
-        background-attachment: scroll !important;
-    }
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+  /* Основной контейнер */
+  .page-wrapper {
+    max-width: 95%;
+    padding: 10px;
+    margin: 0 auto;
+  }
 
-    /* 2. "ОТКЛЕИВАЕМ" ВСЁ (Сброс position: absolute) */
-    /* Это заставит лого, кнопки и карточки идти друг за другом, а не кучей */
-    .logo, .sidebar, .profile-card, .music-player, .product-card, .marquee-container, 
-    .container, .main-content, .sticker, [style*="position: absolute"] {
-        position: relative !important; 
-        left: auto !important;
-        top: auto !important;
-        right: auto !important;
-        bottom: auto !important;
-        transform: none !important;
-        margin: 15px auto !important;
-        width: 90% !important; /* Ширина почти на весь экран */
-        max-width: 340px !important; /* Чтобы не были слишком огромными */
-        display: block !important;
-    }
+  /* Заголовок шапки */
+  .header-container {
+    flex-direction: column;
+    height: auto;
+    padding: 20px 10px;
+  }
+  .header-title {
+    flex-direction: column;
+    align-items: center;
+  }
+  /* Меню навигации — сделать колонкой */
+  .header-nav-side {
+    position: static;
+    flex-direction: row;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+  }
+  .nav-side-item {
+    font-size: 0.9rem;
+    padding: 6px 10px;
+    width: auto;
+    flex-direction: row;
+    gap: 8px;
+  }
+  .nav-icon {
+    width: 24px;
+    height: 24px;
+    scale: 1.2;
+  }
 
-    /* 3. КНОПКИ (Мерч, Авито, Галерея, Отзывы) */
-    /* Выстраиваем их аккуратно в два ряда */
-    .sidebar {
-        display: grid !important;
-        grid-template-columns: 1fr 1fr !important;
-        gap: 10px !important;
-        width: 95% !important;
-        padding: 0 !important;
-    }
+  /* Логотип и завитушка */
+  .logo-wrap {
+    margin-top: 20px;
+  }
+  .main-logo-img {
+    height: 100px;
+    margin-left: 0;
+  }
+  .spin-logo {
+    left: 50%;
+    top: 15%;
+    height: 60px;
+  }
 
-    .nav-button, .sidebar a, .sidebar div {
-        width: 100% !important;
-        height: 50px !important;
-        font-size: 0.9rem !important;
-        margin: 0 !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-    }
+  /* Текст под логотипом */
+  .header-subtitle {
+    font-size: 0.6rem;
+    letter-spacing: 3px;
+    top: 130px;
+  }
 
-    /* 4. КАРТОЧКА С ПЕРСОНАЖЕМ (borween) */
-    .profile-card {
-        height: auto !important;
-        padding: 15px !important;
-        border-radius: 20px !important;
-    }
+  /* Сайдбар слева — сделать блоком сверху */
+  .sidebar-left {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 30px;
+  }
 
-    .profile-card img {
-        width: 100% !important;
-        height: auto !important;
-    }
+  /* Мини-плеер — сделать шириной 100% */
+  .mini-player {
+    width: 100%;
+  }
 
-    /* 5. БЕГУЩАЯ СТРОКА (MARQUEE) */
-    .marquee-container {
-        width: 100vw !important;
-        max-width: none !important;
-        margin: 20px 0 !important;
-    }
+  /* Контейнер товаров - сетка 2 колонки */
+  .main-layout {
+    display: flex;
+    flex-direction: column;
+  }
 
-    /* 6. СЕТКА ТОВАРОВ */
-    .product-grid {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        width: 100% !important;
-        gap: 30px !important;
-    }
+  /* Блок товаров — сетка из 2 колонок */
+  .pegboard {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 10px 0;
+  }
 
-    /* 7. МОДАЛЬНОЕ ОКНО (чтобы оно наконец заработало) */
-    .modal-content {
-        position: fixed !important;
-        width: 92% !important;
-        left: 4% !important;
-        top: 10% !important;
-        transform: none !important;
-        z-index: 10000 !important;
-        padding: 20px !important;
-        border: 4px solid #333 !important;
-    }
+  /* Карточки мерча */
+  .merch-item {
+    max-width: 100%;
+    padding: 8px;
+  }
 
-    /* Скрываем мелкий декор, который создает визуальный шум на узком экране */
-    .decor-sticker, .floating-star {
-        display: none !important;
-    }
+  /* Заголовки секций */
+  .section-title {
+    font-size: 1.8rem;
+    padding: 10px 0;
+  }
+
+  /* Заголовок "New Merch Drops" */
+  #current-section-title {
+    font-size: 2rem;
+  }
+
+  /* Тикер — сделай шрифт чуть меньше */
+  .ticker span {
+    font-size: 0.8rem;
+  }
+
+  /* Модальное окно — растянуть на всю ширину */
+  #product-modal .modal-window-container {
+    width: 90%;
+    top: 10%;
+    left: 5%;
+    transform: translateX(0);
+  }
+
+  /* Адаптация изображений в модалке */
+  #modal-img {
+    max-height: 50vh;
+  }
+
+  /* Общая ширина элементов внутри модалки */
+  .modal-content-grid {
+    flex-direction: column;
+  }
+  .modal-image-slot {
+    width: 100%;
+    height: auto;
+  }
+  .modal-text-slot {
+    padding: 10px;
+  }
+
+  /* Кнопки сортировки и другие блоки — масштабировать */
+  .win-sort-row {
+    flex-direction: column;
+    align-items: center;
+  }
+  .win-item.sort-file {
+    width: 80%;
+  }
 }
