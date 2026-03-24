@@ -1413,86 +1413,67 @@ button,
     font-size: 1.2em;
 }
 
-/* ПОЛНАЯ ПЕРЕЗАГРУЗКА ДЛЯ МОБИЛОК */
-@media screen and (max-width: 768px) {
-    /* 1. Убираем всё лишнее пространство справа и разрешаем контенту дышать */
-    html, body {
-        margin: 0 !important;
-        padding: 0 !important;
+@media screen and (max-width: 480px) {
+    /* 1. Обнуляем обертки */
+    body, html {
+        overflow-x: hidden !important;
         width: 100% !important;
-        overflow-x: hidden !important; /* Убираем боковую прокрутку */
     }
 
-    /* 2. Твой главный контейнер (тот, что держит всё) */
-    /* Если у тебя другой класс, замени .wrapper на него */
-    .wrapper, .main-container, .container {
-        display: flex !important;
-        flex-direction: column !important; /* Ставим блоки друг под друга */
-        width: 100% !important;
-        padding: 10px !important;
-        box-sizing: border-box !important;
+    /* 2. Кнопки меню сверху (Мерч, Авито и т.д.) */
+    /* Уменьшаем их, чтобы они не занимали пол-экрана */
+    .menu-button, [class*="button"] { 
+        width: 140px !important; /* Уменьшили ширину */
+        height: auto !important;
+        padding: 8px !important;
+        font-size: 0.9rem !important; /* Уменьшили шрифт */
+        margin: 5px auto !important;
     }
 
-    /* 3. Левая колонка (профиль, кнопки сверху) */
-    .sidebar, .left-panel {
-        width: 100% !important; /* На весь экран */
-        max-width: none !important;
-        margin: 0 0 20px 0 !important;
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-    }
-
-    /* 4. Сетка товаров (теперь по центру) */
-    .product-grid {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        width: 100% !important;
-        margin: 0 !important;
-    }
-
-    /* 5. Карточки товаров — делаем их крупными и красивыми */
-    .product-card {
-        width: 280px !important; /* Фиксируем удобную ширину для телефона */
-        margin-bottom: 20px !important;
-    }
-
-    /* 6. ЗАГОЛОВОК "NEW MERCH DROPS" — уменьшаем гиганта */
-    .section-title h2 {
-        font-size: 1.2rem !important;
+    /* 3. Карточка профиля (с рисунком) */
+    .profile-card, [class*="card"] {
         width: 90% !important;
-        padding: 10px !important;
         margin: 10px auto !important;
-        box-shadow: 6px 6px 0px #333 !important;
-        outline-offset: -5px !important;
+        float: none !important;
     }
 
-    /* 7. АДАПТАЦИЯ МОДАЛЬНОГО ОКНА (чтобы было БОЛЬШИМ) */
-    .modal {
+    /* 4. Бегущая строка (SOON GARAGE SALE) */
+    .marquee, [class*="ticker"] {
+        font-size: 0.8rem !important;
+        padding: 5px 0 !important;
+    }
+
+    /* 5. Главный контейнер с товарами */
+    /* Заставляем его встать ПОД профилем, а не сбоку */
+    .main-content, .content-wrapper {
         display: flex !important;
+        flex-direction: column !important;
         align-items: center !important;
-        justify-content: center !important;
-        padding: 10px !important;
-    }
-
-    .modal-content {
-        width: 95% !important; /* Почти на весь экран */
-        height: auto !important;
-        max-height: 90vh !important; /* Чтобы не вылезало за высоту экрана */
-        overflow-y: auto !important; /* Если текст длинный — можно скроллить */
-        margin: 0 !important;
-        padding: 20px !important;
-        position: relative !important;
-        left: auto !important;
-        top: auto !important;
-        transform: none !important;
-    }
-
-    /* Картинка в модалке */
-    .modal-content img {
         width: 100% !important;
-        height: auto !important;
-        margin-bottom: 15px !important;
+        padding: 0 !important;
+    }
+
+    /* 6. Карточки товаров (BEAR STICKER PACK) */
+    .product-card {
+        width: 180px !important; /* Делаем их компактными */
+        margin: 20px auto !important;
+        position: static !important;
+    }
+
+    /* 7. Заголовок NEW MERCH DROPS */
+    .section-title h2 {
+        font-size: 1rem !important;
+        padding: 5px 15px !important;
+        margin-top: 20px !important;
+    }
+
+    /* 8. МОДАЛЬНОЕ ОКНО (То самое, что не работало) */
+    .modal-content {
+        width: 90% !important;
+        left: 50% !important;
+        top: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        padding: 15px !important;
+        font-size: 0.9rem !important;
     }
 }
