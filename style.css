@@ -17,7 +17,7 @@
     padding: 0; 
     box-sizing: border-box; 
     /* Возвращаем видимый курсор. Если хочешь кастомный салатовый — укажи ссылку на .cur или .png файл */
-    cursor: none; 
+
 }
 
 html { scroll-behavior: smooth; }
@@ -396,7 +396,6 @@ box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
     border-radius: 20px;
     box-shadow: 12px 12px 0px #333;
     text-shadow: 3px 3px 0px #333;
-    cursor: none;
     position: relative;
 }
 
@@ -463,7 +462,6 @@ box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
     width: 85px; 
     height: 45px;
     z-index: 10;
-    pointer-events: none;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -519,7 +517,6 @@ box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
     border: 2px solid #333;
     padding: 10px;
     font-weight: 900;
-    cursor: none;
     box-shadow: 4px 4px 0px #333;
     transition: 0.2s;
     text-transform: uppercase;
@@ -548,7 +545,7 @@ box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
 
 /* 9. ЛЕТАЮЩИЕ СМАЙЛИКИ ПО КРАЯМ */
 .floating-deco {
-    position: fixed; font-size: 3.5rem; z-index: 1; pointer-events: none;
+    position: fixed; font-size: 3.5rem; z-index: 1;
     filter: drop-shadow(0 5px 15px rgba(255, 133, 161, 0.2));
 }
 .deco-1 { top: 15%; left: 4%; animation: float 6s ease-in-out infinite; }
@@ -598,7 +595,6 @@ button,
   width: 345px; 
   height: 300px; 
   z-index: 9999; 
-  pointer-events: none; 
   background-size: contain;
   background-repeat: no-repeat;
   image-rendering: pixelated; 
@@ -702,7 +698,6 @@ button,
     width: 110px; 
     height: auto;
     opacity: 0;
-    pointer-events: none;
     z-index: 10;
     image-rendering: pixelated;
     filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.9));
@@ -965,7 +960,7 @@ button,
     to { transform: scale(1); opacity: 1; }
 }
 
-.modal-frame-img { width: 100%; display: block; pointer-events: none; }
+.modal-frame-img { width: 100%; display: block;}
 
 /* 2. КРЕСТИК ЗАКРЫТИЯ */
 .modal-close-trigger {
@@ -1118,7 +1113,6 @@ button,
     display: flex;
     flex-direction: column;
     align-items: center;
-    cursor: none;
     background: rgba(255, 255, 255, 0.7);
     border: 2px solid #333;
     padding: 6px;
@@ -1175,7 +1169,7 @@ button,
 .win-dots span { width: 8px; height: 8px; border-radius: 50%; border: 1px solid #333; }
 .dot-red { background: #ff5f56; } .dot-yellow { background: #ffbd2e; } .dot-green { background: #27c93f; }
 .win-title { font-family: monospace; font-weight: 900; font-size: 11px; color: #333; }
-.win-close-x { background: #fff; border: 2px solid #333; cursor: none; font-weight: bold; width: 20px; height: 20px; }
+.win-close-x { background: #fff; border: 2px solid #333; font-weight: bold; width: 20px; height: 20px; }
 
 /* ТЕЛО ОКНА */
 .win-glass-body { padding: 10px 15px; }
@@ -1189,7 +1183,6 @@ button,
     display: flex;
     flex-direction: column;
     align-items: center;
-    cursor: none;
     transition: 0.1s;
     text-align: center;
 }
@@ -1387,7 +1380,6 @@ button,
     left: 0;
     width: 100%;
     height: 100vh;
-    pointer-events: none; /* Чтобы можно было кликать сквозь него */
     z-index: -1; /* Уходит под весь контент и под твои сакуры */
     overflow: hidden;
 }
