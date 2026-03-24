@@ -1413,67 +1413,66 @@ button,
     font-size: 1.2em;
 }
 
-@media screen and (max-width: 480px) {
-    /* 1. Обнуляем обертки */
-    body, html {
-        overflow-x: hidden !important;
-        width: 100% !important;
-    }
-
-    /* 2. Кнопки меню сверху (Мерч, Авито и т.д.) */
-    /* Уменьшаем их, чтобы они не занимали пол-экрана */
-    .menu-button, [class*="button"] { 
-        width: 140px !important; /* Уменьшили ширину */
-        height: auto !important;
-        padding: 8px !important;
-        font-size: 0.9rem !important; /* Уменьшили шрифт */
-        margin: 5px auto !important;
-    }
-
-    /* 3. Карточка профиля (с рисунком) */
-    .profile-card, [class*="card"] {
-        width: 90% !important;
-        margin: 10px auto !important;
-        float: none !important;
-    }
-
-    /* 4. Бегущая строка (SOON GARAGE SALE) */
-    .marquee, [class*="ticker"] {
-        font-size: 0.8rem !important;
-        padding: 5px 0 !important;
-    }
-
-    /* 5. Главный контейнер с товарами */
-    /* Заставляем его встать ПОД профилем, а не сбоку */
-    .main-content, .content-wrapper {
+@media screen and (max-width: 600px) {
+    /* 1. Глобальный сброс — всё в одну колонку по центру */
+    body {
         display: flex !important;
         flex-direction: column !important;
         align-items: center !important;
         width: 100% !important;
-        padding: 0 !important;
+        overflow-x: hidden !important;
+        background-size: contain !important; /* Чтобы фон не растягивался уродливо */
     }
 
-    /* 6. Карточки товаров (BEAR STICKER PACK) */
-    .product-card {
-        width: 180px !important; /* Делаем их компактными */
+    /* 2. ЛОГОТИП (тот, что BOR) */
+    .logo, header img, [class*="logo"] {
+        width: 80% !important; /* Чтобы не вылезал за экран */
+        height: auto !important;
+        margin: 20px auto !important;
+        display: block !important;
+    }
+
+    /* 3. КНОПКИ-НАКЛЕЙКИ (Мерч, Авито и т.д.) */
+    .buttons-container, .sidebar, nav {
+        display: flex !important;
+        flex-wrap: wrap !important; /* Чтобы они могли встать в два ряда */
+        justify-content: center !important;
+        gap: 10px !important;
+        width: 100% !important;
+        position: static !important; /* Убираем absolute, если был */
+        margin-top: 10px !important;
+    }
+
+    .nav-button, .sidebar a, [class*="button"] {
+        width: 140px !important; /* Фиксируем размер наклейки */
+        height: 50px !important;
+        font-size: 0.8rem !important;
+        padding: 5px !important;
+        margin: 0 !important;
+    }
+
+    /* 4. КАРТОЧКА ПЕРСОНАЖА (Розовая с плеером) */
+    .profile-card, .character-box {
+        width: 280px !important; /* Чтобы была как аккуратная карточка */
         margin: 20px auto !important;
         position: static !important;
+        transform: none !important;
     }
 
-    /* 7. Заголовок NEW MERCH DROPS */
-    .section-title h2 {
-        font-size: 1rem !important;
-        padding: 5px 15px !important;
-        margin-top: 20px !important;
+    /* 5. БЕГУЩАЯ СТРОКА */
+    .marquee-container {
+        width: 100% !important;
+        margin: 15px 0 !important;
     }
 
-    /* 8. МОДАЛЬНОЕ ОКНО (То самое, что не работало) */
+    /* 6. МОДАЛЬНОЕ ОКНО (Больше и по центру) */
     .modal-content {
         width: 90% !important;
-        left: 50% !important;
-        top: 50% !important;
-        transform: translate(-50%, -50%) !important;
+        max-width: 320px !important;
         padding: 15px !important;
-        font-size: 0.9rem !important;
+        left: 5% !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+        border: 3px solid #333 !important;
     }
 }
