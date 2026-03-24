@@ -1413,67 +1413,67 @@ button,
     font-size: 1.2em;
 }
 
-/* --- ФИНАЛЬНАЯ ПОПЫТКА АДАПТАЦИИ --- */
-
+/* --- СУПЕР-АДАПТАЦИЯ (В САМЫЙ КОНЕЦ) --- */
 @media screen and (max-width: 600px) {
-    /* 1. Сбрасываем фон и общую ширину */
+    /* 1. Делаем фон бесконечным и убираем прокрутку вбок */
     body {
-        width: 100% !important;
-        overflow-x: hidden !important;
         display: flex !important;
         flex-direction: column !important;
         align-items: center !important;
-        padding: 20px 0 !important;
-        background-attachment: scroll !important;
+        width: 100vw !important;
+        overflow-x: hidden !important;
+        height: auto !important;
+        padding-top: 20px !important;
     }
 
-    /* 2. ГЛАВНЫЙ СБРОС: Отменяем абсолютное позиционирование */
-    /* Именно оно заставляет элементы налезать друг на друга */
-    .sidebar, .profile-card, .music-player, .product-card, .logo, .container, div[style*="position: absolute"] {
-        position: relative !important; /* Больше не приклеены к координатам */
+    /* 2. ОТМЕНЯЕМ ABSOLUTE ДЛЯ ВСЕГО */
+    /* Это заставит элементы не налезать друг на друга */
+    .logo, .sidebar, .profile-card, .music-player, .product-card, .marquee-container {
+        position: relative !important;
         left: auto !important;
         top: auto !important;
         right: auto !important;
-        bottom: auto !important;
+        margin: 10px auto !important;
         transform: none !important;
-        margin: 15px auto !important; /* Выстраиваем в очередь по центру */
-        width: 90% !important; /* Ширина почти на весь экран телефона */
-        max-width: 320px !important;
+        width: 90% !important; /* Почти на всю ширину */
+        max-width: 320px !important; /* Но не слишком огромные */
+        display: block !important;
     }
 
-    /* 3. КНОПКИ (Мерч, Авито и т.д.) */
+    /* 3. КНОПКИ (Мерч, Авито...) */
     .sidebar {
         display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
+        flex-wrap: wrap !important; /* В два ряда */
+        justify-content: center !important;
         gap: 10px !important;
     }
 
     .nav-button, .sidebar a {
-        width: 160px !important; /* Делаем их аккуратными стикерами */
-        height: auto !important;
-        font-size: 1rem !important;
-        padding: 8px !important;
+        width: 140px !important; /* Уменьшаем стикеры */
+        height: 50px !important;
+        margin: 0 !important;
+        font-size: 0.9rem !important;
     }
 
-    /* 4. КАРТОЧКА С ПЕРСОНАЖЕМ (borween) */
-    .profile-card {
-        height: auto !important;
-        padding: 10px !important;
+    /* 4. БЕГУЩАЯ СТРОКА */
+    .marquee-container {
+        width: 100vw !important;
+        max-width: none !important;
     }
 
-    /* 5. МОДАЛЬНОЕ ОКНО (чтобы оно наконец стало большим) */
+    /* 5. МОДАЛЬНОЕ ОКНО (Теперь оно будет БОЛЬШИМ) */
     .modal-content {
         position: fixed !important;
-        width: 92% !important;
-        left: 4% !important;
+        width: 95% !important;
+        left: 2.5% !important;
         top: 10% !important;
         transform: none !important;
-        z-index: 9999 !important;
+        margin: 0 !important;
+        z-index: 10000 !important;
     }
 
-    /* 6. СКРЫВАЕМ ЛОГО, ЕСЛИ ОНО ОГРОМНОЕ */
-    .header img {
-        max-width: 200px !important;
+    /* Скрываем мелкий декор, который мешает */
+    .decor-stars, .extra-stickers {
+        display: none !important;
     }
 }
