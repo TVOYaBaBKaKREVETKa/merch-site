@@ -561,26 +561,30 @@ box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
     50% { transform: translateY(-30px) rotate(15deg); }
 }
 
-/* 10. КУРСОР */
-#custom-cursor {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 32px; /* Подбери размер под свои картинки */
-    height: 32px;
-    background-image: url('assets/Normal\ Select.cur'); /* Обычная банка */
-    background-size: contain;
-    background-repeat: no-repeat;
-    pointer-events: none; /* Чтобы курсор не мешал кликам */
-    z-index: 999999; /* Поверх всего на свете */
-    transition: transform 0.1s ease-out; /* Легкая плавность */
+/* 1. Назначаем обычную банку всему сайту */
+html, body {
+    /* Убрал обратные слэши, оставил кавычки. Это стандарт для путей с пробелами */
+    cursor: url('assets/Normal\ Select.cur'), auto !important;
 }
 
-/* Состояние при наведении на ссылки/кнопки */
-#custom-cursor.active {
-    background-image: url('assets/help\ select.ani'); /* Банка в активном состоянии */
-    transform: scale(1.2); /* Немного увеличим для эффекта */
+/* 2. Назначаем активную банку для всех кликабельных элементов */
+/* Добавил сюда .win-item и другие интерактивные штуки из твоего кода */
+a, 
+button, 
+.merch-item, 
+.buy-btn, 
+.nav-side-item, 
+#os-shortcut, 
+.win-item, 
+.win-close-x {
+    /* Если .ani не заведется в браузере, подставится стандартный pointer (палец) */
+    cursor: url('assets/help select.ani'), pointer !important;
 }
+
+
+/* 4. Фикс для картинок товаров, чтобы они не перехватывали курсор */
+
+
 
 /* ВКЛАДКИ */
 .tab-pane { display: none; animation: slideUp 0.4s ease-out; }

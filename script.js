@@ -2,27 +2,47 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 1. КУРСОР ---
 const cursor = document.getElementById('custom-cursor');
 
-// 1. Движение курсора
-document.addEventListener('mousemove', (e) => {
-    // Выравниваем банку по центру кончика мыши
-    cursor.style.left = e.clientX - 16 + 'px'; 
-    cursor.style.top = e.clientY - 16 + 'px';
-});
+if (cursor) {
+    document.addEventListener('mousemove', (e) => {
+        cursor.style.opacity = '1';
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+    });
 
-// 2. Смена состояния при наведении на интерактивные элементы
-const interactiveElements = 'a, button, .nav-side-item, .merch-item, .win-item, #os-shortcut';
+    // Функция для смены вида банки
+    const toggleCursor = (active) => {
+        if (active) cursor.classList.add('active');
+        else cursor.classList.remove('active');
+    };
 
-document.addEventListener('mouseover', (e) => {
-    if (e.target.closest(interactiveElements)) {
-        cursor.classList.add('active');
+    // Вешаем события на все интерактивные штуки
+    const targets = 'a, button, .merch-item, .nav-side-item, .win-item, #os-shortcut, .buy-btn';
+    
+    document.addEventListener('mouseover', (e) => {
+        if (e.target.closest(targets)) toggleCursor(true);
+    });
+
+    document.addEventListener('mouseout', (e) => {
+        if (e.target.closest(targets)) toggleCursor(false);
+    });
+}
+
+    // --- 2. ЭФФЕКТЫ (СКОТЧ + НАКЛОН) ---
+    function setupMerchEffects() {
+        document.querySelectorAll('.item-tape').forEach(tape => {
+            if (![...tape.classList].some(cls => cls.startsWith('tape-'))) {
+                const randomNum = Math.floor(Math.random() * 16) + 1;
+                tape.classList.add(`tape-${randomNum}`);
+            }
+        });
+        document.querySelectorAll('.merch-item').forEach(item => {
+            if (!item.style.getPropertyValue('--tilt')) {
+                const randomRotate = (Math.random() * 6 - 3).toFixed(1);
+                item.style.setProperty('--tilt', `${randomRotate}deg`);
+                item.style.transform = `rotate(var(--tilt))`;
+            }
+        });
     }
-});
-
-document.addEventListener('mouseout', (e) => {
-    if (e.target.closest(interactiveElements)) {
-        cursor.classList.remove('active');
-    }
-});
 
     // --- 3. МАГАЗИН (ФИЛЬТР + СОРТИРОВКА) ---
     function updateStore() {
