@@ -575,7 +575,7 @@ button,
 .win-item, 
 .win-close-x {
     /* Если .ani не заведется в браузере, подставится стандартный pointer (палец) */
-    cursor: url('assets/help select.ani'), pointer !important;
+    cursor: url('assets/link\ select.cur'), pointer !important;
 }
 
 
