@@ -1413,9 +1413,9 @@ button,
     font-size: 1.2em;
 }
 
-/* --- СУПЕР-АДАПТАЦИЯ (В САМЫЙ КОНЕЦ) --- */
-@media screen and (max-width: 600px) {
-    /* 1. Делаем фон бесконечным и убираем прокрутку вбок */
+/* --- ТОТАЛЬНАЯ ПЕРЕСБОРКА ДЛЯ МОБИЛОК (max-width: 768px) --- */
+@media screen and (max-width: 768px) {
+    /* 1. Глобальный сброс: превращаем сайт в вертикальную ленту */
     body {
         display: flex !important;
         flex-direction: column !important;
@@ -1423,57 +1423,88 @@ button,
         width: 100vw !important;
         overflow-x: hidden !important;
         height: auto !important;
-        padding-top: 20px !important;
+        padding: 20px 0 !important;
+        background-attachment: scroll !important;
     }
 
-    /* 2. ОТМЕНЯЕМ ABSOLUTE ДЛЯ ВСЕГО */
-    /* Это заставит элементы не налезать друг на друга */
-    .logo, .sidebar, .profile-card, .music-player, .product-card, .marquee-container {
-        position: relative !important;
+    /* 2. "ОТКЛЕИВАЕМ" ВСЁ (Сброс position: absolute) */
+    /* Это заставит лого, кнопки и карточки идти друг за другом, а не кучей */
+    .logo, .sidebar, .profile-card, .music-player, .product-card, .marquee-container, 
+    .container, .main-content, .sticker, [style*="position: absolute"] {
+        position: relative !important; 
         left: auto !important;
         top: auto !important;
         right: auto !important;
-        margin: 10px auto !important;
+        bottom: auto !important;
         transform: none !important;
-        width: 90% !important; /* Почти на всю ширину */
-        max-width: 320px !important; /* Но не слишком огромные */
+        margin: 15px auto !important;
+        width: 90% !important; /* Ширина почти на весь экран */
+        max-width: 340px !important; /* Чтобы не были слишком огромными */
         display: block !important;
     }
 
-    /* 3. КНОПКИ (Мерч, Авито...) */
+    /* 3. КНОПКИ (Мерч, Авито, Галерея, Отзывы) */
+    /* Выстраиваем их аккуратно в два ряда */
     .sidebar {
-        display: flex !important;
-        flex-wrap: wrap !important; /* В два ряда */
-        justify-content: center !important;
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
         gap: 10px !important;
+        width: 95% !important;
+        padding: 0 !important;
     }
 
-    .nav-button, .sidebar a {
-        width: 140px !important; /* Уменьшаем стикеры */
+    .nav-button, .sidebar a, .sidebar div {
+        width: 100% !important;
         height: 50px !important;
-        margin: 0 !important;
         font-size: 0.9rem !important;
+        margin: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
     }
 
-    /* 4. БЕГУЩАЯ СТРОКА */
+    /* 4. КАРТОЧКА С ПЕРСОНАЖЕМ (borween) */
+    .profile-card {
+        height: auto !important;
+        padding: 15px !important;
+        border-radius: 20px !important;
+    }
+
+    .profile-card img {
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    /* 5. БЕГУЩАЯ СТРОКА (MARQUEE) */
     .marquee-container {
         width: 100vw !important;
         max-width: none !important;
+        margin: 20px 0 !important;
     }
 
-    /* 5. МОДАЛЬНОЕ ОКНО (Теперь оно будет БОЛЬШИМ) */
+    /* 6. СЕТКА ТОВАРОВ */
+    .product-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        width: 100% !important;
+        gap: 30px !important;
+    }
+
+    /* 7. МОДАЛЬНОЕ ОКНО (чтобы оно наконец заработало) */
     .modal-content {
         position: fixed !important;
-        width: 95% !important;
-        left: 2.5% !important;
+        width: 92% !important;
+        left: 4% !important;
         top: 10% !important;
         transform: none !important;
-        margin: 0 !important;
         z-index: 10000 !important;
+        padding: 20px !important;
+        border: 4px solid #333 !important;
     }
 
-    /* Скрываем мелкий декор, который мешает */
-    .decor-stars, .extra-stickers {
+    /* Скрываем мелкий декор, который создает визуальный шум на узком экране */
+    .decor-sticker, .floating-star {
         display: none !important;
     }
 }
