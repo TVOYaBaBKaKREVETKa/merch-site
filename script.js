@@ -1,30 +1,28 @@
 document.addEventListener('DOMContentLoaded', () => {
     // --- 1. КУРСОР ---
-    const cursor = document.getElementById('custom-cursor');
-    if (cursor) {
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.opacity = '1';
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-        });
-    }
+const cursor = document.getElementById('custom-cursor');
 
-    // --- 2. ЭФФЕКТЫ (СКОТЧ + НАКЛОН) ---
-    function setupMerchEffects() {
-        document.querySelectorAll('.item-tape').forEach(tape => {
-            if (![...tape.classList].some(cls => cls.startsWith('tape-'))) {
-                const randomNum = Math.floor(Math.random() * 16) + 1;
-                tape.classList.add(`tape-${randomNum}`);
-            }
-        });
-        document.querySelectorAll('.merch-item').forEach(item => {
-            if (!item.style.getPropertyValue('--tilt')) {
-                const randomRotate = (Math.random() * 6 - 3).toFixed(1);
-                item.style.setProperty('--tilt', `${randomRotate}deg`);
-                item.style.transform = `rotate(var(--tilt))`;
-            }
-        });
+// 1. Движение курсора
+document.addEventListener('mousemove', (e) => {
+    // Выравниваем банку по центру кончика мыши
+    cursor.style.left = e.clientX - 16 + 'px'; 
+    cursor.style.top = e.clientY - 16 + 'px';
+});
+
+// 2. Смена состояния при наведении на интерактивные элементы
+const interactiveElements = 'a, button, .nav-side-item, .merch-item, .win-item, #os-shortcut';
+
+document.addEventListener('mouseover', (e) => {
+    if (e.target.closest(interactiveElements)) {
+        cursor.classList.add('active');
     }
+});
+
+document.addEventListener('mouseout', (e) => {
+    if (e.target.closest(interactiveElements)) {
+        cursor.classList.remove('active');
+    }
+});
 
     // --- 3. МАГАЗИН (ФИЛЬТР + СОРТИРОВКА) ---
     function updateStore() {
@@ -204,3 +202,44 @@ document.addEventListener('DOMContentLoaded', () => {
     setupMerchEffects();
     updateStore();
 });
+
+const decorImages = ['tortbg.png', 'starbg.png', 'strawberrybg.png'];
+
+function spawnDecor() {
+    const layer = document.getElementById('decor-layer');
+    if (!layer) return;
+    layer.innerHTML = '';
+
+    // Создаем 30 элементов на весь экран
+    for (let i = 0; i < 30; i++) {
+        const decor = document.createElement('div');
+        const randomImg = decorImages[Math.floor(Math.random() * decorImages.length)];
+        
+        const top = Math.random() * 90; // Распределяем по высоте (0-90%)
+        
+        // Логика: либо в левой части экрана (0-25%), либо в правой (75-100%)
+        // Чтобы не лезли на центральный белый блок
+        const isLeft = Math.random() > 0.5;
+        const left = isLeft ? (Math.random() * 20) : (80 + Math.random() * 15);
+        
+        const size = Math.random() * (35 - 20) + 20; 
+        const rotation = Math.random() * 360; 
+        const delay = Math.random() * 10; 
+        const duration = Math.random() * (12 - 7) + 7; 
+        
+        decor.className = 'bg-decor-item';
+        decor.style.backgroundImage = `url('assets/${randomImg}')`;
+        decor.style.top = `${top}%`;
+        decor.style.left = `${left}%`; 
+        decor.style.width = `${size}px`;
+        decor.style.height = `${size}px`;
+        
+        decor.style.setProperty('--rot', `${rotation}deg`);
+        decor.style.animationDelay = `${delay}s`;
+        decor.style.animationDuration = `${duration}s`;
+        
+        layer.appendChild(decor);
+    }
+}
+
+window.addEventListener('DOMContentLoaded', spawnDecor);

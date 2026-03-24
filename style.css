@@ -370,7 +370,7 @@ box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
 .section-title {
     text-align: center;
     /* СВЕРХУ: 5px (почти вплотную), СНИЗУ: 50px (чтобы не было нахлеста на карточки) */
-    margin: 5px 0 50px 0; 
+    margin: 5px 0 30px 0; 
     perspective: 1000px;
 }
 
@@ -563,10 +563,23 @@ box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
 
 /* 10. КУРСОР */
 #custom-cursor {
-    width: 20px; height: 20px; background: var(--melon-green);
-    border: 2px solid #fff; border-radius: 50%;
-    position: fixed; pointer-events: none; z-index: 999999;
-    transform: translate(-50%, -50%); opacity: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 32px; /* Подбери размер под свои картинки */
+    height: 32px;
+    background-image: url('assets/Normal\ Select.cur'); /* Обычная банка */
+    background-size: contain;
+    background-repeat: no-repeat;
+    pointer-events: none; /* Чтобы курсор не мешал кликам */
+    z-index: 999999; /* Поверх всего на свете */
+    transition: transform 0.1s ease-out; /* Легкая плавность */
+}
+
+/* Состояние при наведении на ссылки/кнопки */
+#custom-cursor.active {
+    background-image: url('assets/help\ select.ani'); /* Банка в активном состоянии */
+    transform: scale(1.2); /* Немного увеличим для эффекта */
 }
 
 /* ВКЛАДКИ */
@@ -1362,4 +1375,29 @@ box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
 .win-item.sort-file[data-dir="1"] .dir-arrow, 
 .win-item.sort-file[data-dir="2"] .dir-arrow {
     color: #a7f432; /* Салатовая стрелочка на синем фоне — кайф */
+}
+
+#decor-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    pointer-events: none; /* Чтобы можно было кликать сквозь него */
+    z-index: -1; /* Уходит под весь контент и под твои сакуры */
+    overflow: hidden;
+}
+
+.bg-decor-item {
+    position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 1;
+    animation: floatFree 10s ease-in-out infinite;
+}
+
+/* Анимация с большим разлетом */
+@keyframes floatFree {
+    0%, 100% { transform: translate(0, 0) rotate(var(--rot)); }
+    50% { transform: translate(40px, -60px) rotate(calc(var(--rot) + 20deg)); }
 }
