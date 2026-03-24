@@ -1413,66 +1413,67 @@ button,
     font-size: 1.2em;
 }
 
+/* --- ФИНАЛЬНАЯ ПОПЫТКА АДАПТАЦИИ --- */
+
 @media screen and (max-width: 600px) {
-    /* 1. Глобальный сброс — всё в одну колонку по центру */
+    /* 1. Сбрасываем фон и общую ширину */
     body {
+        width: 100% !important;
+        overflow-x: hidden !important;
         display: flex !important;
         flex-direction: column !important;
         align-items: center !important;
-        width: 100% !important;
-        overflow-x: hidden !important;
-        background-size: contain !important; /* Чтобы фон не растягивался уродливо */
+        padding: 20px 0 !important;
+        background-attachment: scroll !important;
     }
 
-    /* 2. ЛОГОТИП (тот, что BOR) */
-    .logo, header img, [class*="logo"] {
-        width: 80% !important; /* Чтобы не вылезал за экран */
-        height: auto !important;
-        margin: 20px auto !important;
-        display: block !important;
-    }
-
-    /* 3. КНОПКИ-НАКЛЕЙКИ (Мерч, Авито и т.д.) */
-    .buttons-container, .sidebar, nav {
-        display: flex !important;
-        flex-wrap: wrap !important; /* Чтобы они могли встать в два ряда */
-        justify-content: center !important;
-        gap: 10px !important;
-        width: 100% !important;
-        position: static !important; /* Убираем absolute, если был */
-        margin-top: 10px !important;
-    }
-
-    .nav-button, .sidebar a, [class*="button"] {
-        width: 140px !important; /* Фиксируем размер наклейки */
-        height: 50px !important;
-        font-size: 0.8rem !important;
-        padding: 5px !important;
-        margin: 0 !important;
-    }
-
-    /* 4. КАРТОЧКА ПЕРСОНАЖА (Розовая с плеером) */
-    .profile-card, .character-box {
-        width: 280px !important; /* Чтобы была как аккуратная карточка */
-        margin: 20px auto !important;
-        position: static !important;
+    /* 2. ГЛАВНЫЙ СБРОС: Отменяем абсолютное позиционирование */
+    /* Именно оно заставляет элементы налезать друг на друга */
+    .sidebar, .profile-card, .music-player, .product-card, .logo, .container, div[style*="position: absolute"] {
+        position: relative !important; /* Больше не приклеены к координатам */
+        left: auto !important;
+        top: auto !important;
+        right: auto !important;
+        bottom: auto !important;
         transform: none !important;
-    }
-
-    /* 5. БЕГУЩАЯ СТРОКА */
-    .marquee-container {
-        width: 100% !important;
-        margin: 15px 0 !important;
-    }
-
-    /* 6. МОДАЛЬНОЕ ОКНО (Больше и по центру) */
-    .modal-content {
-        width: 90% !important;
+        margin: 15px auto !important; /* Выстраиваем в очередь по центру */
+        width: 90% !important; /* Ширина почти на весь экран телефона */
         max-width: 320px !important;
-        padding: 15px !important;
-        left: 5% !important;
-        top: 50% !important;
-        transform: translateY(-50%) !important;
-        border: 3px solid #333 !important;
+    }
+
+    /* 3. КНОПКИ (Мерч, Авито и т.д.) */
+    .sidebar {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 10px !important;
+    }
+
+    .nav-button, .sidebar a {
+        width: 160px !important; /* Делаем их аккуратными стикерами */
+        height: auto !important;
+        font-size: 1rem !important;
+        padding: 8px !important;
+    }
+
+    /* 4. КАРТОЧКА С ПЕРСОНАЖЕМ (borween) */
+    .profile-card {
+        height: auto !important;
+        padding: 10px !important;
+    }
+
+    /* 5. МОДАЛЬНОЕ ОКНО (чтобы оно наконец стало большим) */
+    .modal-content {
+        position: fixed !important;
+        width: 92% !important;
+        left: 4% !important;
+        top: 10% !important;
+        transform: none !important;
+        z-index: 9999 !important;
+    }
+
+    /* 6. СКРЫВАЕМ ЛОГО, ЕСЛИ ОНО ОГРОМНОЕ */
+    .header img {
+        max-width: 200px !important;
     }
 }
