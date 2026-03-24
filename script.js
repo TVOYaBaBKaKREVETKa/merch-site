@@ -153,27 +153,33 @@ if (cursor) {
         }
     }
 
-    document.addEventListener('click', (e) => {
-        const card = e.target.closest('.merch-item');
-        if (card && !e.target.closest('.buy-btn')) {
-            const name = card.querySelector('.item-name').innerText;
-            const price = card.querySelector('.price-tag').innerText;
-            const mainImg = card.querySelector('.item-img img').src;
-            
-            // Если нет data-images, просто используем главную картинку
-            const imgAttr = card.getAttribute('data-images');
-            currentImages = imgAttr ? imgAttr.split(',') : [mainImg];
-            currentIdx = 0;
+document.addEventListener('click', (e) => {
+    const card = e.target.closest('.merch-item');
+    // Проверяем, что кликнули по карточке, но НЕ по кнопке покупки
+    if (card && !e.target.closest('.buy-btn')) {
+        const name = card.querySelector('.item-name').innerText;
+        const mainImg = card.querySelector('.item-img img').src;
+        
+        // Находим блок с ценами в карточке
+        const priceTag = card.querySelector('.price-tag');
+        
+        const imgAttr = card.getAttribute('data-images');
+        currentImages = imgAttr ? imgAttr.split(',') : [mainImg];
+        currentIdx = 0;
 
-            document.getElementById('modal-title').innerText = name;
-            document.getElementById('modal-desc').innerText = card.getAttribute('data-desc') || "Описание скоро будет ✨";
-            const mPrice = document.querySelector('.modal-price');
-            if (mPrice) mPrice.innerText = price;
-            
-            updateModalImage();
-            if(modal) modal.style.display = 'flex';
+        document.getElementById('modal-title').innerText = name;
+        document.getElementById('modal-desc').innerText = card.getAttribute('data-desc') || "Описание скоро будет ✨";
+        
+        const mPrice = document.querySelector('.modal-price');
+        if (mPrice && priceTag) {
+            // Просто копируем весь HTML ценника из карточки в модалку
+            mPrice.innerHTML = priceTag.innerHTML;
         }
-    });
+        
+        updateModalImage();
+        if(modal) modal.style.display = 'flex';
+    }
+});
 
     document.getElementById('prev-img').onclick = (e) => {
         e.stopPropagation();

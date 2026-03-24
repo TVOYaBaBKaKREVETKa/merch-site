@@ -1397,3 +1397,17 @@ button,
     0%, 100% { transform: translate(0, 0) rotate(var(--rot)); }
     50% { transform: translate(40px, -60px) rotate(calc(var(--rot) + 20deg)); }
 }
+
+/* Стили для цен в модальном окне */
+.modal-old-price {
+    text-decoration: line-through;
+    color: #888;
+    margin-right: 10px;
+    font-size: 0.9em;
+}
+
+.modal-new-price {
+    color: #000;
+    font-weight: bold;
+    font-size: 1.2em;
+}
