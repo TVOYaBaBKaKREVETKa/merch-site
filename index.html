@@ -155,15 +155,28 @@
     </div>
 
     <!-- ТОВАРЫ МЕРЧА (Видны сразу) -->
+<!-- СЕКЦИЯ ОБЫЧНОГО МЕРЧА -->
+<section id="merch-section">
     <div id="shop-merch" class="pegboard">
-        <div class="merch-item" data-fandom="original" data-price="450" data-date="2026-03-23" data-images="assets/merch1.png,assets/testtovar.png">
+        <!-- Bunny Keychain -->
+        <div class="merch-item" 
+             data-fandom="original" 
+             data-price="450" 
+             data-date="2026-03-23" 
+             data-images="assets/filters.png,assets/merch1_2.png"> <!-- ЗАМЕНИ assets/testtovar.png на вторую картинку этого товара! -->
             <div class="item-tape"></div> 
-            <div class="item-img"><img src="assets/merch1.png" alt=""></div>
+            <div class="item-img"><img src="assets/filters.png" alt=""></div>
             <p class="item-name">Bunny Keychain</p>
             <div class="price-tag">450₽</div>
             <button class="buy-btn">Add to Jar</button>
         </div>
-        <div class="merch-item" data-fandom="anime" data-price="150" data-date="2026-01-15" data-images="assets/merch2.png,assets/testtovar.png">
+
+        <!-- Bear Sticker Pack -->
+        <div class="merch-item" 
+             data-fandom="anime" 
+             data-price="150" 
+             data-date="2026-01-15" 
+             data-images="assets/merch2.png,assets/merch2_2.png"> <!-- И ТУТ ТОЖЕ ЗАМЕНИ -->
             <div class="item-tape"></div> 
             <div class="item-img"><img src="assets/merch2.png" alt=""></div>
             <p class="item-name">Bear Sticker Pack</p>
@@ -172,9 +185,14 @@
         </div>
     </div>
 
-    <!-- ТОВАРЫ АВИТО (Скрыты изначально) -->
+    <!-- ТОВАРЫ АВИТО (Оставил только один блок, чтобы не было конфликтов ID) -->
     <div id="shop-avito" class="pegboard" style="display: none;">
-        <div class="merch-item sale-item" data-fandom="original" data-price="800" data-date="2025-12-01" data-images="assets/testtovar.png,assets/testtovar.png">
+        <!-- Vintage Plush -->
+        <div class="merch-item sale-item" 
+             data-fandom="original" 
+             data-price="800" 
+             data-date="2025-12-01" 
+             data-images="assets/testtovar.png,assets/testtovar_back.png">
             <div class="sale-badge">SALE %</div>
             <div class="item-tape avito-tape"></div> 
             <div class="item-img"><img src="assets/testtovar.png" alt=""></div>
@@ -182,7 +200,13 @@
             <div class="price-tag">800₽ <span class="old-price">1600₽</span></div>
             <button class="buy-btn avito-btn">Связаться</button>
         </div>
-        <div class="merch-item sale-item" data-fandom="anime" data-price="1200" data-date="2026-02-20" data-images="assets/avito2.png,assets/testtovar.png">
+
+        <!-- Manga Collection -->
+        <div class="merch-item sale-item" 
+             data-fandom="anime" 
+             data-price="1200" 
+             data-date="2026-02-20" 
+             data-images="assets/avito2.png,assets/avito2_2.png">
             <div class="sale-badge">SALE %</div>
             <div class="item-tape avito-tape"></div> 
             <div class="item-img"><img src="assets/avito2.png" alt=""></div>
@@ -193,27 +217,6 @@
     </div>
 </section>
 
-
-<!-- ТОВАРЫ АВИТО -->
-<div id="shop-avito" class="pegboard" style="display: none;">
-    <div class="merch-item sale-item" data-fandom="original" data-price="800" data-date="2025-12-01">
-        <div class="sale-badge">SALE %</div>
-        <div class="item-tape avito-tape"></div> 
-        <!-- ВСТАВИЛ ТВОЙ TESTTOVAR -->
-        <div class="item-img"><img src="assets/testtovar.png" alt=""></div>
-        <p class="item-name">Vintage Plush</p>
-        <div class="price-tag">800₽ <span class="old-price">1600₽</span></div>
-        <button class="buy-btn avito-btn">Связаться</button>
-    </div>
-    <div class="merch-item sale-item" data-fandom="anime" data-price="1200" data-date="2026-02-20">
-        <div class="sale-badge">SALE %</div>
-        <div class="item-tape avito-tape"></div> 
-        <div class="item-img"><img src="assets/avito2.png" alt=""></div>
-        <p class="item-name">Manga Collection</p>
-        <div class="price-tag">1200₽ <span class="old-price">2500₽</span></div>
-        <button class="buy-btn avito-btn">Связаться</button>
-    </div>
-</div>
 
 
 
