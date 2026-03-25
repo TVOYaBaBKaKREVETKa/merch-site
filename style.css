@@ -1413,3 +1413,88 @@ button,
     font-size: 1.2em;
 }
 
+/* ============================================
+   МОБИЛЬНАЯ АДАПТАЦИЯ
+   Адаптация карточек товаров и модального окна
+   ============================================ */
+
+/* АДАПТАЦИЯ ДЛЯ ПЛАНШЕТОВ И НЕБОЛЬШИХ ЭКРАНОВ (до 768px) */
+/* АДАПТАЦИЯ ДЛЯ ПЛАНШЕТОВ И МОБИЛОК (до 1100px) */
+@media (max-width: 1100px) {
+    /* КАРТОЧКИ ТОВАРОВ: строго 2 в ряд */
+    .pegboard {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important; /* Две колонки */
+        gap: 30px 20px !important; /* Уменьшил отступы, чтобы карточки влезли */
+        padding: 20px 10px 100px 10px !important;
+        margin-left: 0 !important;
+    }
+
+    /* Настройка размера карточек */
+    .merch-item {
+        max-width: 100% !important;
+        min-height: auto !important; /* Авто-высота лучше для 2 в ряд */
+        padding: 15px !important;
+    }
+
+    /* Увеличиваем изображение товара */
+    .item-img {
+        min-height: 180px !important;
+        height: auto !important;
+    }
+
+    /* Текстовые элементы в карточке */
+    .item-name {
+        font-size: 1.1rem !important;
+        margin-top: 15px !important;
+    }
+
+    .price-tag {
+        font-size: 1.2rem !important;
+        margin-top: 10px !important;
+    }
+
+    .buy-btn {
+        padding: 12px !important;
+        font-size: 0.95rem !important;
+        margin-top: 12px !important;
+    }
+
+    /* ========================================
+       МОДАЛЬНОЕ ОКНО
+       ======================================== */
+    
+    .modal-window-container {
+        width: 95% !important;
+        max-width: 95% !important;
+    }
+
+    .modal-content-grid {
+        top: 5% !important;
+        left: 5% !important;
+        width: 90% !important;
+        height: 90% !important;
+        gap: 5px !important;
+    }
+
+    .modal-image-slot {
+        height: 45% !important;
+    }
+
+    #modal-title {
+        font-size: 1.3rem !important;
+    }
+
+    #modal-desc {
+        font-size: 1rem !important;
+        max-height: 100px !important;
+    }
+
+    .modal-price {
+        font-size: 1.6rem !important;
+    }
+
+    .modal-footer .buy-btn {
+        width: 100% !important;
+    }
+}
