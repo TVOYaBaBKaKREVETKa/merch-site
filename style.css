@@ -1420,81 +1420,81 @@ button,
 
 /* АДАПТАЦИЯ ДЛЯ ПЛАНШЕТОВ И НЕБОЛЬШИХ ЭКРАНОВ (до 768px) */
 /* АДАПТАЦИЯ ДЛЯ ПЛАНШЕТОВ И МОБИЛОК (до 1100px) */
+/* ========================================
+   АДАПТАЦИЯ МОДАЛЬНОГО ОКНА (до 1100px)
+   ======================================== */
+/* АДАПТАЦИЯ ТОЛЬКО ВНУТРЕННОСТЕЙ МОДАЛКИ (размер окна не трогаем) */
 @media (max-width: 1100px) {
-    /* КАРТОЧКИ ТОВАРОВ: строго 2 в ряд */
-    .pegboard {
-        display: grid !important;
-        grid-template-columns: repeat(2, 1fr) !important; /* Две колонки */
-        gap: 30px 20px !important; /* Уменьшил отступы, чтобы карточки влезли */
-        padding: 20px 10px 100px 10px !important;
-        margin-left: 0 !important;
-    }
-
-    /* Настройка размера карточек */
-    .merch-item {
-        max-width: 100% !important;
-        min-height: auto !important; /* Авто-высота лучше для 2 в ряд */
-        padding: 15px !important;
-    }
-
-    /* Увеличиваем изображение товара */
-    .item-img {
-        min-height: 180px !important;
-        height: auto !important;
-    }
-
-    /* Текстовые элементы в карточке */
-    .item-name {
-        font-size: 1.1rem !important;
-        margin-top: 15px !important;
-    }
-
-    .price-tag {
-        font-size: 1.2rem !important;
-        margin-top: 10px !important;
-    }
-
-    .buy-btn {
-        padding: 12px !important;
-        font-size: 0.95rem !important;
-        margin-top: 12px !important;
-    }
-
-    /* ========================================
-       МОДАЛЬНОЕ ОКНО
-       ======================================== */
-    
+    /* РАЗМЕР ОКНА */
     .modal-window-container {
         width: 95% !important;
         max-width: 95% !important;
     }
 
+    /* КОНТЕНТНАЯ ЗОНА */
     .modal-content-grid {
-        top: 5% !important;
-        left: 5% !important;
-        width: 90% !important;
-        height: 90% !important;
-        gap: 5px !important;
+        top: 10.5% !important; 
+        left: 28.5% !important;  
+        width: 68% !important;  
+        height: 84% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 0px !important;
     }
 
+    /* ГАЛЕРЕЯ (длинная вниз) */
     .modal-image-slot {
-        height: 45% !important;
+        height: 58% !important; /* Оставил длинной, но чуть-чуть ужал для крупных шрифтов */
+        width: 95% !important;  
+        margin: 0 auto !important;
+        flex-shrink: 0 !important;
+    }
+
+    /* ТЕКСТОВЫЙ БЛОК */
+    .modal-text-slot {
+        display: flex !important;
+        flex-direction: column !important;
     }
 
     #modal-title {
-        font-size: 1.3rem !important;
+        font-size: 1.2rem !important;
+        padding: 10px 0 0 20px !important;
     }
 
+    /* ОПИСАНИЕ (крупнее и ниже) */
     #modal-desc {
-        font-size: 1rem !important;
-        max-height: 100px !important;
+        position: static !important;
+        font-size: 1.30rem !important; /* Увеличили шрифт */
+        margin: 100px 0 10px 20px !important; /* Увеличили верхний отступ (20px), чтобы было ниже */
+        max-height: 60px !important;
+        font-weight: 600 !important; /* Сделали чуть жирнее для читаемости */
+        line-height: 1.4 !important;
     }
 
+    /* ФУТЕР (Цена и Кнопка) */
+    .modal-footer {
+        margin-top: auto !important;
+        display: flex !important;
+        flex-direction: column !important;
+        padding-bottom: 15px !important;
+    }
+
+    /* ЦЕНА (крупнее и слева) */
     .modal-price {
-        font-size: 1.6rem !important;
+        font-size: 1.9rem !important; /* Мощный размер шрифта */
+        text-align: left !important;
+        padding-left: 20px !important;
+        margin-bottom: 12px !important;
+        font-weight: 900 !important;
     }
 
+    /* КНОПКА (широкая) */
     .modal-footer .buy-btn {
-        width: 100% !important;
+        width: 95% !important; /* Широкая на весь блок */
+        max-width: none !important;
+        margin: 0 auto !important;
+        padding: 15px !important; /* Сделали кнопку «мясистее» */
+        font-size: 1.2rem !important; /* Шрифт на кнопке тоже побольше */
+        position: static !important;
     }
 }
