@@ -1,0 +1,138 @@
+/* ============================================
+   МОБИЛЬНАЯ АДАПТАЦИЯ
+   Адаптация карточек товаров и модального окна
+   ============================================ */
+
+/* АДАПТАЦИЯ ДЛЯ ПЛАНШЕТОВ И НЕБОЛЬШИХ ЭКРАНОВ (до 768px) */
+@media (max-width: 768px) {
+    /* Карточки товаров: 2 в ряд вместо 3 */
+    .pegboard {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 40px 30px !important;
+        padding: 10px 5px 100px 5px !important;
+    }
+
+    /* Увеличиваем размер карточек */
+    .merch-item {
+        max-width: 100% !important;
+    }
+
+    /* Модальное окно: больше места на экране */
+    .modal-window-container {
+        width: 90% !important;
+        max-width: 90% !important;
+    }
+}
+
+/* АДАПТАЦИЯ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ (до 480px) */
+@media (max-width: 480px) {
+    /* Карточки товаров: 1 в ряд для максимальной читаемости */
+    .pegboard {
+        grid-template-columns: 1fr !important;
+        gap: 50px 0 !important;
+        padding: 20px 10px 100px 10px !important;
+        margin-left: 0 !important;
+    }
+
+    /* Увеличиваем карточки товаров */
+    .merch-item {
+        max-width: 100% !important;
+        min-height: 320px !important;
+        padding: 15px 15px 40px 15px !important;
+    }
+
+    /* Увеличиваем изображение товара */
+    .item-img {
+        min-height: 200px !important;
+    }
+
+    /* Увеличиваем название товара */
+    .item-name {
+        font-size: 1.1rem !important;
+        margin-top: 20px !important;
+    }
+
+    /* Увеличиваем цену */
+    .price-tag {
+        font-size: 1.3rem !important;
+        margin-top: 15px !important;
+    }
+
+    /* Увеличиваем кнопку */
+    .buy-btn {
+        padding: 15px !important;
+        font-size: 1rem !important;
+        margin-top: 15px !important;
+    }
+
+    /* ========================================
+       МОДАЛЬНОЕ ОКНО: адаптация под мобильные
+       ======================================== */
+    
+    .modal-window-container {
+        width: 95% !important;
+        max-width: 95% !important;
+    }
+
+    /* Увеличиваем контентную зону модального окна */
+    .modal-content-grid {
+        top: 8% !important;
+        left: 5% !important;
+        width: 90% !important;
+        height: 88% !important;
+        gap: 5px !important;
+    }
+
+    /* Галерея в модалке */
+    .modal-image-slot {
+        height: 50% !important;
+        width: 100% !important;
+    }
+
+    /* Увеличиваем заголовок в модалке */
+    #modal-title {
+        font-size: 1.4rem !important;
+        padding: 15px 15px 0 15px !important;
+    }
+
+    /* Увеличиваем описание в модалке */
+    #modal-desc {
+        font-size: 1.1rem !important;
+        line-height: 1.5 !important;
+        margin: 15px 15px 20px 15px !important;
+        max-height: 80px !important;
+    }
+
+    /* Увеличиваем цену в модалке */
+    .modal-price {
+        font-size: 1.8rem !important;
+        padding-left: 15px !important;
+        margin-bottom: 10px !important;
+    }
+
+    /* Кнопка в модалке */
+    .modal-footer .buy-btn {
+        width: 95% !important;
+        padding: 15px !important;
+        font-size: 1.1rem !important;
+    }
+
+    /* Навигация по галерее */
+    .gallery-nav {
+        width: 45px !important;
+        height: 45px !important;
+        font-size: 1.2rem !important;
+    }
+
+    /* Счетчик галереи */
+    .gallery-counter {
+        font-size: 12px !important;
+        padding: 5px 12px !important;
+    }
+
+    /* Кнопка закрытия модалки */
+    .modal-close-trigger {
+        width: 8% !important;
+        height: 7% !important;
+    }
+}
