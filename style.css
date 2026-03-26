@@ -514,7 +514,14 @@ box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
     text-align: center;
 }
 
-.buy-btn {
+a.buy-btn,
+a.buy-btn:link,
+a.buy-btn:visited {
+    display: inline-block; /* ОБЯЗАТЕЛЬНО: чтобы работала ширина и отступы */
+    box-sizing: border-box; /* Чтобы padding не раздувал кнопку шире 100% */
+    text-align: center;    /* Центрируем текст */
+    text-decoration: none; /* Убираем синее подчеркивание ссылки */
+    
     width: 100%;
     margin-top: 10px;
     background: var(--pink-bright);
@@ -528,7 +535,7 @@ box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
     border-radius: 8px;
 }
 
-.buy-btn:hover {
+a.buy-btn:hover {
     background: #a7f432;
     color: #333;
     transform: translate(-2px, -2px);
@@ -1053,7 +1060,7 @@ button,
 #modal-desc { 
     font-size: 0.95rem; /* Увеличили шрифт */
     line-height: 1.3; 
-    margin: auto 0 30px 20px; /* Увеличили отступ до 50px, чтобы поднять выше */
+    margin: auto 0 20px 20px; /* Увеличили отступ до 50px, чтобы поднять выше */
     overflow-y: auto;
     max-height: 55px; 
     color: #333;
@@ -1078,8 +1085,14 @@ button,
 
 /* КНОПКА */
 .modal-footer .buy-btn {
-    width: 92%; 
-    margin: 0 auto; 
+    display: flex;          /* Делаем флексом для центровки текста */
+    justify-content: center; /* Текст по центру */
+    align-items: center;
+
+    width: 180px;           /* ЗАДАЙ ФИКСИРОВАННУЮ ШИРИНУ В ПИКСЕЛЯХ (так надежнее) */
+    max-width: 92%;         /* Чтобы на мобилках не вылезала */
+    margin: 15px auto 0;    /* Центрируем саму кнопку и даем отступ сверху */
+    
     background: #ff1493;
     color: #fff;
     border: 2px solid #333;
@@ -1089,7 +1102,9 @@ button,
     cursor: pointer;
     text-transform: uppercase;
     transition: 0.2s;
+    text-decoration: none;  /* Чтобы ссылка не подчеркивалась */
 }
+
 
 .modal-footer .buy-btn:hover { 
     background: #a7f432; 

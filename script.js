@@ -155,7 +155,7 @@ if (cursor) {
 
 document.addEventListener('click', (e) => {
     const card = e.target.closest('.merch-item');
-    // Проверяем, что кликнули по карточке, но НЕ по кнопке покупки
+    // Проверяем, что кликнули по карточке, но НЕ по кнопке/ссылке покупки
     if (card && !e.target.closest('.buy-btn')) {
         const name = card.querySelector('.item-name').innerText;
         const mainImg = card.querySelector('.item-img img').src;
