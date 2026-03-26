@@ -300,26 +300,30 @@ box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
 /* БЛОКИ (BOX DECO) С ПУНКТИРОМ */
 /* --- СЕКЦИЯ САЙДБАРА (ИЗМЕНЕНО: сужена до 240px) --- */
 .sidebar-left {
-    width: 220px; /* Было шире, теперь компактно */
+    width: 220px;
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
     gap: 20px;
-    margin-top: -25px; /* Поднимаем сайдбар вверх, чтобы он наложился на тикер */
+    margin-top: -25px;
 
+    /* Добавленные свойства для липкости */
+    position: sticky;
+    top: 20px; /* Отступ от верхнего края экрана при скролле */
+    align-self: flex-start; /* Важно: не дает растягиваться на всю высоту родителя */
 }
 
 .box-deco {
     background: #fff;
     border: 3px solid var(--border-pink);
     border-radius: 20px;
-    padding: 10px; /* Уменьшил с 20px, чтобы сэкономить место внутри */
+    padding: 10px;
     position: relative;
-    /* Внутренняя строчка */
     outline: 1.7px dashed var(--border-pink);
-    outline-offset: -8px; /* Чуть прижал к краям */
+    outline-offset: -8px;
     box-shadow: 5px 5px 0px rgba(118, 195, 4, 0.333);
 }
+
 
 /* ЛЕНТОЧКА-ЗАГОЛОВОК (Оставил без изменений) */
 .side-title {
