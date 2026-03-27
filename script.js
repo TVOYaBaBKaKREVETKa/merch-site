@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- КЭШ ЭЛЕМЕНТОВ ---
+    // --- 1. КЭШ ЭЛЕМЕНТОВ ---
     const elements = {
         cursor: document.getElementById('custom-cursor'),
         modal: document.getElementById('product-modal'),
@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
         playerMarquee: document.getElementById('player-marquee'),
         merchContainer: document.getElementById('shop-merch'),
         avitoContainer: document.getElementById('shop-avito'),
+        reviewsTab: document.getElementById('reviews-tab'),
         sectionTitle: document.getElementById('current-section-title'),
         tabs: document.querySelectorAll('.nav-side-item')
     };
@@ -23,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentImages = [];
     let currentIdx = 0;
 
-    // --- 1. ПЛАВНЫЙ КУРСОР ---
+    // --- 2. ПЛАВНЫЙ КУРСОР (60 FPS) ---
     if (elements.cursor) {
         let mouseX = 0, mouseY = 0;
         document.addEventListener('mousemove', (e) => {
@@ -38,7 +39,8 @@ document.addEventListener('DOMContentLoaded', () => {
         };
         requestAnimationFrame(updateCursor);
 
-        const targets = 'a, button, .merch-item, .nav-side-item, .win-item, #os-shortcut, .buy-btn';
+        // Реакция на наведение
+        const targets = 'a, button, .merch-item, .nav-side-item, .win-item, #os-shortcut, .buy-btn, .gallery-nav';
         document.addEventListener('mouseover', (e) => {
             if (e.target.closest(targets)) elements.cursor.classList.add('active');
         });
@@ -47,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 2. ЭФФЕКТЫ (СКОТЧ + НАКЛОН) ---
+    // --- 3. ЭФФЕКТЫ (СКОТЧ + НАКЛОН) ---
     function setupMerchEffects() {
         document.querySelectorAll('.merch-item:not(.processed)').forEach(item => {
             const tape = item.querySelector('.item-tape');
@@ -58,11 +60,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const randomRotate = (Math.random() * 6 - 3).toFixed(1);
             item.style.setProperty('--tilt', `${randomRotate}deg`);
             item.style.transform = `rotate(${randomRotate}deg)`;
-            item.classList.add('processed');
+            item.classList.add('processed'); // Чтобы не пересчитывать заново
         });
     }
 
-    // --- 3. МАГАЗИН (ФИЛЬТР + СОРТИРОВКА) ---
+    // --- 4. МАГАЗИН (ФИЛЬТР + СОРТИРОВКА) ---
     function updateStore() {
         const activeContainer = [elements.merchContainer, elements.avitoContainer].find(el => 
             el && window.getComputedStyle(el).display !== 'none'
@@ -76,41 +78,44 @@ document.addEventListener('DOMContentLoaded', () => {
         const priceFile = document.querySelector('.sort-file[data-sort-type="price"]');
         const dateFile = document.querySelector('.sort-file[data-sort-type="date"]');
 
+        // Обновляем стрелочки ↕ ↓ ↑
         const arrows = { "0": "↕", "1": "↓", "2": "↑" }; 
         [priceFile, dateFile].forEach(file => {
             if (file) {
-                const span = file.querySelector('.dir-arrow') || file.querySelector('span');
+                const span = file.querySelector('span');
                 if (span) {
-                    const base = span.innerText.split(' ')[0];
-                    span.innerText = `${base} ${arrows[file.dataset.dir || "0"]}`;
+                    const baseText = span.innerText.replace(/[↕↓↑]/g, '').trim();
+                    span.innerText = `${baseText} ${arrows[file.dataset.dir || "0"]}`;
                 }
             }
         });
 
+        // Фильтрация
         items.forEach(item => {
-            item.style.display = (activeFandom === 'all' || item.dataset.fandom === activeFandom) ? '' : 'none';
+            const isMatch = (activeFandom === 'all' || item.dataset.fandom === activeFandom);
+            item.style.display = isMatch ? '' : 'none';
         });
 
         let visibleItems = items.filter(i => i.style.display !== 'none');
 
+        // Сортировка
         if (priceFile?.dataset.dir !== "0") {
             visibleItems.sort((a, b) => {
                 const p1 = parseFloat(a.dataset.price) || 0;
                 const p2 = parseFloat(b.dataset.price) || 0;
                 return priceFile.dataset.dir === "1" ? p1 - p2 : p2 - p1;
             });
-        } else {
-            const dir = dateFile?.dataset.dir !== "0" ? dateFile.dataset.dir : "1";
+        } else if (dateFile?.dataset.dir !== "0") {
             visibleItems.sort((a, b) => {
                 const d1 = new Date(a.dataset.date || 0);
                 const d2 = new Date(b.dataset.date || 0);
-                return dir === "1" ? d2 - d1 : d1 - d2;
+                return dateFile.dataset.dir === "1" ? d2 - d1 : d1 - d2;
             });
         }
         visibleItems.forEach(item => activeContainer.appendChild(item));
     }
 
-    // --- 4. МОДАЛКА И ГАЛЕРЕЯ ---
+    // --- 5. МОДАЛКА И ГАЛЕРЕЯ ---
     function updateModalImage() {
         if (currentImages.length > 0 && elements.modalImg) {
             elements.modalImg.src = currentImages[currentIdx];
@@ -119,11 +124,30 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Глобальный клик (делегирование)
+    // --- 6. ГЛОБАЛЬНЫЙ КЛИК (ДЕЛЕГИРОВАНИЕ) ---
     document.addEventListener('click', (e) => {
         const target = e.target;
 
-        // Открытие карточки
+        // 1. Клики по Фандомам (Scott_P, ОС и т.д.)
+        const fandomBtn = target.closest('.win-item:not(.sort-file)');
+        if (fandomBtn) {
+            document.querySelectorAll('.win-item:not(.sort-file)').forEach(i => i.classList.remove('active'));
+            fandomBtn.classList.add('active');
+            updateStore();
+            return;
+        }
+
+        // 2. Клики по Сортировке (Цена, Дата)
+        const sortBtn = target.closest('.sort-file');
+        if (sortBtn) {
+            let currentDir = parseInt(sortBtn.dataset.dir || "0");
+            document.querySelectorAll('.sort-file').forEach(other => { if (other !== sortBtn) other.dataset.dir = "0"; });
+            sortBtn.dataset.dir = (currentDir + 1) % 3;
+            updateStore();
+            return;
+        }
+
+        // 3. Открытие модалки товара
         const card = target.closest('.merch-item');
         if (card && !target.closest('.buy-btn')) {
             elements.modalTitle.innerText = card.querySelector('.item-name').innerText;
@@ -136,43 +160,39 @@ document.addEventListener('DOMContentLoaded', () => {
             currentIdx = 0;
             updateModalImage();
             elements.modal.style.display = 'flex';
+            return;
         }
 
-        // Кнопки модалки
+        // 4. Кнопки галереи и закрытие
         if (target.id === 'prev-img') { currentIdx = (currentIdx - 1 + currentImages.length) % currentImages.length; updateModalImage(); }
         if (target.id === 'next-img') { currentIdx = (currentIdx + 1) % currentImages.length; updateModalImage(); }
-        if (target.classList.contains('modal-close-trigger') || target === elements.modal) elements.modal.style.display = 'none';
+        if (target.classList.contains('modal-close-trigger') || target === elements.modal) {
+            elements.modal.style.display = 'none';
+        }
 
-        // Лайтбокс
+        // 5. Лайтбокс (увеличение по клику на фото в модалке)
         if (target === elements.modalImg) {
             elements.lbImg.src = elements.modalImg.src;
             elements.lightbox.style.display = 'flex';
         }
         if (target === elements.lightbox) elements.lightbox.style.display = 'none';
 
-        // OS Окно
+        // 6. OS Window (Пуск)
         if (target.id === 'os-shortcut') elements.win.classList.toggle('show');
         if (target.classList.contains('win-btn-close')) elements.win.classList.remove('show');
         
-        // Фильтры и вкладки
-        // Фильтры и вкладки
+        // 7. Переключение вкладок (Мерч / Авито / Отзывы)
         const tab = target.closest('.nav-side-item');
         if (tab) {
             const href = tab.getAttribute('href');
             if (!href?.startsWith('#')) return;
             e.preventDefault();
-
-            // 1. Управляем активным классом
             elements.tabs.forEach(t => t.classList.remove('active-tab'));
             tab.classList.add('active-tab');
 
-            // 2. Скрываем вообще все контейнеры (Мерч, Авито, Отзывы)
-            const reviewsTab = document.getElementById('reviews-tab');
-            if (elements.merchContainer) elements.merchContainer.style.display = 'none';
-            if (elements.avitoContainer) elements.avitoContainer.style.display = 'none';
-            if (reviewsTab) reviewsTab.style.display = 'none';
+            // Скрываем всё
+            [elements.merchContainer, elements.avitoContainer, elements.reviewsTab].forEach(c => { if(c) c.style.display = 'none'; });
 
-            // 3. Включаем нужный и меняем заголовок
             if (href === '#merch') {
                 elements.merchContainer.style.display = 'grid';
                 elements.sectionTitle.innerText = "New Merch Drops ✨";
@@ -184,17 +204,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 setupMerchEffects();
                 updateStore();
             } else if (href === '#reviews') {
-                if (reviewsTab) reviewsTab.style.display = 'block';
+                if (elements.reviewsTab) elements.reviewsTab.style.display = 'block';
                 elements.sectionTitle.innerText = "Customer Reviews 💬";
-                // Для отзывов updateStore не нужен, там нет товаров
             }
         }
-
     });
 
-    // --- 5. ПЛЕЕР ---
+    // --- 7. ПЛЕЕР ---
     if (elements.audio && elements.playBtn) {
-        elements.playBtn.addEventListener('click', () => {
+        elements.playBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
             if (elements.audio.paused) {
                 elements.audio.play(); elements.playBtn.innerText = '💔';
                 elements.playerMarquee?.start();
@@ -205,18 +224,19 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Закрытие OS окна при клике мимо
+    // Закрытие окна OS при клике мимо
     window.addEventListener('click', (e) => {
         if (elements.win && !elements.win.contains(e.target) && !elements.shortcut.contains(e.target)) {
             elements.win.classList.remove('show');
         }
     });
 
+    // Инициализация
     setupMerchEffects();
     updateStore();
 });
 
-// --- ДЕКОР ---
+// --- 8. ДЕКОР (ФОНОВЫЕ ЭЛЕМЕНТЫ) ---
 function spawnDecor() {
     const layer = document.getElementById('decor-layer');
     if (!layer) return;
@@ -234,7 +254,8 @@ function spawnDecor() {
             width: `${Math.random() * 15 + 20}px`,
             height: `${Math.random() * 15 + 20}px`,
             animationDelay: `${Math.random() * 10}s`,
-            animationDuration: `${Math.random() * 5 + 7}s`
+            animationDuration: `${Math.random() * 5 + 7}s`,
+            pointerEvents: 'none' // Чтобы не мешали кликам
         });
         decor.style.setProperty('--rot', `${Math.random() * 360}deg`);
         fragment.appendChild(decor);

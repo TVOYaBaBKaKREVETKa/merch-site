@@ -1146,8 +1146,8 @@ button,
 }
 
 .premium-shortcut:hover { transform: scale(1.05); }
-.premium-shortcut img { width: 24px !important; height: 24px !important; object-fit: contain; }
-.premium-shortcut span { font-family: monospace; font-size: 8px; font-weight: 900; margin-top: 3px; color: #333; }
+.premium-shortcut img { width: 24px !important; height: 24px !important; object-fit: contain;pointer-events: none; }
+.premium-shortcut span { font-family: monospace; font-size: 8px; font-weight: 900; margin-top: 3px; color: #333; pointer-events: none; }
 
 /* ОКНО */
 .premium-window {
@@ -1436,8 +1436,8 @@ button,
     flex-direction: row; /* Строго в ряд */
     justify-content: center;
     align-items: flex-start;
-    gap: 20px;
-    padding: 30px 10px;
+    gap: 30px;
+    padding: 20px -10px;
     width: 100%;
 }
 
