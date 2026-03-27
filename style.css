@@ -474,22 +474,23 @@ box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
 }
 
 /* Ссылки на скотчи (tape-1...16) */
-.tape-1 { background-image: url('assets/tape1.png'); }
-.tape-2 { background-image: url('assets/tape2.png'); }
-.tape-3 { background-image: url('assets/tape3.png'); }
-.tape-4 { background-image: url('assets/tape4.png'); }
-.tape-5 { background-image: url('assets/tape5.png'); }
-.tape-6 { background-image: url('assets/tape6.png'); }
-.tape-7 { background-image: url('assets/tape7.png'); }
-.tape-8 { background-image: url('assets/tape8.png'); }
-.tape-9 { background-image: url('assets/tape9.png'); }
-.tape-10 { background-image: url('assets/tape10.png'); }
-.tape-11 { background-image: url('assets/tape11.png'); }
-.tape-12 { background-image: url('assets/tape12.png'); }
-.tape-13 { background-image: url('assets/tape13.png'); }
-.tape-14 { background-image: url('assets/tape14.png'); }
-.tape-15 { background-image: url('assets/tape15.png'); }
-.tape-16 { background-image: url('assets/tape16.png'); }
+.tape-1 { background-image: url('assets/tape1.webp'); }
+.tape-2 { background-image: url('assets/tape2.webp'); }
+.tape-3 { background-image: url('assets/tape3.webp'); }
+.tape-4 { background-image: url('assets/tape4.webp'); }
+.tape-5 { background-image: url('assets/tape5.webp'); }
+.tape-6 { background-image: url('assets/tape6.webp'); }
+.tape-7 { background-image: url('assets/tape7.webp'); }
+.tape-8 { background-image: url('assets/tape8.webp'); }
+.tape-9 { background-image: url('assets/tape9.webp'); }
+.tape-10 { background-image: url('assets/tape10.webp'); }
+.tape-11 { background-image: url('assets/tape11.webp'); }
+.tape-12 { background-image: url('assets/tape12.webp'); }
+.tape-13 { background-image: url('assets/tape13.webp'); }
+.tape-14 { background-image: url('assets/tape14.webp'); }
+.tape-15 { background-image: url('assets/tape15.webp'); }
+.tape-16 { background-image: url('assets/tape16.webp'); }
+
 
 /* --- 5. ВНУТРЕННОСТИ --- */
 .item-img { 
@@ -1517,3 +1518,5 @@ button,
         position: static !important;
     }
 }
+
+

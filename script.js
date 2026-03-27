@@ -150,6 +150,17 @@ if (cursor) {
             const tot = document.getElementById('total-idx');
             if (cur) cur.innerText = currentIdx + 1;
             if (tot) tot.innerText = currentImages.length;
+
+            // Клик по картинке открывает её ПОВЕРХ модалки
+            modalImg.style.cursor = 'zoom-in';
+            modalImg.onclick = () => {
+                const lb = document.getElementById('lightbox');
+                const lbImg = document.getElementById('lightbox-img');
+                if (lb && lbImg) {
+                    lbImg.src = modalImg.src;
+                    lb.style.display = 'flex';
+                }
+            };
         }
     }
 
@@ -229,7 +240,7 @@ document.addEventListener('click', (e) => {
     updateStore();
 });
 
-const decorImages = ['tortbg.png', 'starbg.png', 'strawberrybg.png'];
+const decorImages = ['tortbg.webp', 'starbg.webp', 'strawberrybg.webp'];
 
 function spawnDecor() {
     const layer = document.getElementById('decor-layer');
