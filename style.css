@@ -789,27 +789,21 @@ button,
 .profile-tag { font-size: 0.7rem; color: rgba(255, 255, 255, 0.9); line-height: 1.2; }
 
 .tg-widget {
-    /* ОТСТУП: увеличили расстояние от верхнего бокса */
     margin-top: 15px; 
-    
     padding: 35px 15px 15px 15px;
     position: relative;
     overflow: visible; 
     background-color: #ffffff;
-    
-    /* Розовая сетка */
     background-image: 
         linear-gradient(rgba(255, 182, 193, 0.4) 1.5px, transparent 1.5px), 
         linear-gradient(90deg, rgba(255, 182, 193, 0.4) 1.5px, transparent 1.5px);
     background-size: 18px 18px;
 }
 
-/* ЦЕНТРАЛЬНАЯ ИКОНКА-СТИКЕР (БЕЗ НАКЛОНА) */
 .tg-top-icon {
     position: absolute;
     top: -32px; 
     left: 50%;
-    /* Только центровка по горизонтали */
     transform: translateX(-50%); 
     z-index: 10;
     transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -819,8 +813,6 @@ button,
     width: 65px; 
     height: auto;
     object-fit: contain;
-    
-    /* МАГИЯ "СТИКЕРА": жирная белая обводка */
     filter: 
         drop-shadow(2px 0 0 #fff) 
         drop-shadow(-2px 0 0 #fff) 
@@ -829,7 +821,6 @@ button,
         drop-shadow(0 4px 8px rgba(255, 105, 180, 0.3));
 }
 
-/* Эффект при наведении — иконка просто плавно растет */
 .tg-widget:hover .tg-top-icon {
     transform: translateX(-50%) scale(1.15);
 }
@@ -844,7 +835,6 @@ button,
     z-index: 5;
 }
 
-/* КРУГЛАЯ АВАТАРКА */
 .tg-avatar-wrap {
     position: relative;
     width: 80px; 
@@ -862,7 +852,6 @@ button,
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
 }
 
-/* ЭФФЕКТ "БЕЛОЙ АУРЫ" ДЛЯ ИМЕНИ */
 .tg-header-info {
     background: #fff;
     box-shadow: 0 0 25px 20px #fff; 
@@ -874,9 +863,10 @@ button,
     z-index: 2;
 }
 
-/* ЭФФЕКТ "БЕЛОЙ АУРЫ" ДЛЯ ОПИСАНИЯ */
 .tg-text {
-    font-size: 0.8rem;
+    /* Моноширинный шрифт для описания (Webcore) */
+    font-family: 'IBM Plex Mono', monospace; 
+    font-size: 0.75rem; /* Чуть уменьшил для стиля */
     color: #444;
     line-height: 1.4;
     text-align: center;
@@ -890,22 +880,27 @@ button,
 }
 
 .tg-name {
+    /* Округлый жирный шрифт для имени (Kawaii) */
+    font-family: 'Comfortaa', cursive;
     font-size: 1.05rem;
-    font-weight: 900;
+    font-weight: 700;
     color: var(--pink-bright);
     margin: 0;
 }
 
 .tg-subs {
-    font-size: 0.65rem;
+    /* Системный шрифт для счетчика сабов */
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
     color: #bbb;
     text-transform: uppercase;
     letter-spacing: 1px;
     font-weight: bold;
 }
 
-/* КНОПКА */
 .tg-join-btn {
+    /* Округлый шрифт для кнопки */
+    font-family: 'Comfortaa', cursive;
     width: 100%;
     display: block;
     background: var(--pink-bright);
@@ -914,10 +909,11 @@ button,
     padding: 10px;
     border-radius: 12px;
     font-size: 0.85rem;
-    font-weight: 900;
+    font-weight: 700;
     border: 2px solid #fff;
     box-shadow: 3px 3px 0px var(--border-pink);
     transition: 0.2s;
+    text-transform: uppercase;
 }
 
 .tg-join-btn:hover {
@@ -925,10 +921,8 @@ button,
     background: #fff;
     color: var(--pink-bright);
     box-shadow: 4px 4px 0px var(--border-pink);
-    animation: neon-glow-vivid 4s linear infinite;
 }
 
-/* ОНЛАЙН ТОЧКА */
 .tg-status-dot {
     position: absolute;
     bottom: 4px;
@@ -1061,12 +1055,14 @@ button,
 #modal-desc { 
     font-size: 0.95rem; /* Увеличили шрифт */
     line-height: 1.3; 
-    margin: auto 0 20px 20px; /* Увеличили отступ до 50px, чтобы поднять выше */
-    overflow-y: auto;
+    margin: auto 0 9px 15px; /* Увеличили отступ до 50px, чтобы поднять выше */
+    font-family: 'IBM Plex Mono', monospace;
     max-height: 55px; 
     color: #333;
     font-weight: 500;
 }
+
+
 
 /* 6. ФУТЕР (Цена и Кнопка) */
 .modal-footer {
@@ -1082,6 +1078,7 @@ button,
     color: #000; 
     margin-bottom: 5px; 
     padding-left: 20px; 
+        font-family: 'VT323', monospace;
 }
 
 /* КНОПКА */
@@ -1089,11 +1086,11 @@ button,
     display: flex;          /* Делаем флексом для центровки текста */
     justify-content: center; /* Текст по центру */
     align-items: center;
-
+    font-family: 'IBM Plex Mono', monospace;
     width: 180px;           /* ЗАДАЙ ФИКСИРОВАННУЮ ШИРИНУ В ПИКСЕЛЯХ (так надежнее) */
     max-width: 92%;         /* Чтобы на мобилках не вылезала */
     margin: 15px auto 0;    /* Центрируем саму кнопку и даем отступ сверху */
-    
+        font-size: 1.1rem;
     background: #ff1493;
     color: #fff;
     border: 2px solid #333;
@@ -1431,6 +1428,165 @@ button,
     color: #000;
     font-weight: bold;
     font-size: 1.2em;
+}
+
+/* ОБЩИЙ КОНТЕЙНЕР ДЛЯ РЯДА */
+.reviews-side-by-side {
+    display: flex;
+    flex-direction: row; /* Строго в ряд */
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 30px 10px;
+    width: 100%;
+}
+
+/* ОБЩИЙ СТИЛЬ ОКОН */
+.avito-window {
+    background: #fff;
+    border: 3px solid #333;
+    border-radius: 12px;
+    box-shadow: 6px 6px 0px rgba(0,0,0,0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-win {
+    width: 280px; /* Фиксируем ширину левого окна */
+    flex-shrink: 0; /* Чтобы не сжималось */
+}
+
+.reviews-win {
+    width: 350px; /* Фиксируем ширину правого окна */
+    box-shadow: 8px 8px 0px #ffb6c1;
+    flex-shrink: 0;
+}
+
+/* ШАПКА ОКОН */
+.avito-win-top {
+    background: #eeeeee;
+    border-bottom: 3px solid #333;
+    padding: 6px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.pink-header { background: #ffb6c1; }
+
+.win-buttons span {
+    display: inline-block;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    border: 1.5px solid #333;
+    margin-right: 3px;
+    background: #ff5f56;
+}
+.win-buttons span:nth-child(2) { background: #ffbd2e; }
+.win-buttons span:nth-child(3) { background: #27c93f; }
+
+.win-title-text {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 900;
+    color: #666;
+}
+
+/* КОНТЕНТ */
+.static-img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* ПРОКРУТКА ОТЗЫВОВ */
+.scroll-box {
+    height: 420px; /* Ограничиваем высоту, чтобы окна были примерно одного размера */
+    overflow: hidden;
+    position: relative;
+    background: #fff;
+}
+
+.scrolling-tape {
+    display: flex;
+    flex-direction: column;
+    animation: avitoInfiniteScroll 35s linear infinite;
+}
+
+.tape-img {
+    width: 100%;
+    display: block;
+}
+
+@keyframes avitoInfiniteScroll {
+    from { transform: translateY(0); }
+    to { transform: translateY(-20%); }
+}
+
+/* КНОПКА */
+.avito-footer-link {
+    display: block;
+    text-align: center;
+    
+    /* УВЕЛИЧИВАЕМ РАЗМЕРЫ */
+    padding: 12px; /* Было 12px, стало 20px — теперь она жирненькая */
+    font-size: 1.1rem; /* Увеличили шрифт для читабельности */
+    
+    background: #ff1493;
+    color: #fff;
+    text-decoration: none;
+    font-family: 'Comfortaa', cursive;
+    font-weight: 900;
+    border-top: 3px solid #333;
+    transition: 0.2s;
+    text-transform: uppercase; /* Делаем капсом для пущей важности */
+    letter-spacing: 1px;
+}
+
+.avito-footer-link:hover {
+    background: #a7f432;
+    color: #333;
+    /* Эффект легкого нажатия при наведении */
+    letter-spacing: 2px; 
+}
+
+/* УВЕЛИЧЕННЫЕ ГАБАРИТЫ ТЕЛЕВИЗОРА */
+.tv-zoom .reviews-win.tv-body {
+    width: 480px; /* Было 380px, стало шире */
+    padding: 20px;
+}
+
+.tv-zoom .tv-screen {
+    height: 450px; /* Было 340px, стало выше */
+    border-radius: 25px;
+    background: #fff;
+}
+
+/* ЧЕТКОСТЬ ТЕКСТА */
+.tape-img {
+    width: 100%;
+    display: block;
+    /* Улучшает четкость мелкого текста на скриншотах */
+    image-rendering: -webkit-optimize-contrast; 
+}
+
+/* СКОРОСТЬ ПРОКРУТКИ */
+.scrolling-tape {
+    display: flex;
+    flex-direction: column;
+    /* Увеличил до 60 секунд, чтобы отзывы не "летели" */
+    animation: avitoInfiniteScroll 60s linear infinite; 
+}
+
+
+
+/* МОБИЛКА: если экран совсем узкий, они встанут друг под друга */
+@media (max-width: 650px) {
+    .reviews-side-by-side {
+        flex-direction: column;
+        align-items: center;
+    }
 }
 
 /* ============================================
