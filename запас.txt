@@ -1,0 +1,55 @@
+        <!-- Bunny Keychains (остальные) -->
+        <div class="merch-item" 
+             data-fandom="original" data-price="800" data-date="2026-03-23" 
+             data-desc="Три зелёных комочка чиллят в банке. Внутри всё двигается — идеальная вещь, чтобы залипнуть, когда не хочется ничего делать."
+             data-images="assets/filters.png,assets/merch1_2.png">
+            <div class="item-tape"></div> 
+            <div class="item-img"><img src="assets/filters.png" alt=""></div>
+            <p class="item-name">Шейкер «Маримо в банке»</p>
+            <div class="price-tag">700₽</div>
+            <a href="https://t.me/Tisha_borweenManager" target="_blank" class="buy-btn">Add to Jar</a>
+        </div>
+
+
+                <div class="merch-item" 
+             data-fandom="original" 
+             data-price="300" 
+             data-date="2026-03-23" 
+             data-desc="Довольный кошачий фейс"
+             data-images="assets/merch2.png,assets/merch2_2.png">
+            <div class="item-tape"></div> 
+            <div class="item-img"><img src="assets/merch2.png" alt=""></div>
+            <p class="item-name">Кот-каомодзи</p>
+            <div class="price-tag">300₽</div>
+            <a href="https://t.me/Tisha_borweenManager" target="_blank" class="buy-btn">Add to Jar</a>
+        </div>
+
+
+                <div class="merch-item" 
+             data-fandom="Yotsuba&!" 
+             data-price="200" 
+             data-date="2026-03-23" 
+             data-desc="Напоминалка о том, что даже обычные вещи - это весело, если смотреть на них как Ёцуба."
+             data-images="assets/merch2.png,assets/merch2_2.png">
+            <div class="item-tape"></div> 
+            <div class="item-img"><img src="assets/merch2.png" alt=""></div>
+            <p class="item-name">Значок «Enjoy Everything»</p>
+            <div class="price-tag">200₽</div>
+            <a href="https://t.me/Tisha_borweenManager" target="_blank" class="buy-btn">Add to Jar</a>
+        </div>
+
+    
+
+    
+                <div class="merch-item" 
+             data-fandom="Yotsuba&!" 
+             data-price="500" 
+             data-date="2026-03-23" 
+             data-desc="Маленькая Ёцуба в шортах и футболке готова отправиться на край света. Пружинка тянется."
+             data-images="assets/merch2.png,assets/merch2_2.png">
+            <div class="item-tape"></div> 
+            <div class="item-img"><img src="assets/merch2.png" alt=""></div>
+            <p class="item-name">Брелок «Ёцуба на пружинке»</p>
+            <div class="price-tag">500₽</div>
+            <a href="https://t.me/Tisha_borweenManager" target="_blank" class="buy-btn">Add to Jar</a>
+        </div>
